@@ -1,0 +1,26 @@
+div#left,
+div#right {
+  margin-top: 2.5%;
+  box-sizing: border-box;
+}
+div#left {
+  width: 70%;
+  margin-left: 3%;
+  float: left;
+  /* Test for component position */
+  /* background: #8977ad; */
+}
+div#right {
+  width: 13%;
+  margin-right: 5%;
+  float: right;
+  /* Test for component position */
+  /* background: #8977ad; */
+}
+div#footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 45px;
+  width: 100%;
+}
