@@ -51,7 +51,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3100",
+  "proxy": "http://172.17.0.1:3100",
   "main": "index.js",
   "repository": "https://github.com/frost-secu/Horizon.git",
   "author": "frost-secu <shw9810@icloud.com>",
