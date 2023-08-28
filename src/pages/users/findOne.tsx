@@ -27,10 +27,10 @@ export default function FindData() {
 
   return (
     <form onSubmit={handleSubmit}>
-      찾을 유저의 id를 입력하세요
+      찾을 유저의 학번을 입력하세요
       <input
         className="bg-gray-100 p-1 rounded-lg block placeholder:text-slate-400 focus:border-blue-400 focus:ring-blue-400 required"
-        placeholder="아이디를 입력 해주세요"
+        placeholder="헉번을 입력 해주세요"
         type="text"
         name="studentId"
       />

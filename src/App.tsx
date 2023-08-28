@@ -6,6 +6,9 @@ import Header from "./components/header";
 import Sidebar from "./components/sidebar";
 import Footer from "./components/footer";
 
+import Signup from "./pages/users/signup"
+
+
 export default function App() {
   return (
     <div className="app font-sans h-screen w-screen">
@@ -16,6 +19,7 @@ export default function App() {
         <div id="main" className="mt-10">
           <div id="left">
             <Main />
+            <Signup />
           </div>
           <div id="right">
             <Sidebar />
