@@ -34,6 +34,7 @@ export default function FindData() {
         type="text"
         name="studentId"
       />
+      <input className="mt-1 bg-blue-400 hover:bg-sky-400 rounded-md p-1.5" type="submit" value="한명 찾기" />
     </form>
   );
 }
