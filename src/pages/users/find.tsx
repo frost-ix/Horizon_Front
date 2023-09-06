@@ -28,6 +28,7 @@ export default function FindOne() {
     <form onSubmit={handleSubmit}>
       Find User <br />
       <input className="mt-1 bg-blue-400 hover:bg-sky-400 rounded-md p-1.5" type="submit" value="전체 찾기" />
+      
     </form>
   );
 }
