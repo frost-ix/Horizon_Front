@@ -55,6 +55,7 @@ build
 
 ### default enviorment settings ###
 .env
+.vscode
 
 ### Proxy IP network setting ###
 src/setProxy.ts

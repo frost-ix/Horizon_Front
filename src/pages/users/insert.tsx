@@ -23,7 +23,7 @@ export default function InsertUser() {
     formData.append("phone", phone);
     formData.append("email", email);
     formData.append("photo", photo); // 파일 추가
-    
+
     try {
       const response = await fetch(`/image/signUp`, {
         method: "POST",
@@ -64,7 +64,11 @@ export default function InsertUser() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           이름
         </label>
         <input
@@ -75,7 +79,11 @@ export default function InsertUser() {
         />
       </div>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           학번
         </label>
         <input
@@ -86,7 +94,11 @@ export default function InsertUser() {
         />
       </div>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           아이디
         </label>
         <input
@@ -97,7 +109,11 @@ export default function InsertUser() {
         />
       </div>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           비밀번호
         </label>
         <input
@@ -108,7 +124,11 @@ export default function InsertUser() {
         />
       </div>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           전화번호
         </label>
         <input
@@ -119,7 +139,11 @@ export default function InsertUser() {
         />
       </div>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           이메일
         </label>
         <input
@@ -130,7 +154,11 @@ export default function InsertUser() {
         />
       </div>
       <div className="textField mb-2">
-        <label htmlFor="name" id="textField" className="block ml-2 mb-2 text-base font-medium text-gray-800">
+        <label
+          htmlFor="name"
+          id="textField"
+          className="block ml-2 mb-2 text-base font-medium text-gray-800"
+        >
           HEMS 사진
         </label>
         <input
@@ -140,7 +168,11 @@ export default function InsertUser() {
           name="photo"
         />
       </div>
-      <input className="float-left mt-1 bg-blue-400 hover:bg-sky-400 rounded-md p-1.5" type="submit" value="생성하기" />
+      <input
+        className="float-left mt-1 bg-blue-400 hover:bg-sky-400 rounded-md p-1.5"
+        type="submit"
+        value="생성하기"
+      />
       <br />
     </form>
   );
