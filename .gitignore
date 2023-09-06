@@ -1,4 +1,61 @@
+# Created by https://www.toptal.com/developers/gitignore/api/linux,react,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=linux,react,node
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### Node ###
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+### react ###
+.DS_*
+**/*.backup.*
+**/*.back.*
+
+### Node modules what installed in this repo ###
 node_modules
+
+### static build files ###
 build
 
+### default enviorment settings ###
 .env
+
+### Proxy IP network setting ###
+src/setProxy.ts
+
