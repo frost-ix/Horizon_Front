@@ -4,10 +4,18 @@ export default function board() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    /***
+     * 게시판 관련 variable 정보
+     * name : 사용자 이름
+     * header : 게시판 제목
+     * category : 게시판 카테고리
+     * content : 게시판 내용
+     * photo : 게시판 사진
+     ***/
     const form = e.target;
     // JWT Token 사용
     const name = "guest";
-    const header = form.elements.header.value;
+    const title = form.elements.title.value;
     const category = form.elements.category.value;
     const content = form.elements.content.value;
     // const photo = form.files;
@@ -17,7 +25,7 @@ export default function board() {
 
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("header", header);
+    formData.append("header", title);
     formData.append("category", category);
     formData.append("content", content);
     formData.append("photo", photo);
@@ -45,7 +53,7 @@ export default function board() {
         <input
           className="bg-gray-100 p-1 rounded-lg block placeholder:text-slate-400 focus:border-blue-400 focus:ring-blue-400 required"
           type="text"
-          name="header"
+          name="title"
         />
         <br />
         카테고리 :{" "}
