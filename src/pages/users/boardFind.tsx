@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function FindOne() {
+export default function boardFind() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch("board/boardFind", {
+    fetch("/image/boardFind", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -15,6 +15,9 @@ export default function FindOne() {
         } else {
           throw new Error("조회에 실패했습니다.");
         }
+      })
+      .then((findBoard) => {
+        console.log("정보 조회 완료 : ", findBoard);
       })
       .catch((error) => {
         console.error("조회에 실패했습니다.", error);
