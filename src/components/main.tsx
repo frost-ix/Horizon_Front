@@ -3,7 +3,8 @@ import Find from "./../pages/users/find";
 import FindOne from "./../pages/users/findOne";
 import DeleteUser from "../pages/users/delete";
 import Update from "./../pages/users/update";
-import Board from "./../pages/users/board"
+import Board from "./../pages/users/board";
+import BoardFind from "./../pages/users/boardFind";
 
 export default function Main() {
   return (
@@ -21,6 +22,8 @@ export default function Main() {
       <br />
       <h3>Board</h3>
       <Board />
+      <h3>Board Find</h3>
+      <BoardFind />
     </div>
   );
 }

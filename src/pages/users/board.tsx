@@ -68,11 +68,7 @@ export default function board() {
         게시물에 첨부할 사진 : <input type="file" name="photo" />
         {/* <input type="file" accept='image/jpg,image/png,image/jpeg,image/heic' name="photo" /> */}
         <br />
-        <input
-          className="mt-1 bg-blue-400 hover:bg-sky-400 rounded-md p-1.5"
-          type="submit"
-          value="게시물 등록"
-        />
+        <input className="mt-1 bg-blue-400 hover:bg-sky-400 rounded-md p-1.5" type="submit" value="게시물 등록" />
       </form>
     </div>
   );
