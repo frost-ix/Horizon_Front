@@ -29,8 +29,8 @@ export default function signup() {
       });
 
       if (response.ok) {
-        const updatedUser = await response.json();
-        console.log("사용자 정보가 업데이트되었습니다.", updatedUser);
+        const updatedSignUp = await response.json();
+        console.log("사용자 정보가 업데이트되었습니다.", updatedSignUp);
       } else {
         throw new Error("회원가입 실패했습니다.");
       }

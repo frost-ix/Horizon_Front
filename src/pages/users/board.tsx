@@ -18,14 +18,13 @@ export default function board() {
     const title = form.elements.title.value;
     const category = form.elements.category.value;
     const content = form.elements.content.value;
-    // const photo = form.files;
     const photo = form.elements.photo.files[0];
 
     console.log(photo);
 
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("header", title);
+    formData.append("title", title);
     formData.append("category", category);
     formData.append("content", content);
     formData.append("photo", photo);
