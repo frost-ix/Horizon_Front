@@ -5,7 +5,7 @@ export default function Footer() {
     <div className="footer">
       <div className="mt-1 ml-5 text-sm text-left">
         제작 과 : ICT 융합보안 컴공과 <br />
-        제작자 : 성현우, 정송훈
+        제작자 : 성현우, 정송훈 | Copyright @ Font by Google fonts
       </div>
     </div>
   );

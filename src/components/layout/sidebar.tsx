@@ -1,5 +1,5 @@
 import React from "react";
-import InsertUser from "./../pages/users/insert";
+import InsertUser from "./../../pages/users/insert";
 
 export default function Sidebar() {
   return (
