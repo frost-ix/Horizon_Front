@@ -15,8 +15,12 @@ function Header() {
                     <img src="/Icon/DisplayLine.jpeg" className='displayLineIcon' onClick={()=>{setDisplayLine(!displayLine)}}/>
                 </div>
                 
-                <div className='displayBar-menu-second'>
-                    메뉴
+                <div className='iwantcenter'>
+                    <div className='displayBar-menu-border'/>
+                    
+                    <div className='displayBar-menu-second'>
+                        메뉴
+                    </div>
                 </div>
             </div>
         )}
