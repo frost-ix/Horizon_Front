@@ -1,0 +1,48 @@
+.Header{
+    width: 100vw;
+    height: 5vh;
+
+    display: flex; 
+    /* justify-content: center; */
+    /* align-items: center;  */
+    flex-direction:row;
+
+    /* background-color: rgb(219, 140, 36); */
+    /* border-bottom: 0.1px solid rgba(0, 0, 0, 0.3); */
+}
+
+.displayLineIcon{
+    cursor: pointer;
+    height: 5vh;
+    width: 5vh;
+}
+
+.displayBar{
+    width: 80vw;
+    height: 100vh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex; 
+    flex-direction:column;
+
+    background-color: white;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.displayBar-menu-first{
+    display: flex; 
+    flex-direction:column;
+
+    margin-bottom:2%;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+    border-width: 30%;
+
+}
+
+.displayBar-menu2-second{
+    display: flex; 
+    flex-direction:column;
+}
