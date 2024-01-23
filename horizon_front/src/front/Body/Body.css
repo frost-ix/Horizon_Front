@@ -1,0 +1,17 @@
+/* 컴퓨터 */
+@media screen and (min-width: 800px) {
+    .Body{
+    width: 100vw;
+    height: auto;
+
+    margin-top: 6vh;
+}
+}
+
+@media screen and (max-width: 800px) {
+    .Body{
+        width: 100vw;
+        height: auto;
+        margin-bottom: 8vh;
+    }
+}
