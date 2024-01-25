@@ -121,15 +121,18 @@
         display: none;
     }
     
-    .AccountIcon{
-        height: 6vh;
-        width: 6vh;
-        background-color: rgb(205, 205, 205);
+    .Header-icon{
+        height: 7vh;
+        width: 7vh;
+        /* background-color: rgb(205, 205, 205); */
         border-radius: 15px;
     
         margin-left: auto;
         margin-right: auto; 
-        /* margin-right: 3%;  */
+    }
+
+    .Header-icon.visible{
+        background-color: rgb(205, 205, 205);
     }
     
     .displayBar{

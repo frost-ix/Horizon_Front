@@ -6,7 +6,41 @@ import BoardItem from "../../../Interface/BoardInterface";
 
 
 function BoardList() {
-  const [boardData, setBoardData] = useState<BoardItem[] | null>(null)
+  // const [boardData, setBoardData] = useState<BoardItem[] | null>(null)
+  const [boardData, setBoardData] = useState<BoardItem[] | null>(
+    [{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },{
+    num: 1,writer: '사용자1',title: '제목1',category: '카테고리1',
+    content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+    hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+  },])
 
   useEffect(()=>{
     const fetchData = async () => {
@@ -34,7 +68,7 @@ function BoardList() {
   return (
     <div className="BoardList">
                 {boardData? (
-                  <div className='boardlist'>
+                  <div className='BoardList-box'>
                   <p className='boardp'>테스트~ing</p>
                   <table className="boardtable">
                     <thead>
@@ -52,7 +86,7 @@ function BoardList() {
                     <tr key={item.num} className='boardtr'>
                       <td className='boardid2'>{item.num}</td>
                       <td className='boardtitle2'><Link to="/" state={{ boardId: item.num}}>{item.title}</Link></td>
-                      <td className='boardusername2'>{item.name}</td>
+                      <td className='boardusername2'>{item.writer}</td>
                       <td className='boardcontent'>{item.content}</td>
                       <td className='boardusername2'>{item.likes}</td>
                       <td className='boardusername2'>{item.hits}</td>

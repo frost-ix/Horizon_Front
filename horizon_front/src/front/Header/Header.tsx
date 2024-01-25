@@ -5,18 +5,35 @@ import { useNavigate } from "react-router-dom";
 function Header() {
     const navigate = useNavigate();
     const [displayLine, setDisplayLine] = useState<boolean>(false);
+    const [pos, setPos] = useState<boolean>(false);
+    const [boo, setBoo] = useState<boolean>(false);
+    const [hom, setHom] = useState<boolean>(false);
+    const [acc, setAcc] = useState<boolean>(false);
+
 
     const displayBarClick = () => {
         setDisplayLine(!displayLine);
     };
     const AccountClick = () => {
         navigate('/account')
+        setAcc(true)
+        setBoo(false)
+        setHom(false)
+        setPos(false)
     };
     const PostClick = () => {
         navigate('/post')
+        setAcc(false)
+        setBoo(false)
+        setHom(false)
+        setPos(true)
     };
     const MainClick = () => {
         navigate('/')
+        setAcc(false)
+        setBoo(false)
+        setHom(true)
+        setPos(false)
     };
     const SearchClick = () => {
         // navigate('/search')
@@ -24,17 +41,21 @@ function Header() {
     };
     const BookClick = () => {
         navigate('/book')
+        setAcc(false)
+        setBoo(true)
+        setHom(false)
+        setPos(false)
     };
 
     return (
         <div className="Header">
             <div className='Header-icons'>
                 <img src="/Icon/DisplayLine.png" className='displayLineIcon' onClick={displayBarClick} alt="icon"/>{/* 컴퓨터 */}
-                <img src="/Icon/Search.png"  className='AccountIcon' onClick={SearchClick} alt="icon"/>
-                <img src="/Icon/Book.png"  className='AccountIcon' onClick={BookClick} alt="icon"/>
-                <img src="/Icon/Home.png"  className='AccountIcon' onClick={MainClick} alt="icon"/>
-                <img src="/Icon/Post.png"  className='AccountIcon' onClick={PostClick} alt="icon"/>
-                <img src="/Icon/Account.png"  className='AccountIcon' onClick={AccountClick} alt="icon"/>
+                <img src="/Icon/Search.png"  className='Header-icon' onClick={SearchClick} alt="icon"/>
+                <img src="/Icon/Book.png"  className={`Header-icon ${boo ? 'visible':''}`} onClick={BookClick} alt="icon"/>
+                <img src="/Icon/Home.png"  className={`Header-icon ${hom ? 'visible':''}`} onClick={MainClick} alt="icon"/>
+                <img src="/Icon/Post.png"  className={`Header-icon ${pos ? 'visible':''}`} onClick={PostClick} alt="icon"/>
+                <img src="/Icon/Account.png"  className={`Header-icon ${acc ? 'visible':''}`} onClick={AccountClick} alt="icon"/>
             </div>
 
             {/* 컴퓨터 */}

@@ -1,6 +1,6 @@
 interface BoardItem {
     num: number;
-    name: string;
+    writer: string;
     title: String;
     category: String;
     content: String;

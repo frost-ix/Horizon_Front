@@ -2,10 +2,13 @@
     .BoardList{
         width: 100vw;
         height: auto;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     /* 예비 */
-    .boardlist{
+    .BoardList-box{
         height: 90%;
         width: 100%;
         display: flex;
