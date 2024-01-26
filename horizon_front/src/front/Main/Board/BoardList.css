@@ -1,0 +1,72 @@
+@media screen and (max-width: 800px) {
+    .BoardList{
+        width: 100vw;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    /* 예비 */
+    .BoardList-box{
+        height: 90%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      
+      .boardp{
+        font-size: 200%;
+        margin:0;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      
+      .boardtable{
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        width: 80%;
+        height: 90%;
+      }
+      
+      .boardid{
+        width: 10%;
+        border-bottom: 1px solid rgb(55, 55, 55, 0.5);
+      }
+      
+      .boardtitle{
+        width: 20%;
+        border-bottom: 1px solid rgb(55, 55, 55, 0.5);
+      }
+      
+      .boardusername{
+        width: 20%;
+        border-bottom: 1px solid rgb(55, 55, 55, 0.5);
+      }
+      
+      .boardid2{
+        width: 10%;
+        /* border-bottom: 1px solid rgb(55, 55, 55, 0.5); */
+        border-bottom: 4px solid rgb(55, 55, 55, 0.2);
+      }
+      
+      .boardtitle2{
+        width: 20%;
+        /* border-bottom: 1px solid rgb(55, 55, 55, 0.5); */
+        border-bottom: 4px solid rgb(55, 55, 55, 0.2);
+      }
+      
+      .boardusername2{
+        width: 20%;
+        /* border-bottom: 1px solid rgb(55, 55, 55, 0.5); */
+        border-bottom: 4px solid rgb(55, 55, 55, 0.2);
+      }
+      .boardcontent{
+        width: 40%;
+        /* border-bottom: 1px solid rgb(55, 55, 55, 0.5); */
+        border-bottom: 4px solid rgb(55, 55, 55, 0.2);
+      }
+      /* 예비 */
+}
