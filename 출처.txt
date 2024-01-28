@@ -1,0 +1,38 @@
+돋보기,계정,게시글추가아이콘 : <a href="https://kr.freepik.com/free-vector/flat-instagram-icons-and-notifications-set_2400536.htm#query=%ED%94%84%EB%A1%9C%ED%95%84&position=45&from_view=search&track=sph&uuid=f25800e0-1a4c-4aec-9daf-64a902869f37">Freepik</a>
+책아이콘 : 출처 <a href="https://kr.freepik.com/free-vector/modern-book-logo-set_12126901.htm#query=%EC%B1%85%20%EC%95%84%EC%9D%B4%EC%BD%98&position=0&from_view=search&track=ais&uuid=d4c5ab54-ef9a-454f-a338-394db6b1e6c3">Freepik</a>
+출처 <a href="https://kr.freepik.com/free-vector/flat-instagram-icons-and-notifications-set_2400562.htm#query=sns&position=41&from_view=search&track=sph&uuid=ed9102eb-c619-47f2-9dca-35b7d1794790">Freepik</a>
+
+
+{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },{
+      num: 1,name: '사용자1',title: '제목1',category: '카테고리1',
+      content: '후 그냥 돈많은 백수로 살래',dateofCreate: new Date(),likes: 10,
+      hits: 100,boardImageMetadata: { url: 'https://example.com/image1.jpg' }
+    },

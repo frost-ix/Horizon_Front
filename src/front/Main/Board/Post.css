@@ -1,0 +1,114 @@
+.Post{
+    width: 100%;
+    height: 92vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-form{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.post-form > * {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.post-bar{
+    width: 100%;
+    height: 6%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    border-bottom: 1px solid rgb(0,0,0,0.3);
+    /* border-top: 1px solid rgb(0,0,0,0.3); */
+}
+.post-submit{
+    width: 20%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: 10px;
+
+    background-color: #66c1dc;
+}
+.post-p{
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.post-category{
+    width: 40%;
+    height: 80%;
+    margin-right: 10px;
+
+    border: 1px solid rgb(0,0,0,0.2);
+    border-radius: 0;
+    color: black;
+}
+.post-check{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+
+.post-title{
+    width: 90%;
+    height: 5%;
+    font-size: 90%;
+}
+
+.post-content{
+    width: 90%;
+    height: 60%;
+    font-size: 100%;
+}
+
+/* .post-file{
+    width: 90%;
+    height: 10%;
+} */
+
+.filebox{
+    width: 90%;
+    height: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000000;
+    border-radius: .30em;
+    cursor: pointer;
+}
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+.filebox label { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+     
+    width: 100%;
+    height: 100%;
+}
+.post-photoIcon{
+    height: 100%;
+}
+
+

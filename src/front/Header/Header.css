@@ -1,0 +1,157 @@
+/* 컴퓨터 기준 */
+@media screen and (min-width: 800px) {
+.Header{
+    width: 100vw;
+    height: 7vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex; 
+    flex-direction:row;
+    margin-top: 5px;
+
+    /* background-color: rgb(123,178,255); */
+    /* border-bottom: 0.1px solid rgba(0, 0, 0, 0.3);  */
+}
+
+.Header-icons{
+    width: 100vw;
+    height: 7vh;
+    display: flex; 
+    align-items: center;
+    justify-content:center;
+    flex-direction:row;
+}
+
+.displayLineIcon{
+    cursor: pointer;
+    height: 7vh;
+    width: 7vh;
+}
+
+.AccountIcon{
+    height: 5vh;
+    width: 5vh;
+    background-color: rgb(205, 205, 205);
+    border-radius: 15px;
+
+    margin-left: auto;
+    margin-right: 3%;
+}
+
+.displayBar{
+    width: 0;
+    height: 100vh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex; 
+    flex-direction:column;
+
+    background-color: white;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+
+    overflow: hidden;
+    transition: width 0.7s ease;
+
+}
+
+.displayBar.visible {
+    width: 20vw;
+}
+
+
+.displayBar-menu-first{
+    display: flex; 
+    /* align-items: center; */
+    justify-content:center;
+    flex-direction:column;
+}
+
+.iwantCenter{
+    display: flex; 
+    flex-direction:column;
+    align-items: center;
+}
+
+.displayBar-menu-border{
+    width: 90%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 2%;
+} 
+
+.displayBar-menu2-second{
+    display: flex; 
+    flex-direction:column;
+}
+}
+
+/* 스마트폰 기준 */
+@media screen and (max-width: 800px) {
+    .Header{
+        width: 100vw;
+        height: 8vh;
+    
+        position: fixed;
+        bottom: 0;
+        /* left: 0; */
+    
+        display: flex; 
+        flex-direction:row;
+        margin-top: 5px;
+    
+        background-color: rgb(255, 255, 255);
+        border-top: 0.1px solid rgba(0, 0, 0, 0.3); 
+
+    }
+    
+    .Header-icons{
+        width: 100vw;
+        height: 8vh;
+        display: flex; 
+        align-items: center;
+        justify-content:center;
+        flex-direction:row;
+    }
+    
+    .displayLineIcon{
+        display: none;
+    }
+    
+    .Header-icon{
+        height: 7vh;
+        width: 7vh;
+        /* background-color: rgb(205, 205, 205); */
+        border-radius: 15px;
+    
+        margin-left: auto;
+        margin-right: auto; 
+    }
+
+    .Header-icon.visible{
+        background-color: rgb(205, 205, 205);
+    }
+    
+    .displayBar{
+        display: none;
+    }
+    .displayBar.visible {
+        display: none;
+    }
+    .displayBar-menu-first{
+        display: none;
+    }
+    .iwantCenter{
+        display: none;
+    }
+    .displayBar-menu-border{
+        display: none;
+    } 
+    .displayBar-menu2-second{
+        display: none;
+    }
+}

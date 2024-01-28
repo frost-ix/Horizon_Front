@@ -1,0 +1,97 @@
+@media screen and (max-width: 800px) {
+    .BoardList{
+        width: 100vw;
+        height: auto;
+        
+    }
+
+    .board-bar{
+        width: 100%;
+        height: auto;
+        
+        display: flex;
+        flex-direction: row;
+    }
+
+    .board-bar-list{
+        width: 25%;
+        height: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s ease; 
+    }
+    .board-bar-list.select{
+        border-bottom:2px solid #66c0dc;
+        color: #66c0dc;
+    }
+    .barl{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        color: rgb(0,0,0,0.2);
+    }
+    
+   .boardList-box{
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    cursor: pointer;
+   }
+
+   .board-table{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(0,0,0,0.3);
+   }
+
+   .board-data-div{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+   }
+
+   .board-tr{
+    border-top: 1px solid rgb(0,0,0,0.3);
+    width: 98%;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2%;
+    transition: background-color 0.3s ease; 
+   }
+   .board-tr:hover{
+    background-color: #66c1dc70;
+   }
+
+
+   .board-title{
+    font-size: 17px;
+    font-weight:600;
+    margin-bottom: 7px;
+   }
+
+   .board-data{
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+   }
+
+   .board-line{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: rgb(0,0,0,0.4);
+   }
+  
+}
