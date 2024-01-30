@@ -6,6 +6,28 @@ function Post() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [imgName, setImgName] = useState<string>("사진 선택")
 
+  const postMassage:string=
+  `
+  - 비속어 사용, 비하 혹은 혐오적인 표현을 
+    삼가해주세요.
+
+  - 선정적인 내용 또는 불건전한 이미지를 게시하거나 
+    첨부하는 것을 금합니다.
+  
+  - 불법적인 활동에 관련된 글이나 사진을 게시하는 
+    것을 금하며, 해당 행동에 대한 
+    경고 없이 제재될 수 있습니다.
+  
+  - 다른 사용자를 존중하고 예의를 갖춰주세요. 
+    상처감을 줄 수 있는 내용이나 공격적인 
+    태도는 피해주세요.
+  
+  - 위 규칙을 준수하지 않을 경우, 해당 글은 
+    삭제될 수 있으며 사용자는 경고 혹은 일시적인 
+    이용 제한을 받을 수 있습니다.
+  `;
+
+
   const changeImg = (e:any)=>{
     setImgName(e.target.files[0].name);
   }
@@ -22,7 +44,7 @@ function Post() {
     const content:string = form.elements.content.value;
     const boardImageMetaData: Blob | null = form.elements.boardImageMetaData.files[0];
 
-    console.log(title, category, content, boardImageMetaData, isChecked);
+    // console.log(title, category, content, boardImageMetaData, isChecked);
 
     const formData:any = new FormData();
     formData.append("title", title);
@@ -30,21 +52,29 @@ function Post() {
     // formData.append("write", write);
     formData.append("content", content);
     formData.append("boardImageMetaData", boardImageMetaData);
+
     
-    // try {
-    //   const response: AxiosResponse<any> = await axios.post('백엔드링크', formData, {
-    //     headers: {'Content-Type': 'multipart/form-data'},})
-    //   if(response.status === 200)
-    //   {
-    //     alert("게시물 작성 성공")
-    //   }else{
-    //     alert("게시물 작성 실패")
-    //   }
-    // } catch (error) {
-    //   console.error('Error fetching data:', error);
-    // } finally {
-    //   // alert("실패!")
-    // }
+    console.log(formData)
+    console.log(formData.get("title"));
+    console.log(formData.get("category"));
+    console.log(formData.get("content"));
+    console.log(formData.get("boardImageMetaData"));
+    
+
+    try {
+      const response: AxiosResponse<any> = await axios.post('/mynode/form', formData, {
+        headers: {'Content-Type': 'multipart/form-data'},})
+      if(response.status === 200)
+      {
+        alert("게시물 작성 성공")
+      }else{
+        alert("게시물 작성 실패")
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      // alert("실패!")
+    }
 
   }
 
@@ -55,7 +85,7 @@ function Post() {
             <p className="post-p">게시글 작성</p> <input type='submit' className='post-submit' value="등록"/>
           </div>
 
-          <div className="post-bar">
+          <div className="post-bar-two">
             <select name="category" className='post-category'>
                 <option value="hoseo">호서게시판</option>
                 <option value="qna">QnA게시판</option>
@@ -66,7 +96,7 @@ function Post() {
           </div>
             
           <input type='text' name="title" className='post-title' placeholder="제목" required/>
-          <textarea name="content" className='post-content' placeholder="내용" required/>
+          <textarea name="content" className='post-content' placeholder={postMassage} required/>
           {/* <input type='file' className='post-file' name="boardImageMetaData"/> */}
 
           <div className="filebox"> 

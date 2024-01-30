@@ -15,7 +15,8 @@ function Header() {
         setDisplayLine(!displayLine);
     };
     const AccountClick = () => {
-        navigate('/account')
+        // navigate('/account')
+        // alert("기능 준비 중")
         setAcc(true);setBoo(false);setHom(false);setPos(false);
     };
     const PostClick = () => {
@@ -31,7 +32,8 @@ function Header() {
         alert("기능 준비 중")
     };
     const BookClick = () => {
-        navigate('/book')
+        // navigate('/book')
+        // alert("기능 준비 중")
         setAcc(false);setBoo(true);setHom(false);setPos(false)
     };
 
