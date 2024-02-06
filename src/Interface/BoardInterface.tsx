@@ -1,13 +1,15 @@
+
 interface BoardItem {
-    num: number;
-    writer: string;
-    title: String;
-    category: String;
-    content: String;
-    dateofCreate: Date;
-    likes: number;
-    hits: number;
-    boardImageMetadata: object;
-  }
+  _id: string;
+  writer: string;
+  title: String;
+  category: String;
+  content: String;
+  createAt: Date;
+  // updateAt: Date;
+  likes: number;
+  hits: number;
+  boardImageMetadata: string|null;
+}
 
 export default BoardItem;

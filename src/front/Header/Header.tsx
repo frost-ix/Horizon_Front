@@ -24,7 +24,7 @@ function Header() {
         setAcc(false);setBoo(false);setHom(false);setPos(true)
     };
     const MainClick = () => {
-        navigate('/')
+        navigate('/board?Category=hoseo')
         setAcc(false);setBoo(false);setHom(true);setPos(false)
     };
     const SearchClick = () => {
