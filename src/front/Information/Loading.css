@@ -1,0 +1,16 @@
+.loadingIcon{
+    width: 40vw;
+    height: 40vw;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+  }
+  
+  .loading-center{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }

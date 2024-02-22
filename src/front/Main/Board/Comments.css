@@ -1,3 +1,4 @@
+@media screen and (max-width: 800px) {
 .Comments{
     width: 100%;
     height: auto;
@@ -10,11 +11,8 @@
     padding-left: 2%;
     padding-top: 3px;
     padding-bottom: 3px;
-}
-
-.comment-tr-row{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .comment-tr-writer{
@@ -23,12 +21,108 @@
 }
 
 .comment-tr-createAt{
-    font-size: 10px;
+    font-size: 12px;
     margin-top: auto;
     color:rgb(0,0,0,0.4)
 }
 
 .comment-tr-content{
     font-size: 14px;
-    margin-top: 3px;
+    margin-top: 2px;
+}
+
+.comment-tr-bottom{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.comment-like{
+    color:#FFCC33;
+    font-weight:600;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: 11px;
+}
+.comment-like-icon{
+    width: 12px;
+    height: 12px;
+}
+
+.comment-menubar{
+    display: none;
+}
+
+.form-comment-div{
+    width: 96%;
+    height: auto;
+    /* background-color: rgba(196, 196, 196, 0.2); */
+    padding: 2%;
+}
+
+.form-comment{
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0.5em;
+    border:1px solid rgb(0,0,0,0.3);
+    background-color: rgba(171, 171, 171, 0.1);
+}
+
+.input-comment-text{
+    width: 75%;
+    height: 30px;
+    font-size: 13px;
+    /* margin-left: 1%; */
+    /* margin-right: auto; */
+    border: 0;
+    background-color: rgb(0,0,0,0);
+}
+
+.input-comment-text:focus {
+    outline: none;
+  }
+
+.input-comment-submit{
+    width: 15%;
+    height: 100%;
+    color: black;
+    font-weight: bold;
+    font-size: 90%;
+    border: 0;
+    border-radius: 0.3em;
+    background-color: rgb(0,0,0,0);
+    /* margin-left: auto; */
+    white-space: nowrap;
+}
+
+.input-comment-anonymous{
+    width: 10%;
+    height: 100%;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 90%;
+    font-weight: bold;
+    /* color: rgb(160, 74, 74); */
+    color:#2284a2;
+    /* margin-left: 3px; */
+}
+.input-comment-anonymous:active{
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.input-comment-anonymous:focus{
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.input-comment-anonymous:hover{
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 }

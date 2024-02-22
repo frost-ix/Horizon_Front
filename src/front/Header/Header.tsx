@@ -15,7 +15,7 @@ function Header() {
         setDisplayLine(!displayLine);
     };
     const AccountClick = () => {
-        // navigate('/account')
+        navigate('/myaccount')
         // alert("기능 준비 중")
         setAcc(true);setBoo(false);setHom(false);setPos(false);
     };

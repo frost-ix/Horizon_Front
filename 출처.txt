@@ -6,6 +6,7 @@
 <a href="https://kr.freepik.com/icon/share_1358023#fromView=search&term=%EA%B3%B5%EC%9C%A0&track=ais&page=1&position=6&uuid=e99dab37-ae14-4e45-83ba-afcb8fbbfd4c">Freepik 제작 아이콘</a>
 <a href="https://kr.freepik.com/icon/like_12371717#fromView=keyword&term=%EC%A2%8B%EC%95%84%EC%9A%94&page=1&position=46&uuid=b3adb1a5-0e9e-43bb-a94e-30787473935a">Irvan Kurnianto 제작 아이콘</a>
 <a href="https://kr.freepik.com/icon/monitor_10442084#fromView=search&term=%EB%A1%9C%EB%94%A9%EC%A4%91&track=ais&page=1&position=73&uuid=68056418-28b7-48f3-81eb-45d2cec6428f">LAFS 제작 아이콘</a>
+로딩움짤 : https://giphy.com/gifs/mashable-3oEjI6SIIHBdRxXI40
 
 - 비속어 사용, 비하 혹은 혐오적인 표현을 
     삼가해주세요.
@@ -24,3 +25,5 @@
   - 위 규칙을 준수하지 않을 경우, 해당 글은 
     삭제될 수 있으며 사용자는 경고 혹은 일시적인 
     이용 제한을 받을 수 있습니다.
+
+    <div className="loading-center"><img src="/Icon/Loading.png" className="loadingIcon" alt="" /></div>

@@ -8,11 +8,6 @@
   flex-direction:column;
 }
 
-.lodingIcon{
-  width: 70vw;
-  height: auto;
-}
-
 /* 프렌텐다드 경고문 */
 @font-face {
   font-family: 'Pretendard-Regular';
@@ -29,6 +24,10 @@
 }
 
 *{
-  font-family: 'EASTARJET-Medium', sans-serif;
+  font-family: 'Pretendard-Regular', sans-serif;
   /* font-weight: bold; */
+}
+
+input {
+  touch-action: manipulation;
 }

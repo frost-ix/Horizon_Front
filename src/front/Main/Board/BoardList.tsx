@@ -3,6 +3,7 @@ import { useNavigate,useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import './BoardList.css';
 import BoardListItem from "../../../Interface/BoardListItem";
+import Loading from "../../Information/Loading";
 
 
 function BoardList() {
@@ -71,7 +72,7 @@ function BoardList() {
         </div>
         </div>
       ):(
-        <img src="/Icon/Loding.png" className="lodingIcon" alt="" />
+        <Loading/>
       )}
     </div>
   );

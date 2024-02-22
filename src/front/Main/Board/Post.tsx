@@ -87,8 +87,8 @@ function Post() {
           익명등록<input type="checkbox" name="anonymous" checked={isChecked} onChange={anonymousCheck} className="post-check" />
         </div>
 
-        <input type='text' name="title" className='post-title' placeholder="제목"/>
-        <textarea name="content" className='post-content' placeholder={postMassage}/>
+        <input type='text' name="title" className='post-title' placeholder="제목" required/>
+        <textarea name="content" className='post-content' placeholder={postMassage} required/>
 
         <div className="filebox">
           <label htmlFor="ex_file"><img src="/Icon/Photo.png" alt="" className="post-photoIcon" />{imgName}</label>

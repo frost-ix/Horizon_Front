@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import BoardItem from "../../../Interface/BoardInterface";
 import Comments from './Comments';
+import Loading from '../../Information/Loading';
 
 import './OneBoard.css';
 
@@ -56,7 +57,7 @@ function OneBoard() {
           <Comments boardId={boardId}/>
         </div>
         ):(
-          <img src="/Icon/Loding.png" className="lodingIcon" alt="" />
+          <Loading/>
         )}
     </div>
   );
