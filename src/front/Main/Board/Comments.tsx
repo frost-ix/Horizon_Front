@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from 'axios';
 import './Comments.css';
 import CommentsItem from "../../../Interface/CommentsInterface";
-// import Loading from "../../Information/Loading";
+import report from "../../Information/Report";
 
 function Comments({ boardId }: { boardId: any }) {
   const [comments, setComments] = useState<CommentsItem[] | null>();
@@ -68,6 +68,10 @@ function Comments({ boardId }: { boardId: any }) {
       }
     }
 
+    const reportEvent = (id:any) => {
+      report(id,"신고자이름")
+    }
+
   return (
     <div className="Comments">
       {comments? (
@@ -82,7 +86,7 @@ function Comments({ boardId }: { boardId: any }) {
             </div>
 
             <div className="comment-menubar" id={`${item.commentNum}comment`} >
-              <div>신고버튼</div><div>댓글달기</div><div>추천</div>
+              <button onClick={()=>{reportEvent(item.commentNum)}}>신고하기</button>
             </div>
 
           </div>

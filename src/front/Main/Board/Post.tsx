@@ -54,6 +54,7 @@ function Post() {
     formData.append("category", category);
     formData.append("writer", "병준"); // 임시
     formData.append("content", content);
+    formData.append("anonymous",isChecked)
     formData.append("boardImageMetaData", boardImageMetaData);
 
     try {

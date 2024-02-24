@@ -1,21 +1,21 @@
-h1{
+/* h1{
   color: #66c0dc;
   margin-left: 40px;
-}
+} */
 
-form{
+/* form{
   text-align: center;
-}
-
+} */
+/* 
 input{
   border: none;
-}
+} */
 
-input:not(.first){
+/* input:not(.first){
   margin-top: 20px;
-}
+} */
 
-input[type=button]{
+/* input[type=button]{
   background-color: #fff;
   border: 1px solid #66c0dc;
   color: #66c0dc;
@@ -26,9 +26,9 @@ input[type=button]{
   height: 40px;
   margin-top: 30px;
   cursor : pointer;
-}
+} */
 
-input[type=submit]{
+/* input[type=submit]{
   background-color: #fff;
   border: 1px solid #66c0dc;
   color: #66c0dc;
@@ -41,7 +41,7 @@ input[type=submit]{
   margin-right: 15px;
   cursor : pointer;
   float: right;
-}
+} */
 
 input[type=button]:hover{
     background-color: #66c0dc;

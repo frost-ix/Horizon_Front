@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import BoardItem from "../../../Interface/BoardInterface";
 import Comments from './Comments';
 import Loading from '../../Information/Loading';
+import report from '../../Information/Report';
 
 import './OneBoard.css';
 
@@ -29,6 +30,10 @@ function OneBoard() {
       getBoardList()
     },[])
 
+    const reportEvent = () => {
+      report(boardId, "신고자이름")
+    }
+
 
   return (
     <div className="OneBoard">
@@ -51,7 +56,7 @@ function OneBoard() {
           </div>
           <div className='oneboard-bar'>
             <button className='oneboard-bar-button'><img src="/Icon/Like.png" className="oneboard-bar-icon" alt="" />추천</button>
-            <button className='oneboard-bar-button'><img src="/Icon/Report.png" className="oneboard-bar-icon" alt="" />신고</button>
+            <button className='oneboard-bar-button' onClick={reportEvent}><img src="/Icon/Report.png" className="oneboard-bar-icon" alt="" />신고</button>
             <button className='oneboard-bar-button'><img src="/Icon/Share.png" className="oneboard-bar-icon" alt="" />공유</button>
           </div>
           <Comments boardId={boardId}/>
