@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Post() {
   const navigate = useNavigate();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isAnonymous, setIsAnonymous] = useState<boolean>(false);
   const [imgName, setImgName] = useState<string>("사진 선택")
 
   const postMassage:string =
@@ -34,7 +34,7 @@ function Post() {
   }
 
   const anonymousCheck = (e:any)=> {
-    setIsChecked(e.target.checked);
+    setIsAnonymous(e.target.checked);
   };
 
   const posting = async (e:any) => {
@@ -45,27 +45,25 @@ function Post() {
     const content:string = form.elements.content.value;
     const boardImageMetaData: Blob | null = form.elements.boardImageMetaData.files[0];
 
-    console.log(title);
-    console.log(category);
-    console.log(content);
-
     const formData:any = new FormData();
     formData.append("title", title);
     formData.append("category", category);
     formData.append("writer", "병준"); // 임시
     formData.append("content", content);
-    formData.append("anonymous",isChecked)
+    formData.append("isAnonymous",isAnonymous)
     formData.append("boardImageMetaData", boardImageMetaData);
 
     try {
-      const response: AxiosResponse<any> = await axios.post('http://localhost:3100/board/', formData, {
+      const response: AxiosResponse<any> = await axios.post('http://jungsonghun.iptime.org:7223/board/post', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      alert(response.data.message);
-
       if(response.data.success)
+      {
+        alert("게시물 작성 완료")
         navigate('/');
+      }
+        
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -85,7 +83,7 @@ function Post() {
               <option value="food">맛집게시판</option>
               <option value="department">학과게시판</option>
           </select>
-          익명등록<input type="checkbox" name="anonymous" checked={isChecked} onChange={anonymousCheck} className="post-check" />
+          익명등록<input type="checkbox" name="anonymous" checked={isAnonymous} onChange={anonymousCheck} className="post-check" />
         </div>
 
         <input type='text' name="title" className='post-title' placeholder="제목" required/>
