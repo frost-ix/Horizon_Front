@@ -94,7 +94,7 @@
 @media screen and (max-width: 800px) {
     .Header{
         width: 100vw;
-        height: 8vh;
+        height: 7vh;
     
         position: fixed;
         bottom: 0;
@@ -112,7 +112,7 @@
     
     .Header-icons{
         width: 100vw;
-        height: 8vh;
+        height: 7vh;
         display: flex; 
         align-items: center;
         justify-content:center;
@@ -124,8 +124,8 @@
     }
     
     .Header-icon{
-        height: 7vh;
-        width: 7vh;
+        height: 6vh;
+        width: 6vh;
         /* background-color: rgb(205, 205, 205); */
         border-radius: 15px;
     

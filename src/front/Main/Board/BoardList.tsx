@@ -55,12 +55,14 @@ function BoardList() {
         {boardList.map((item) => (
           <div key={item._id} className='board-tr' onClick={()=>{oneboard(item._id)}}>
             <div className="board-tr-left">
-              <div className='board-title'>{item.title}</div>
+              <div className='board-title'><img src="./Icon/User.png" className="board-userIcon" alt="" />{item.title}</div>
+
+              <div className='board-content'>{item.content}</div>
+
               <div className='board-data'>
                 {item.writer}
                 <div className="board-line">|</div> <span className="board-hit">조회수 {item.hits}</span>
-                
-                {/* <div className="board-line">|</div>  <>{item.createAt}</> */}
+                <div className="board-line">|</div><>{item.createAt.toString().substring(5, 10)}</>
               </div>
             </div>
             <div className="board-tr-right">

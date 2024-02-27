@@ -66,14 +66,15 @@
     border-top: 1px solid rgb(0,0,0,0.3);
     width: 98%;
     height: auto;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 2%;
     transition: background-color 0.3s ease; 
 
     display: flex;
     flex-direction: row;
    }
+
 
    .board-tr-left{
     width: 70%;
@@ -90,15 +91,34 @@
         font-size: 13px;
     }
 
-   /* .board-tr:hover{
-    background-color: #66c1dc70;
-   } */
-
-
+   .board-userIcon{
+    width: 17px;
+    height: 17px;
+    margin-right: 3px;
+    background-color: rgb(0,0,0,0.1);
+   }
+   
    .board-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     font-size: 17px;
-    /* font-weight:bold; */
-    margin-bottom: 7px;
+    /* margin-bottom: 7px; */
+    margin-bottom: 3px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   }
+
+   .board-content{
+    font-size: 13px;
+    color: rgb(0,0,0,0.7);
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
    }
 
    .board-data{

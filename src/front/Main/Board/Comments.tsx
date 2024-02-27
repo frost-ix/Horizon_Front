@@ -77,11 +77,11 @@ function Comments({ boardId }: { boardId: any }) {
       {comments? (
         comments.map((item) => (
           <div className="comment-tr" onClick={()=>commentMenu(item.commentNum+'comment')}>
-              <div className="comment-tr-writer">{item.writer}</div>
+              <div className="comment-tr-writer"><img src="./Icon/User.png" className="comment-userIcon" alt="" />{item.writer}</div>
               <div className="comment-tr-content">{item.content}</div>
               
             <div className="comment-tr-bottom">
-                <div className="comment-tr-createAt">{/*{item.createAt.toString()}*/}10월23일 14:29</div>
+                <div className="comment-tr-createAt">{item.createAt.toString().substring(0, 10)}</div>
                 {/* <div className="comment-like"><img src="/Icon/Like.png" className="comment-like-icon" alt="" /> {item.likes.toString()}</div> */}
             </div>
 
