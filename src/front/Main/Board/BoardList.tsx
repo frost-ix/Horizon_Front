@@ -38,7 +38,7 @@ function BoardList() {
   }
 
   const oneboard = (boardId:string)=> {
-    navigate("/oneboard",{ state : boardId });
+    navigate(`/oneboard?boardId=${boardId}`);
   }
 
   return (

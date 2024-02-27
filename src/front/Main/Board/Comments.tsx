@@ -82,7 +82,7 @@ function Comments({ boardId }: { boardId: any }) {
               
             <div className="comment-tr-bottom">
                 <div className="comment-tr-createAt">{/*{item.createAt.toString()}*/}10월23일 14:29</div>
-                <div className="comment-like"><img src="/Icon/Like.png" className="comment-like-icon" alt="" /> {item.likes.toString()}</div>
+                {/* <div className="comment-like"><img src="/Icon/Like.png" className="comment-like-icon" alt="" /> {item.likes.toString()}</div> */}
             </div>
 
             <div className="comment-menubar" id={`${item.commentNum}comment`} >

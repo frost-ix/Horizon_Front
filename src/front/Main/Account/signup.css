@@ -1,21 +1,21 @@
-/* h1{
+.phone h1{
   color: #66c0dc;
   margin-left: 40px;
-} */
+}
 
-/* form{
+.phone form{
   text-align: center;
-} */
-/* 
-input{
+}
+
+.phone input{
   border: none;
-} */
+}
 
-/* input:not(.first){
+.phone input:not(.first){
   margin-top: 20px;
-} */
+}
 
-/* input[type=button]{
+.phone input[type=button]{
   background-color: #fff;
   border: 1px solid #66c0dc;
   color: #66c0dc;
@@ -26,9 +26,9 @@ input{
   height: 40px;
   margin-top: 30px;
   cursor : pointer;
-} */
+}
 
-/* input[type=submit]{
+.phone input[type=submit]{
   background-color: #fff;
   border: 1px solid #66c0dc;
   color: #66c0dc;
@@ -41,9 +41,9 @@ input{
   margin-right: 15px;
   cursor : pointer;
   float: right;
-} */
+}
 
-input[type=button]:hover{
+.phone input[type=button]:hover{
     background-color: #66c0dc;
     color: #fff;
 }
@@ -58,10 +58,16 @@ input[type=button]:hover{
     margin-left: 20px;
 }
 
-.phone{
+/* .phone{
     width: 407px;
     height: 600px;
     margin: 100px auto;
+} */
+
+.phone{
+  width: 92vw;
+  height: auto;
+  /* margin: 100px auto; */
 }
 
 .warning{
@@ -132,7 +138,7 @@ input[type=button]:hover{
 }
 
 /* step progress bar */
-ul,li {margin:0; padding:0; pointer-events : none;}
+ul,li {margin:0; padding:0;}
 
 .barcontainer {
     width: 100%;
@@ -149,6 +155,7 @@ ul,li {margin:0; padding:0; pointer-events : none;}
     position: relative;
     text-align: center;
     cursor: pointer;
+    pointer-events : none;
   }
   .progressbar li:before {
     content: counter(step);

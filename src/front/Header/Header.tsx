@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 function Header() {
     const navigate = useNavigate();
     const [displayLine, setDisplayLine] = useState<boolean>(false);
-    const [pos, setPos] = useState<boolean>(false);
-    const [boo, setBoo] = useState<boolean>(false);
-    const [hom, setHom] = useState<boolean>(true);
+    const [pos, setPost] = useState<boolean>(false);
+    const [boo, setBook] = useState<boolean>(false);
+    const [hom, setHome] = useState<boolean>(true);
     const [acc, setAcc] = useState<boolean>(false);
 
 
@@ -17,15 +17,15 @@ function Header() {
     const AccountClick = () => {
         navigate('/myaccount')
         // alert("기능 준비 중")
-        setAcc(true);setBoo(false);setHom(false);setPos(false);
+        setAcc(true);setBook(false);setHome(false);setPost(false);
     };
     const PostClick = () => {
         navigate('/post')
-        setAcc(false);setBoo(false);setHom(false);setPos(true)
+        setAcc(false);setBook(false);setHome(false);setPost(true)
     };
     const MainClick = () => {
         navigate('/board?Category=hoseo')
-        setAcc(false);setBoo(false);setHom(true);setPos(false)
+        setAcc(false);setBook(false);setHome(true);setPost(false)
     };
     const SearchClick = () => {
         // navigate('/search')
@@ -34,7 +34,7 @@ function Header() {
     const BookClick = () => {
         // navigate('/book')
         // alert("기능 준비 중")
-        setAcc(false);setBoo(true);setHom(false);setPos(false)
+        setAcc(false);setBook(true);setHome(false);setPost(false)
     };
 
     return (

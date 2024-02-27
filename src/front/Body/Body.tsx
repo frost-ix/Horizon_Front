@@ -8,6 +8,7 @@ import OneBoard from '../Main/Board/OneBoard';
 import BoardList from '../Main/Board/BoardList';
 
 import Signup from '../Main/Account/Signup';
+import Login from '../Main/Account/Login';
 
 function Body() {
   return (
@@ -18,8 +19,11 @@ function Body() {
                 <Route path='/oneboard' element={<OneBoard/>}/>
                 <Route path='/post' element={<Post/>}/>
 
+                {/* <Route path='/myaccount' element={<Main/>}/> */}
                 <Route path='/myaccount' element={<Signup/>}/>
-                
+                {/* <Route path='/myaccount' element={<Login/>}/> */}
+
+
                 <Route path='/account' element={<Main/>}/>
                 <Route path='/book' element={<Main/>}/>
             </Routes>

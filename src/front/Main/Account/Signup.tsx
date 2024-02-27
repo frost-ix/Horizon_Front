@@ -2,7 +2,7 @@ import React, { useState , useRef , useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import './Signup.css';
+import './signup.css';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -285,7 +285,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="phone ">
+    <div className="phone">
       <h1>SIGN UP</h1>
       {/* Step Progress Bar */}
       <div className="barcontainer">
