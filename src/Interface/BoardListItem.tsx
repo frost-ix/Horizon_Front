@@ -4,7 +4,6 @@ interface BoardListItem {
     content:string;
     title: String;
     createAt: Date;
-    // updateAt: Date;
     likes: number;
     hits: number;
   }

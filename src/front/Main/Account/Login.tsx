@@ -1,11 +1,14 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import { LoginSessionDispatch } from "../../../Redux/Login/ReduxLoginSessionDispatch";
 
 // fontawesome 
 import "https://kit.fontawesome.com/344577fb7a.js";
 
 export default function Login() {
+  const navigate = useNavigate()
   /***
    * @description 현재 시간을 불러오는 구간
    * 1s 마다 갱신
@@ -38,7 +41,11 @@ export default function Login() {
     element.preventDefault();
     const userID: string = element.currentTarget.userID.value;
     const userPW: string = element.currentTarget.userPW.value;
-    console.log("userID : " + userID + "\n" + "userPW : " + userPW);
+    // console.log("userID : " + userID + "\n" + "userPW : " + userPW);
+
+    LoginSessionDispatch("정송훈",userID,userPW)
+    
+    navigate("/")
     // axios
     //   .post("http://localhost:3001/login", {
     //     userID: userID,

@@ -69,12 +69,14 @@ function OneBoard() {
                 <div className="oneboard-line">|</div> 조회수 {boardData.hits}
               </div>
           </div>
+
           {boardData.boardImageMetadata? (
           <img className='oneboard-image' src={boardData.boardImageMetadata}/>
           ):(<></>)}
           <div className='oneboard-content'>
             {boardData.content}
           </div>
+
           <div className='oneboard-bar'>
             <button className='oneboard-bar-button' onClick={LikesEvent}><img src="/Icon/Like.png" className="oneboard-bar-icon" alt="" />추천</button>
             <button className='oneboard-bar-button' onClick={reportEvent}><img src="/Icon/Report.png" className="oneboard-bar-icon" alt="" />신고</button>

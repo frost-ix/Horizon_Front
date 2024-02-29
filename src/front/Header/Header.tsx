@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './Header.css';
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
+
 function Header() {
     const navigate = useNavigate();
     const [displayLine, setDisplayLine] = useState<boolean>(false);
@@ -9,6 +12,8 @@ function Header() {
     const [boo, setBook] = useState<boolean>(false);
     const [hom, setHome] = useState<boolean>(true);
     const [acc, setAcc] = useState<boolean>(false);
+
+    const userImpormation = useSelector((state:RootState) => state.LoginSession);
 
 
     const displayBarClick = () => {
@@ -33,8 +38,8 @@ function Header() {
     };
     const BookClick = () => {
         // navigate('/book')
-        // alert("기능 준비 중")
-        setAcc(false);setBook(true);setHome(false);setPost(false)
+        alert("기능 준비 중")
+        // setAcc(false);setBook(true);setHome(false);setPost(false)
     };
 
     return (

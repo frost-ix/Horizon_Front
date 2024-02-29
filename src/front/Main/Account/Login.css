@@ -268,11 +268,11 @@ body{
     border-radius: 5px 5px 0 0;
     border: 1px solid rgba(185, 185, 185, 0.7);
   
-    background-image : url('./img/user_before.svg');
+    /* background-image : url('./img/user_before.svg'); */
     margin-bottom: 0;
 
     &:focus{
-      background-image : url('./img/user_after.svg');
+      /* background-image : url('./img/user_after.svg'); */
     }
   }
   
@@ -282,10 +282,10 @@ body{
     border: 1px solid rgba(185, 185, 185, 0.7);
     border-top: none;
 
-    background-image : url('./img/pwd_before.svg');
+    /* background-image : url('./img/pwd_before.svg'); */
 
     &:focus{
-      background-image: url('./img/pwd_after.svg');
+      /* background-image: url('./img/pwd_after.svg'); */
     }
   }
 
