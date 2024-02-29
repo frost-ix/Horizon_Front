@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import './Header.css';
 import { useNavigate } from "react-router-dom";
 
-import { useSelector } from 'react-redux';
-import { RootState } from '../../Redux/store';
-
 function Header() {
     const navigate = useNavigate();
     const [displayLine, setDisplayLine] = useState<boolean>(false);
@@ -12,9 +9,6 @@ function Header() {
     const [boo, setBook] = useState<boolean>(false);
     const [hom, setHome] = useState<boolean>(true);
     const [acc, setAcc] = useState<boolean>(false);
-
-    const userImpormation = useSelector((state:RootState) => state.LoginSession);
-
 
     const displayBarClick = () => {
         setDisplayLine(!displayLine);
