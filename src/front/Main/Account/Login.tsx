@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./Login.css";
-// import "./Login_origin.css";
 
 // fontawesome 
 import "https://kit.fontawesome.com/344577fb7a.js";
@@ -57,38 +56,71 @@ export default function Login() {
   const idSave = useRef<HTMLLabelElement>(null);
   const idSaveSpan = useRef<HTMLLabelElement>(null);
 
-  const [idUrl, setIdUrl] = useState("img/check_before.svg");
+  const [idUrl, setIdUrl] = useState("icon/check_before.svg");
   const setId = ({target} : {target:HTMLInputElement}) => {
     // alert(target.checked);
     const checkState: boolean = target.checked;
     if(checkState){
-      setIdUrl('img/check_after.svg')
+      setIdUrl('icon/check_after.svg')
       idSaveSpan.current?.style.setProperty('font-weight', '700');
     }
     else{
-      setIdUrl('img/check_before.svg');
+      setIdUrl('icon/check_before.svg');
       idSaveSpan.current?.style.setProperty('font-weight', '400');
     }
   }
 
   /*** 비밀번호 보기  */
-  const viewPW = useRef<HTMLLabelElement>(null);
-  const viewPWSpan = useRef<HTMLSpanElement>(null);
-  const [pwUrl, setPwUrl] = useState("img/check_before.svg");
+  const [pwUrl, setPwUrl] = useState("icon/eye_before.svg");
   const userPW = useRef<HTMLInputElement>(null);
+  const eyeIcon = useRef<HTMLButtonElement>(null);
 
-  const setPw = ({target} : {target : HTMLInputElement}) => {
-    // alert(target.checked);
-    const checkState: boolean = target.checked;
-    if(checkState){
-      setPwUrl('img/check_after.svg')
-      viewPWSpan.current?.style.setProperty('font-weight', '700');
-      userPW.current?.setAttribute('type', 'text');
+  const setPw = () => {
+    if(pwUrl === "icon/eye_before.svg" && userPW.current){
+      setPwUrl("icon/eye_after.svg");
+      userPW.current.type = "text";
     }
-    else{
-      setPwUrl('img/check_before.svg');
-      viewPWSpan.current?.style.setProperty('font-weight', '400');
-      userPW.current?.setAttribute('type', 'password');
+    else if(pwUrl === "icon/eye_after.svg" && userPW.current){
+      setPwUrl("icon/eye_before.svg");
+      userPW.current.type = "password";
+    }
+  }
+
+  const userID = useRef<HTMLInputElement>(null);/*pw는 앞에서 선언 */
+  const xIconId = useRef<HTMLButtonElement>(null);
+  const xIconPw = useRef<HTMLButtonElement>(null);
+  let xIcon = useRef<HTMLButtonElement>(null);
+  
+  const setXIcon = (type:string) => {
+    let value_check = false;
+    if(type === "id"){
+      xIcon = xIconId;
+      if(userID.current?.value)
+        value_check = true;
+    }
+    else if(type === "pw"){
+      xIcon = xIconPw;
+      if(userPW.current?.value)
+        value_check = true;
+    }
+
+    if(value_check)
+      xIcon.current?.style.setProperty("visibility", "visible");
+    else
+      xIcon.current?.style.setProperty("visibility", "hidden");
+  }
+
+  const xEventId = () => {
+    if(userID.current){
+      userID.current.value = "";
+      xIconId.current?.style.setProperty("visibility", "hidden");
+    }
+  }
+
+  const xEventPw = () => {
+    if(userPW.current){
+      userPW.current.value = "";
+      xIconPw.current?.style.setProperty("visibility", "hidden");
     }
   }
 
@@ -97,16 +129,18 @@ export default function Login() {
       <h1>LOGIN</h1>
       <form id="loginForm" onSubmit={handleLogin}>
         <div id="locale">{locale}</div>
-        <input type="text" name="userID" id="userID" placeholder="아이디" autoFocus/>
-        <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" />
+        <div id="id_box" className="input_box">
+          <input type="text" name="userID" id="userID" ref={userID} placeholder="아이디" onChange={() => setXIcon("id")} autoFocus/>
+          <button style={{visibility: "hidden"}} ref={xIconId}><img src="icon/x_icon.svg" alt="" onClick={xEventId} /></button>
+        </div>
+        <div id="pw_box" className="input_box">
+          <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" onChange={() => setXIcon("pw")}/>
+          <button style={{visibility: "hidden"}} ref={xIconPw}><img src="icon/x_icon.svg" alt="" onClick={xEventPw}/></button>
+          <button onClick={setPw} ref={eyeIcon}><img src={pwUrl} alt=""/></button>
+        </div>
         <label htmlFor="remember" id="label_box" ref={idSave} style={{backgroundImage: `url('${idUrl}')`}}>
           <span ref={idSaveSpan}>아이디 저장</span>
-          {/* <input type="checkbox" id="remember" onChange={(e) => setSave(e)} />  */}
           <input type="checkbox" id="remember" style={{visibility: "hidden"}} onChange={(e) => setId(e)}/> 
-        </label>
-        <label htmlFor="viewPW" id="label_box" ref={viewPW} style={{backgroundImage: `url('${pwUrl}')`}}>
-          <span ref={viewPWSpan}>비밀번호 보기</span>
-          <input type="checkbox" id="viewPW" style={{visibility: "hidden"}} onChange={(e) => setPw(e)}/> 
         </label>
         <input type="submit" id="loginSubmit" value="로그인" />
       </form>
