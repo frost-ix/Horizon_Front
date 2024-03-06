@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from "../../../Redux/store";
 import './BoardList.css';
 import BoardListItem from "../../../Interface/BoardListItem";
 import Loading from "../../Information/Loading";
@@ -10,6 +12,7 @@ function BoardList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const Category = queryParams.get('Category');
+  const userImpormation = useSelector((state:RootState) => state.LoginSession);
 
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<BoardListItem[] | null>(null);
@@ -38,7 +41,14 @@ function BoardList() {
   }
 
   const oneboard = (boardId:string)=> {
-    navigate(`/oneboard?boardId=${boardId}`);
+    if(userImpormation.userId && userImpormation.userName)
+    {
+      navigate(`/oneboard?boardId=${boardId}`);
+    }else{
+      alert("로그인 후 이용하실 수 있습니다.")
+      navigate('/login')
+    }
+    
   }
 
   return (

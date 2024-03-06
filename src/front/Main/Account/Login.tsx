@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import "./Login.css";
+import "./css/Login.css";
 import { useNavigate } from "react-router-dom";
 import { LoginSessionDispatch } from "../../../Redux/Login/ReduxLoginSessionDispatch";
 
@@ -31,6 +31,8 @@ export default function Login() {
     return () => clearInterval(interval);
   }, []);
 
+  
+
   /***
    * @description 로그인 비동기 처리 구간
    * @param {React.FormEvent<HTMLFormElement>} element
@@ -39,24 +41,32 @@ export default function Login() {
    */
   const handleLogin = async (element: React.FormEvent<HTMLFormElement>) => {
     element.preventDefault();
-    const userID: string = element.currentTarget.userID.value;
-    const userPW: string = element.currentTarget.userPW.value;
+    const userId: string = element.currentTarget.userID.value;
+    const userPw: string = element.currentTarget.userPW.value;
     // console.log("userID : " + userID + "\n" + "userPW : " + userPW);
-
-    LoginSessionDispatch("정송훈",userID,userPW)
     
-    navigate("/")
-    // axios
-    //   .post("http://localhost:3001/login", {
-    //     userID: userID,
-    //     userPW: userPW,
-    //   })
-    //   .then((res) => {
-    //     alert("로그인 성공 하셨습니다!" + "\n" + "환영합니다!" );
-    //   })
-    //   .catch((err) => {
-    //     alert("로그인 실패 하셨습니다!" + "\n" + "아이디와 비밀번호를 확인해주세요!");
-    //   });
+      axios
+      .post(`http://jungsonghun.iptime.org:7223/user`, {
+        userId:userId,
+        userPw:userPw
+      })
+      .then((res) => {
+        if(res.data.success)
+        {
+          alert("로그인 성공 하셨습니다!" + "\n" + "환영합니다!" );
+          localStorage.setItem("refreshToken",res.data.refreshToken)
+          sessionStorage.setItem("accessToken",res.data.accessToken)
+          LoginSessionDispatch("정송훈","wjdthdgns1")
+          navigate('/')
+        }else{
+          alert("로그인실패")
+        }
+        
+      })
+      .catch((err) => {
+        alert("로그인 실패 하셨습니다!" + "\n" + "아이디와 비밀번호를 확인해주세요!");
+      });
+
   };
 
   /*** 아이디 저장 체크 */
@@ -137,11 +147,11 @@ export default function Login() {
       <form id="loginForm" onSubmit={handleLogin}>
         <div id="locale">{locale}</div>
         <div id="id_box" className="input_box">
-          <input type="text" name="userID" id="userID" ref={userID} placeholder="아이디" onChange={() => setXIcon("id")} autoFocus/>
+          <input type="text" name="userID" id="userID" ref={userID} placeholder="아이디" onChange={() => setXIcon("id")} autoFocus required/>
           <button style={{visibility: "hidden"}} ref={xIconId}><img src="img/x_icon.svg" alt="" onClick={xEventId} /></button>
         </div>
         <div id="pw_box" className="input_box">
-          <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" onChange={() => setXIcon("pw")}/>
+          <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" onChange={() => setXIcon("pw")} required/>
           <button style={{visibility: "hidden"}} ref={xIconPw}><img src="img/x_icon.svg" alt="" onClick={xEventPw}/></button>
           <button onClick={setPw} ref={eyeIcon}><img src={pwUrl} alt=""/></button>
         </div>

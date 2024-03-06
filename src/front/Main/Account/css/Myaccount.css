@@ -1,0 +1,17 @@
+@media screen and (max-width: 800px) {
+    .Myaccount{
+        width: 100vw;
+        height: auto;
+    }
+
+    .account-bar{
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid rgb(0,0,0,0.3);
+    }
+
+    .account-bar-link{
+        font-size: 15px;
+    }
+
+}

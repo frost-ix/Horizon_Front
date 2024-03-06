@@ -48,10 +48,10 @@ function Post() {
     const formData:any = new FormData();
     formData.append("title", title);
     formData.append("category", category);
-    formData.append("writer", "병준"); // 임시
     formData.append("content", content);
     formData.append("isAnonymous",isAnonymous)
     formData.append("boardImageMetaData", boardImageMetaData);
+    formData.append("accessToken", sessionStorage.getItem("accessToken"));
 
     try {
       const response: AxiosResponse<any> = await axios.post('http://jungsonghun.iptime.org:7223/board/post', formData, {

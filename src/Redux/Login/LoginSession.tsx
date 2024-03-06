@@ -5,7 +5,6 @@ import { RootState } from '../store';
 const initialState: LoginSessionItem = {
     userName: null,
     userId: null,
-    userPwd: null
   };
   
 
@@ -16,7 +15,6 @@ const LoginSession = createSlice({
         ReduxLoginSessionAction: (state, action: PayloadAction<LoginSessionItem>) => {
         state.userName = action.payload.userName;
         state.userId = action.payload.userId;
-        state.userPwd = action.payload.userPwd;
       }
     }
   });

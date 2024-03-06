@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import './Comments.css';
 import CommentsItem from "../../../Interface/CommentsInterface";
 import report from "../../Information/Report";
+import CommentPostItem from "../../../Interface/CommentPostInterface";
 
 function Comments({ boardId }: { boardId: any }) {
   const [comments, setComments] = useState<CommentsItem[] | null>();
@@ -45,11 +46,12 @@ function Comments({ boardId }: { boardId: any }) {
       const content:String = form.elements.content.value
       const writer:String = "예비데이터"
       const isAnonymous:boolean = isChecked
-      const commentData = {
-        writer : writer,
+      const accessToken:String =  sessionStorage.getItem("accessToken") || "storageError"
+      const commentData:CommentPostItem = {
         content : content,
         isAnonymous : isAnonymous,
-        boardId : boardId
+        boardId : boardId,
+        accessToken : accessToken
       }
       
       try {

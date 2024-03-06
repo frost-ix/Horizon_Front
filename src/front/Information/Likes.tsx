@@ -5,7 +5,7 @@ const Likes = async (LikesId:String, userId:String) => {
 
     const LikesItem:LikesItem = {
         LikesId : LikesId,
-        userId : userId
+        accessToken : sessionStorage.getItem("accessToken") || "storageError"
     }
 
     try {

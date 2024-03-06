@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Header.css';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
 
 function Header() {
     const navigate = useNavigate();
@@ -9,6 +11,7 @@ function Header() {
     const [boo, setBook] = useState<boolean>(false);
     const [hom, setHome] = useState<boolean>(true);
     const [acc, setAcc] = useState<boolean>(false);
+    const userImpormation = useSelector((state:RootState) => state.LoginSession);
 
     const displayBarClick = () => {
         setDisplayLine(!displayLine);
@@ -19,8 +22,14 @@ function Header() {
         setAcc(true);setBook(false);setHome(false);setPost(false);
     };
     const PostClick = () => {
-        navigate('/post')
-        setAcc(false);setBook(false);setHome(false);setPost(true)
+        if(userImpormation.userId && userImpormation.userName)
+        {
+            navigate('/post')
+            setAcc(false);setBook(false);setHome(false);setPost(true)
+        }else{
+            alert("로그인 후 이용하실 수 있습니다.")
+            navigate('/login')
+        } 
     };
     const MainClick = () => {
         navigate('/board?Category=hoseo')

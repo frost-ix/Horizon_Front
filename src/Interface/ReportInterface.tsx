@@ -1,6 +1,6 @@
 interface ReportItem {
     reportId:String,
-    reporter:String,
+    accessToken:String
     reportText:String
  }
  

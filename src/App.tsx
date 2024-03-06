@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ import Body from './front/Body/Body';
 
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>

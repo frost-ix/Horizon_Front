@@ -9,7 +9,7 @@ const report = async (reportId:String, reporter:String) => {
     }
 
     const reportItem:ReportItem={
-      reporter:reporter,
+      accessToken : sessionStorage.getItem("accessToken") || "storageError",
       reportId:reportId,
       reportText:reportText
     }

@@ -1,12 +1,11 @@
 import store from "../store";
 import { ReduxLoginSessionAction } from "./LoginSession";
 
-export const LoginSessionDispatch = (userName:String,userId:String,userPwd:String) => {
+export const LoginSessionDispatch = (userName:String,userId:String) => {
     store.dispatch(
         ReduxLoginSessionAction({
           userName:userName,
-          userId:userId,
-          userPwd:userPwd
+          userId:userId
         })
       )
 }
