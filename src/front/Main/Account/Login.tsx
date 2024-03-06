@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
@@ -130,11 +131,11 @@ export default function Login() {
       <form id="loginForm" onSubmit={handleLogin}>
         <div id="locale">{locale}</div>
         <div id="id_box" className="input_box">
-          <input type="text" name="userID" id="userID" ref={userID} placeholder="아이디" onChange={() => setXIcon("id")} autoFocus/>
+          <input type="text" name="userID" id="userID" ref={userID} placeholder="아이디" onChange={() => setXIcon("id")} autoFocus required/>
           <button style={{visibility: "hidden"}} ref={xIconId}><img src="icon/x_icon.svg" alt="" onClick={xEventId} /></button>
         </div>
         <div id="pw_box" className="input_box">
-          <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" onChange={() => setXIcon("pw")}/>
+          <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" onChange={() => setXIcon("pw")} required/>
           <button style={{visibility: "hidden"}} ref={xIconPw}><img src="icon/x_icon.svg" alt="" onClick={xEventPw}/></button>
           <button onClick={setPw} ref={eyeIcon}><img src={pwUrl} alt=""/></button>
         </div>
@@ -145,17 +146,11 @@ export default function Login() {
         <input type="submit" id="loginSubmit" value="로그인" />
       </form>
       <div id="a_box">
-        <a href="#">
-          아이디 찾기
-        </a>
+        <Link to="/">아이디 찾기</Link>
         <span>|</span>
-        <a href="#">
-          비밀번호 찾기
-        </a>
+        <Link to="/">비밀번호 찾기</Link>
         <span>|</span>
-        <a href="/signIn" id="signIn">
-          회원가입
-        </a>
+        <Link to="/">회원가입</Link>
       </div>
     </div>
   );
