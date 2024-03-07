@@ -76,8 +76,8 @@ function BoardList() {
               </div>
             </div>
             <div className="board-tr-right">
-                <span className="board-like"><img src="/Icon/Like.png" className="board-like-icon" alt="" /> {item.likes}</span>
-                <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {item.likes}</span>
+                <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {item.commentNum}</span>
+                <span className="board-like"><img src="/Icon/Like.png" className="board-like-icon" alt="" /> {item.likes}</span>               
             </div>
           </div>
         ))}

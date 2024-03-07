@@ -30,21 +30,10 @@ function Comments({ boardId }: { boardId: any }) {
     getComments()
   },[])
 
-  const commentMenu = (ID:any) => {
-    var menu:any = document.getElementById(ID);
-    if (menu.style.display == "none")
-      {
-        menu.style.display ="block";
-      }else{
-        menu.style.display ="none";
-      }
-    }
-
     const Commenting = async (e:any) => {
       e.preventDefault()
       const form:any = e.target;
       const content:String = form.elements.content.value
-      const writer:String = "예비데이터"
       const isAnonymous:boolean = isChecked
       const accessToken:String =  sessionStorage.getItem("accessToken") || "storageError"
       const commentData:CommentPostItem = {
@@ -78,17 +67,17 @@ function Comments({ boardId }: { boardId: any }) {
     <div className="Comments">
       {comments? (
         comments.map((item) => (
-          <div className="comment-tr" onClick={()=>commentMenu(item.commentNum+'comment')}>
-              <div className="comment-tr-writer"><img src="./Icon/User.png" className="comment-userIcon" alt="" />{item.writer}</div>
+          <div className="comment-tr">
+              <div className="comment-tr-writer"><img src="./Icon/User.png" className="comment-userIcon" alt="" />
+                {item.writer}
+                <button className="comment-report" onClick={()=>{reportEvent(item.commentNum)}}>
+                <img src="/Icon/Report.png" className="oneboard-bar-icon" alt="" />신고</button>
+              </div>
               <div className="comment-tr-content">{item.content}</div>
               
             <div className="comment-tr-bottom">
                 <div className="comment-tr-createAt">{item.createAt.toString().substring(0, 10)}</div>
                 {/* <div className="comment-like"><img src="/Icon/Like.png" className="comment-like-icon" alt="" /> {item.likes.toString()}</div> */}
-            </div>
-
-            <div className="comment-menubar" id={`${item.commentNum}comment`} >
-              <button onClick={()=>{reportEvent(item.commentNum)}}>신고하기</button>
             </div>
 
           </div>

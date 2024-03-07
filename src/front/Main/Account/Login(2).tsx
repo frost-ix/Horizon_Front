@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "./css/Login.css";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +30,8 @@ export default function Login() {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  
 
   /***
    * @description 로그인 비동기 처리 구간
@@ -72,32 +73,32 @@ export default function Login() {
   const idSave = useRef<HTMLLabelElement>(null);
   const idSaveSpan = useRef<HTMLLabelElement>(null);
 
-  const [idUrl, setIdUrl] = useState("icon/check_before.svg");
+  const [idUrl, setIdUrl] = useState("img/check_before.svg");
   const setId = ({target} : {target:HTMLInputElement}) => {
     // alert(target.checked);
     const checkState: boolean = target.checked;
     if(checkState){
-      setIdUrl('icon/check_after.svg')
+      setIdUrl('img/check_after.svg')
       idSaveSpan.current?.style.setProperty('font-weight', '700');
     }
     else{
-      setIdUrl('icon/check_before.svg');
+      setIdUrl('img/check_before.svg');
       idSaveSpan.current?.style.setProperty('font-weight', '400');
     }
   }
 
   /*** 비밀번호 보기  */
-  const [pwUrl, setPwUrl] = useState("icon/eye_before.svg");
+  const [pwUrl, setPwUrl] = useState("img/eye_before.svg");
   const userPW = useRef<HTMLInputElement>(null);
   const eyeIcon = useRef<HTMLButtonElement>(null);
 
   const setPw = () => {
-    if(pwUrl === "icon/eye_before.svg" && userPW.current){
-      setPwUrl("icon/eye_after.svg");
+    if(pwUrl === "img/eye_before.svg" && userPW.current){
+      setPwUrl("img/eye_after.svg");
       userPW.current.type = "text";
     }
-    else if(pwUrl === "icon/eye_after.svg" && userPW.current){
-      setPwUrl("icon/eye_before.svg");
+    else if(pwUrl === "img/eye_after.svg" && userPW.current){
+      setPwUrl("img/eye_before.svg");
       userPW.current.type = "password";
     }
   }
@@ -147,11 +148,11 @@ export default function Login() {
         <div id="locale">{locale}</div>
         <div id="id_box" className="input_box">
           <input type="text" name="userID" id="userID" ref={userID} placeholder="아이디" onChange={() => setXIcon("id")} autoFocus required/>
-          <button style={{visibility: "hidden"}} ref={xIconId}><img src="icon/x_icon.svg" alt="" onClick={xEventId} /></button>
+          <button style={{visibility: "hidden"}} ref={xIconId}><img src="img/x_icon.svg" alt="" onClick={xEventId} /></button>
         </div>
         <div id="pw_box" className="input_box">
           <input type="password" name="userPW" id="userPW" ref={userPW} placeholder="비밀번호" onChange={() => setXIcon("pw")} required/>
-          <button style={{visibility: "hidden"}} ref={xIconPw}><img src="icon/x_icon.svg" alt="" onClick={xEventPw}/></button>
+          <button style={{visibility: "hidden"}} ref={xIconPw}><img src="img/x_icon.svg" alt="" onClick={xEventPw}/></button>
           <button onClick={setPw} ref={eyeIcon}><img src={pwUrl} alt=""/></button>
         </div>
         <label htmlFor="remember" id="label_box" ref={idSave} style={{backgroundImage: `url('${idUrl}')`}}>
@@ -161,11 +162,17 @@ export default function Login() {
         <input type="submit" id="loginSubmit" value="로그인" />
       </form>
       <div id="a_box">
-        <Link to="/">아이디 찾기</Link>
+        <a href="#">
+          아이디 찾기
+        </a>
         <span>|</span>
-        <Link to="/">비밀번호 찾기</Link>
+        <a href="#">
+          비밀번호 찾기
+        </a>
         <span>|</span>
-        <Link to="/signup">회원가입</Link>
+        <a href="/signIn" id="signIn">
+          회원가입
+        </a>
       </div>
     </div>
   );

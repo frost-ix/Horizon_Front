@@ -9,6 +9,7 @@ interface BoardItem {
   // updateAt: Date;
   likes: number;
   hits: number;
+  commentNum:number;
   boardImageMetadata: string|null;
 }
 

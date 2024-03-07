@@ -58,24 +58,29 @@ function OneBoard() {
 
   return (
     <div className="OneBoard">
-      {/* <button onClick={()=>{navigate(-1)}}>뒤로가기</button> */}
-      {boardData? (
+          {boardData? (
         <div className='oneboard-all'>
           <div className='oneboard-header'>
+            <img src="./Icon/User.png" className="oneBoard-userIcon" alt="" />
+            <div className='oneboard-data-div'>
+              <div className='oneboard-writer'>{boardData.writer}</div>
+              <div className='oneboard-data'>{boardData.createAt.toString().substring(0, 10)}</div>
+            </div>
+          </div>
+
+          <div className='oneboard-content'>
             <div className='oneboard-title'>{boardData.title}</div>
-              <div className='oneboard-data'>
-                {boardData.writer}
-                <div className="oneboard-line">|</div> 추천 {boardData.likes}
-                <div className="oneboard-line">|</div> 조회수 {boardData.hits}
-              </div>
+            {boardData.content}
+          </div>
+          
+          <div className="board-data-div-second">
+                <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {boardData.commentNum}</span>
+                <span className="board-like"><img src="/Icon/Like.png" className="board-like-icon" alt="" /> {boardData.likes}</span>               
           </div>
 
           {boardData.boardImageMetadata? (
           <img className='oneboard-image' src={boardData.boardImageMetadata}/>
           ):(<></>)}
-          <div className='oneboard-content'>
-            {boardData.content}
-          </div>
 
           <div className='oneboard-bar'>
             <button className='oneboard-bar-button' onClick={LikesEvent}><img src="/Icon/Like.png" className="oneboard-bar-icon" alt="" />추천</button>

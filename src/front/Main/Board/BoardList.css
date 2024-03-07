@@ -11,6 +11,7 @@
         
         display: flex;
         flex-direction: row;
+        margin-bottom: 7px;
     }
 
     .board-bar-list{
@@ -23,8 +24,10 @@
         transition: background-color 0.3s ease; 
     }
     .board-bar-list.select{
-        border-bottom:2px solid #66c0dc;
-        color: #66c0dc;
+        /* border-bottom:2px solid #66c0dc;
+        color: #66c0dc; */
+        border-bottom:2px solid #1897be;
+        color: #1897be;
     }
     .barl{
         display: flex;
@@ -63,11 +66,11 @@
    }
 
    .board-tr{
-    border-top: 1px solid rgb(0,0,0,0.3);
+    border-bottom: 7px solid rgba(119, 119, 119, 0.1);
     width: 98%;
     height: auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 2%;
     transition: background-color 0.3s ease; 
 
@@ -104,7 +107,7 @@
     align-items: center;
     font-size: 17px;
     /* margin-bottom: 7px; */
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -114,7 +117,7 @@
    .board-content{
     font-size: 13px;
     color: rgb(0,0,0,0.7);
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -134,8 +137,8 @@
    }
   
    .board-like{
-    margin-right: 10px;
-    color:#FFCC33;
+    /* color:#FFCC33; */
+    color:#e05151;
     font-weight:600;
    }
     .board-like-icon{
@@ -149,7 +152,8 @@
     }
 
    .board-comment{
-    color:#66c0dc;
+    margin-right: 10px;
+    color:#fbc522;
     font-weight:600;
    }
 

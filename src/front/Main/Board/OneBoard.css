@@ -12,64 +12,19 @@
     justify-content:center;
     flex-direction:column;
 }
-
-.oneboard-header{
-    border-top: 1px solid rgb(0,0,0,0.3);
-    width: 98%;
-    height: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 2%;
-    transition: background-color 0.3s ease; 
-
-    border-bottom: 1px solid rgb(0,0,0,0.2);
-}
-
-.oneboard-title{
-    font-size: 17px;
-    font-weight:600;
-    margin-bottom: 7px;
-}
-
-.oneboard-data{
-    font-size: 13px;
-    display: flex;
-    flex-direction: row;
-}
-
-.oneboard-line{
-    margin-left: 5px;
-    margin-right: 5px;
-    color: rgb(0,0,0,0.4);
-}
-
-.oneboard-content{
-    padding-top: 10px;
-    padding-left: 5px;
-
-    margin-top: 10px;
-    margin-bottom:30px;
-}
-
-.oneboard-image{
-    width: 99%;
-    height: auto;
-    margin-top: 5px;
-    margin-top: 30px;
-}
-
 .oneboard-bar{
     display: flex; 
     align-items: center;
     justify-content:center;
     flex-direction:row;
 
-    margin-top: 10px;
+    margin-top: 5px;
     width: 100%;
     height: 50px;
 
-    border-bottom: 1px solid rgb(0,0,0,0.2);
-    border-top: 1px solid rgb(0,0,0,0.2);
+    /* border-bottom: 1px solid rgb(0,0,0,0.2); */
+    border-bottom: 7px solid rgba(119, 119, 119, 0.1);
+    margin-bottom: 13px;
 }
 
 .oneboard-bar-button{
@@ -95,4 +50,57 @@
     margin-right: 5px;
 }
 
+.oneboard-header{
+    border-top: 1px solid rgb(0,0,0,0.3);
+    width: 96%;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 4%;
+    display: flex;
+}
+
+.oneBoard-userIcon{
+    width: 33px;
+    height: 33px;
+    margin-right: 7px;
+}
+.oneboard-data-div{
+    display: flex;
+    flex-direction: column;
+}
+.oneboard-data{
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+}
+.oneboard-writer{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+.oneboard-title{
+    font-size: 19px;
+    font-weight: bolder;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.oneboard-content{
+    padding-left: 4%;
+    margin-bottom: 8px;
+    width: 96%;
+}
+.oneboard-image{
+    width: 95%;
+    height: auto;
+
+    border-radius: 1em;
+}
+.board-data-div-second{
+    width: 96%;
+    padding-left: 4%;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
 }

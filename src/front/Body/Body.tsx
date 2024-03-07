@@ -49,8 +49,9 @@ function Body() {
                 <Route path='/oneboard' element={<OneBoard/>}/>
                 <Route path='/post' element={<Post/>}/>
                 
-                <Route path='/myaccount' element={<Myaccount/>}/>
-                <Route path='/signIn' element={<Signup/>}/>
+                {/* <Route path='/myaccount' element={<Myaccount/>}/> */}
+                <Route path='/myaccount' element={<Login/>}/>
+                <Route path='/signup' element={<Signup/>}/>
                 <Route path='/login' element={<Login/>}/>
 
                 <Route path='/account' element={<Main/>}/>
