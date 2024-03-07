@@ -1,21 +1,74 @@
 import React, { useState , useRef , useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import './signup.css';
 
 const Signup = () => {
+  const navigate = useNavigate();
   
+  //패스워드 비교
+  const [isPassword, setPassword] = useState({
+    password: "",
+    password_check: "",
+  });
+
+  //빈칸 확인
+  const [nullCheck, setnullCheck] = useState({
+    id: "",
+    password: "",
+    name: "",
+    studentId: "",
+    department: "",
+    phone: "",
+    email: "",
+    photo: null,
+  });
+
+  //경고
+  const [isWarning, setWarning] = useState({
+    id: true,
+    password: true,
+    password_check: true,
+    name: true,
+    studentId: true,
+    department: true,
+    phone: true,
+    email: true,
+  });
+
+  //정규식 체크
+  const [isCheck, setCheck] = useState({
+    id: false,
+    studentid: false,
+    phone: false,
+  });
+
+  //전화번호 정규화
+  const [ismakePhone, setmakePhone] = useState('');
+
+  //학번 정규화
+  const [ismakeStudentid, setmakeStudentid] = useState('');
+
+  //Modal
+  const [isShow, setShow] = useState(false);
+
+  //focusing
+  const id_ref = useRef<HTMLInputElement | null>(null);
+  const password_ref = useRef<HTMLInputElement | null>(null);
+  const password_check_ref = useRef<HTMLInputElement | null>(null);
+  const name_ref = useRef<HTMLInputElement | null>(null);
+  const studentId_ref = useRef<HTMLInputElement | null>(null);
+  const phone_ref = useRef<HTMLInputElement | null>(null);
+  const email_ref = useRef<HTMLInputElement | null>(null);
+
   //회원가입 슬라이드
   const [isSlideIndex, setSlideIndex] = useState(0);
-
-  const form1 = useRef<HTMLInputElement | null>(null);
-  const form2 = useRef<HTMLInputElement | null>(null);
-  const form3 = useRef<HTMLInputElement | null>(null);
-  const form4 = useRef<HTMLInputElement | null>(null);
 
   const slideList = useRef<HTMLInputElement | null>(null);
 
   const slideLen = 4;  // slide length
-  const slideWidth = 400; // slide width
+  const slideWidth = 300; // slide width
   const slideSpeed = 400; // slide speed
   
   useEffect(() => {
@@ -26,53 +79,239 @@ const Signup = () => {
       slideList.current.style.transform = "translate3d(-" + (slideWidth * (isSlideIndex)) + "px, 0px, 0px)";
     }
   },[]);
+  
+  //Step Process Bar
+  const [active1, setActive1] = useState("");
+  const [active2, setActive2] = useState("");
+  const [active3, setActive3] = useState("");
+  const [active4, setActive4] = useState("");
+
+  useEffect(() => {
+    if(isSlideIndex==0){
+      setActive1("active");
+      setActive2("");
+      setActive3("");
+      setActive4("");
+    }else if(isSlideIndex==1){
+      setActive1("active");
+      setActive2("active");
+      setActive3("");
+      setActive4("");
+    }else if(isSlideIndex==2){
+      setActive1("active");
+      setActive2("active");
+      setActive3("active");
+      setActive4("");
+    }else if(isSlideIndex==3){
+      setActive1("active");
+      setActive2("active");
+      setActive3("active");
+      setActive4("active");
+    }
+
+  },[isSlideIndex]);
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     const form = e.target;
-    const id : String = form.elements.id.value;
-    const password : String = form.elements.password.value;
-    const password_check : String = form.elements.password_check.value;
-    const name : String = form.elements.name.value;
-    const studentId : Number = form.elements.studentId.value;
-    const phone : Number = form.elements.phone.value;
-    const email : String = form.elements.email.value;
-    const photo : File = form.elements.photo.files[0]; // 선택된 파일 가져오기
+    const id = form.elements.id.value;
+    const password = form.elements.password.value;
+    const password_check = form.elements.password_check.value;
+    const name = form.elements.name.value;
+    const studentId = form.elements.studentId.value;
+    const department = form.elements.department.value;
+    const phone = form.elements.phone.value;
+    const email = form.elements.email.value;
+    const photo = form.elements.photo.files[0]; // 선택된 파일 가져오기
 
-    //비밀번호 확인
-    if(password==password_check){
-        console.log("ID : " + id + "password : " + password + "name : " + name + "studentID : " + studentId + "phone : " + phone + "email : " + email + "photo : " + photo);
-    }
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("password", password);
+    formData.append("name", name);
+    formData.append("studentId", studentId);
+    formData.append("department", department);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("photo", photo); // 파일 추가
 
-    // const formData = new FormData();
-    // formData.append("id", id);
-    // formData.append("password", password);
-    // formData.append("name", name);
-    // formData.append("studentId", studentId);
-    // formData.append("phone", phone);
-    // formData.append("email", email);
-    // formData.append("photo", photo); // 파일 추가
+    formData.forEach((value, key) => {
+      console.log("key : " + key + " value : " + value);
+    });
 
-    // try {
-    //   const response = await fetch(`/signUp/signUp`, {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-
-    //   if (response.ok) {
-    //     const updatedSignUp = await response.json();
-    //     console.log("사용자 정보가 업데이트되었습니다.", updatedSignUp);
-    //   } else {
-    //     throw new Error("회원가입 실패했습니다.");
-    //   }
-    // } catch (error) {
-    //   console.error("업데이트에 실패했습니다.", error);
-    // }
+  
+    //axios 파일 전송
+    axios
+      .post("/user/create", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if(res.data==true){
+          alert("회원가입 성공 하셨습니다!");
+          //페이지 이동
+          navigate('/Main');
+        }else{
+          alert("회원가입 실패 하셨습니다!" + "\n" + "아이디와 비밀번호를 확인해주세요!");
+        }
+      })
+      .catch((err) => {
+        console.log("err message : " + err);
+        alert("회원가입 실패 하셨습니다!" + "\n" + "아이디와 비밀번호를 확인해주세요!");
+      });
   };
 
   //다음 버튼 슬라이드
   const handleNext = () => {
+
+    //첫 번째 슬라이드
+    if(isSlideIndex==0){
+
+      //빈 칸 확인
+      if(nullCheck.id==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          id: false,
+        }));
+        id_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          id: true,
+        }));
+      }
+
+      if(nullCheck.password==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          password: false,
+        }));
+        password_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          password: true,
+        }));
+      }
+
+      //비밀번호 확인
+      if(isPassword.password!==isPassword.password_check){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          password_check: false,
+        }));
+        password_check_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          password_check: true,
+        }));
+      }
+
+      //아이디 중복 확인
+      if(isCheck.id===false){
+        alert("아이디 중복확인을 해주세요.")
+        return;
+      }
+
+    //두 번째 슬라이드
+    }else if(isSlideIndex==1){
+
+      //빈 칸 확인
+      if(nullCheck.name==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          name: false,
+        }));
+        name_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          name: true,
+        }));
+      }
+
+      //빈 칸 확인
+      if(nullCheck.studentId==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          studentId: false,
+        }));
+        studentId_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          studentId: true,
+        }));
+      }
+
+      //빈 칸 확인
+      if(nullCheck.department==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          department: false,
+        }));
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          studentId: true,
+        }));
+      }
+
+      //학번 중복 확인
+      if(isCheck.studentid===false){
+        alert("학번 중복확인을 해주세요.")
+        return;
+      }
+
+    //세 번째 슬라이드
+    }else if(isSlideIndex==2){
+      
+      if(nullCheck.phone==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          phone: false,
+        }));
+        phone_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          phone: true,
+        }));
+      }
+
+      if(nullCheck.email==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          email: false,
+        }));
+        email_ref.current?.focus();
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          email: true,
+        }));
+      }
+
+      //전화번호 정규식 확인
+      if(isCheck.phone===false){
+        alert("전화번호를 다시 입력해주세요.");
+        return;
+      }
+
+    }
+
+    //슬라이드 이동
     setSlideIndex(isSlideIndex+1);
     if(slideList.current){
       slideList.current.style.transition = slideSpeed + "ms";
@@ -89,79 +328,234 @@ const Signup = () => {
     }
   }
 
+  //빈칸 확인용 
+  const nullchk  = (e:any) => {
+    setnullCheck({
+      ...nullCheck,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  //패스워드 확인용
+  const password = (e:any) => {
+    setPassword({
+      ...isPassword,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  //아이디 변경시 중복체크 다시 해야함
+  const changeId = (e:any) => {
+    setCheck({
+      ...isCheck,
+      id: false,
+    });
+  };
+
+  //아이디 중복 체크
+  const doubleChk_id = () => {
+    const id = nullCheck.id;
+    console.log(id);
+
+    if(id==="test"){
+      alert("현재 사용중인 아이디입니다.");
+      setCheck({
+        ...isCheck,
+        id: false,
+      });
+    }else{
+      alert("사용가능한 아이디입니다.");
+      setCheck({
+        ...isCheck,
+        id: true,
+      });
+    }
+
+    // axios
+    //   .post("/user/create", id)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if(res.data==true){
+    //       alert("사용가능한 아이디입니다.");
+    //     }else{
+    //       alert("현재 사용중인 아이디입니다.");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("err message : " + err);
+    //   });
+  };
+
+    //학번 변경시 중복체크 다시 해야함
+    const changeStudentId = (e:string) => {
+      setCheck({
+        ...isCheck,
+        studentid: false,
+      });
+
+      return (
+        e.replace(/[^0-9]/g, '')
+      )
+    };
+
+  //학번 중복 체크
+  const doubleChk_studentid = () => {
+    const studentid = nullCheck.studentId;
+    console.log(studentid);
+
+    if(studentid==="232323"){
+      alert("현재 사용중인 학번입니다.");
+      setCheck({
+        ...isCheck,
+        studentid: false,
+      });
+    }else{
+      alert("사용가능한 학번입니다.");
+      setCheck({
+        ...isCheck,
+        studentid: true,
+      });
+    }
+
+    // axios
+    //   .post("/user/create", studentid)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if(res.data==true){
+    //       alert("사용가능한 학번입니다.");
+    //     }else{
+    //       alert("현재 사용중인 학번입니다.");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("err message : " + err);
+    //   });
+  };
+
+  //전화번호 정규화
+  const phoneNumber = (e:string) => {
+
+    const regphone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    
+    var number:string = e;
+    
+    if(regphone.test(number)){
+      setCheck({
+        ...isCheck,
+        phone: true,
+      });
+    }else{
+      setCheck({
+        ...isCheck,
+        phone: false,
+      });
+    }
+
+    return (
+      e
+        /** 
+                   * 숫자를 제외한 값 모두 제외 
+                   * 0[0-1][0-9]로 제한하는 것도 가능
+                   */
+        .replace(/[^0-9]/g, '')
+        /**
+         *  0자리 부터 3자리까지 첫번째 '-' 전에 위치
+         *  첫번째 '-'에서 0 자리부터 4자리까지 후에 '-' 위치
+         *  마지막 '-'에서 4자리  숫자
+         */
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+        /**
+         * '-'기호는 한번에서 두번만 적용
+         */
+        .replace(/(-{1,2})$/g, '')
+    )
+
+  };
+
+  //헴스 이미지 클릭
+  const zoomImg = () => {
+    setShow(true);
+
+  };
+
   return (
-    <div className="phone ">
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="phone">
+      <h1 className='title'>SIGN UP</h1>
+      {/* Step Progress Bar */}
+      <div className="barcontainer">
+        <ul className="progressbar">
+          <li className={active1}></li>
+          <li className={active2}></li>
+          <li className={active3}></li>
+          <li className={active4}></li>
+        </ul>
+      </div>
+      <form onSubmit={handleSubmit} className='form_container'>
       <div className='slide_wrap'>
         <div className='slide_box'>
           <div className='slide_list clearfix' ref={slideList}>
-            
-              <div className="form1 slide_content" ref={form1}>
-                {/* Step Progress Bar */}
-                <div className="barcontainer">
-                  <ul className="progressbar">
-                    <li className="active"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-                <input type="text" name="id" className="input_text" placeholder="아이디" required />
+              <div className="form1 slide_content">
+                <input type="text" name="id" className="input_text first double_check" placeholder="아이디" onChange={(e) => {changeId(e); nullchk(e)}} ref={id_ref} required />
+                <input type='button' name='id_check' className='double_check_btn' value="중복 확인" onClick={doubleChk_id} />
+                <p className='warning' style={{ display: isWarning.id ? 'none' : 'block'}}>아이디를 입력해주세요.</p>
                 <br />
-                <input type="password" name="password" className="input_text" placeholder="비밀번호" required />
+                <input type="password" name="password" className="input_text" placeholder="비밀번호" onChange={(e) => {password(e); nullchk(e);}} ref={password_ref} required />
+                <p className='warning' style={{ display: isWarning.password ? 'none' : 'block'}}>비밀번호를 입력해주세요.</p>
                 <br />
-                <input type="password" name="password_check" className="input_text" placeholder="비밀번호 확인" required />
+                <input type="password" name="password_check" className="input_text" placeholder="비밀번호 확인" onChange={(e) => {password(e); nullchk(e);}} ref={password_check_ref} required />
+                <p className='warning' style={{ display: isWarning.password_check ? 'none' : 'block'}}>비밀번호가 일치하지 않습니다.</p>
                 <br />
-                <input type="button" className='next' onClick={handleNext} value="다음" />
+                <input type="button" className='signup_btn next' onClick={handleNext} value="다음" />
               </div>
-              <div className="form2 slide_content" ref={form2}>
-                {/* Step Progress Bar */}
-                <div className="barcontainer">
-                  <ul className="progressbar">
-                    <li className="active"></li>
-                    <li className="active"></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-                <input type="text" name="name" className="input_text" placeholder="이름" required />
+              <div className="form2 slide_content">
+                <input type="text" name="name" className="input_text first" placeholder="이름" onChange={nullchk} ref={name_ref} required />
+                <p className='warning' style={{ display: isWarning.name ? 'none' : 'block'}}>이름을 입력해주세요.</p>
                 <br />
-                <input type="number" name="studentId" className="input_text" placeholder="학번" required />
+                <input type="text" name="studentId" className="input_text double_check" placeholder="학번" onChange={(e) => {setmakeStudentid(changeStudentId(e.currentTarget.value)); nullchk(e)}} ref={studentId_ref} value={ismakeStudentid} required />
+                <p className='warning' style={{ display: isWarning.studentId ? 'none' : 'block'}}>학번을 입력해주세요.</p>
+                <input type='button' name='studentId_check' className='double_check_btn' value="중복 확인" onClick={doubleChk_studentid} />
                 <br />
-                <input type="button" className='pre' onClick={handlePre} value="이전" />
-                <input type="button" className='next' onClick={handleNext} value="다음" />
+                <select name="department" className='input_select' onChange={nullchk} required>
+                  <option className='select-first' value="">학과선택</option>
+                  <option value="ICT융합보안">ICT융합보안</option>
+                  <option value="공간건축디자인">공간건축디자인</option>
+                  <option value="호텔조리">호텔조리</option>
+                  <option value="호텔제과제빵">호텔제과제빵</option>
+                  <option value="호텔식음료서비스">호텔식음료서비스</option>
+                  <option value="게임">게임</option>
+                  <option value="웹툰애니메이션">웹툰애니메이션</option>
+                  <option value="뷰티아트">뷰티아트</option>
+                  <option value="반려동물">반려동물</option>
+                  <option value="동물보건ㆍ재활치료">동물보건ㆍ재활치료</option>
+                </select>
+                <p className='warning' style={{ display: isWarning.department ? 'none' : 'block'}}>학과를 골라주세요.</p>
+                <br />
+                <input type="button" className='signup_btn pre' onClick={handlePre} value="이전" />
+                <input type="button" className='signup_btn next' onClick={handleNext} value="다음" />
               </div>
-              <div className="form3 slide_content" ref={form3}>
-                {/* Step Progress Bar */}
-                <div className="barcontainer">
-                  <ul className="progressbar">
-                    <li className="active"></li>
-                    <li className="active"></li>
-                    <li className="active"></li>
-                    <li></li>
-                  </ul>
-                </div>
-                <input type="number" name="phone" className="input_text" placeholder="전화번호" required />
+              <div className="form3 slide_content">
+                <input type="text" name="phone" className="input_text first" placeholder="전화번호" onChange={(e) => { setmakePhone(phoneNumber(e.currentTarget.value)); nullchk(e);}} ref={phone_ref} maxLength={13} value={ismakePhone} required />
+                <p className='warning' style={{ display: isWarning.phone ? 'none' : 'block'}}>전화번호를 입력해주세요.</p>
                 <br />
-                <input type="text" name="email" className="input_text" placeholder="이메일" required />
+                <input type="text" name="email" className="input_text" placeholder="이메일" onChange={nullchk} ref={email_ref} required />
+                <p className='warning' style={{ display: isWarning.email ? 'none' : 'block'}}>이메일을 입력해주세요.</p>
                 <br />
-                <input type="button" className='pre' onClick={handlePre} value="이전" />
-                <input type="button" className='next'  onClick={handleNext} value="다음" />
+                <input type="button" className='signup_btn pre' onClick={handlePre} value="이전" />
+                <input type="button" className='signup_btn next'  onClick={handleNext} value="다음" />
               </div>
-              <div className="form4 slide_content" ref={form4}>
-                {/* Step Progress Bar */}
-                <div className="barcontainer">
-                  <ul className="progressbar">
-                    <li className="active"></li>
-                    <li className="active"></li>
-                    <li className="active"></li>
-                    <li className="active"></li>
-                  </ul>
-                </div>
-                재학생 인증 사진:<input type="file" name="photo" />
+              <div className="form4 slide_content">
+                <h2>재학생 인증 사진</h2>
+                <img className='hems_img' src="/img/hems.png" alt="hems" onClick={zoomImg} />
                 <br />
-                <input type="button" className='pre' onClick={handlePre} value="이전" />
+                예시 사진
+                <br />
+                <br></br>
+                <input type="file" id='photo' name="photo" accept="image/*" className='photo' onChange={nullchk} required />
+                <label htmlFor="photo">
+                  <div className="btn-upload">사진 추가</div>
+                </label>
+                <br />
+                <input type="button" className='signup_btn pre' onClick={handlePre} value="이전" />
                 <input className="submit_btn" type="submit" value="회원가입" />
               </div>
             
@@ -169,6 +563,14 @@ const Signup = () => {
         </div>
       </div>
       </form>
+
+      {/* Modal */}
+      {isShow == true ? 
+        <div className='modalSign'>
+          <img className='modalImg' src={`/img/hems.png`} alt="" onClick={() => setShow(false)} />
+        </div> 
+        : null 
+      }
     </div>
   );
 }

@@ -16,25 +16,29 @@ const Manager = () => {
 
   return (
     <div className="manager">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       <aside className="side-bar">
-        <section className="side-bar__icon-box">
-          <section className="side-bar__icon-1">
-            <div></div>
-            <div></div>
-            <div></div>
-          </section>
-        </section>
         <ul>
+          <li className='topmenu'>관리자 사이트</li>
           <li onClick={goSite}>
-            <i className="fa-solid fa-cat"></i>사이트 바로가기
+            <span className="material-symbols-outlined">
+              open_in_new
+            </span>
+            사이트 바로가기
           </li>
           <li>
+            <span className="material-symbols-outlined">
+              grid_view
+            </span>
             사이트 관리
             <ul>
               <li onClick={() => setPage(1)}>대시보드</li>
             </ul>
           </li>
           <li>
+            <span className="material-symbols-outlined">
+              list
+            </span>
             게시판 관리
             <ul>
               <li onClick={() => setPage(3)}>최신글</li>
@@ -42,11 +46,22 @@ const Manager = () => {
               <li onClick={() => setPage(5)}>중고책 거래</li>
             </ul>
           </li>
-          <li onClick={() => setPage(2)}>유저 관리</li>
+          <li onClick={() => setPage(2)}>
+            <span className="material-symbols-outlined">
+              group
+            </span>
+            유저 관리
+          </li>
           <li onClick={() => setPage(6)}>
+            <span className="material-symbols-outlined">
+              edit_note
+            </span>
             공지글 작성
           </li>
           <li>
+            <span className="material-symbols-outlined">
+              contact_support
+            </span>
             고객지원
             <ul>
               <li onClick={() => setPage(7)}>회원가입 승인</li>
