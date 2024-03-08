@@ -11,7 +11,7 @@
         
         display: flex;
         flex-direction: row;
-        margin-bottom: 7px;
+        border-bottom: 4px solid rgba(119, 119, 119, 0.1);
     }
 
     .board-bar-list{
@@ -66,7 +66,8 @@
    }
 
    .board-tr{
-    border-bottom: 7px solid rgba(119, 119, 119, 0.1);
+    border-top: 4px solid rgba(119, 119, 119, 0.1);
+    border-bottom: 4px solid rgba(119, 119, 119, 0.1);
     width: 98%;
     height: auto;
     padding-top: 10px;

@@ -17,8 +17,9 @@ const Signup = () => {
     id: "",
     password: "",
     name: "",
-    studentId: null,
-    phone: null,
+    studentId: "",
+    department: "",
+    phone: "",
     email: "",
     photo: null,
   });
@@ -29,8 +30,14 @@ const Signup = () => {
     password_check: true,
     name: true,
     studentId: true,
+    department: true,
     phone: true,
     email: true,
+  });
+
+  const [isdoubleChk, setdoubleChk] = useState({
+    id: false,
+    studentid: false,
   });
 
   //focusing
@@ -48,7 +55,7 @@ const Signup = () => {
   const slideList = useRef<HTMLInputElement | null>(null);
 
   const slideLen = 4;  // slide length
-  const slideWidth = 400; // slide width
+  const slideWidth = 300; // slide width
   const slideSpeed = 400; // slide speed
   
   useEffect(() => {
@@ -100,6 +107,7 @@ const Signup = () => {
     const password_check = form.elements.password_check.value;
     const name = form.elements.name.value;
     const studentId = form.elements.studentId.value;
+    const department = form.elements.department.value;
     const phone = form.elements.phone.value;
     const email = form.elements.email.value;
     const photo = form.elements.photo.files[0]; // 선택된 파일 가져오기
@@ -109,6 +117,7 @@ const Signup = () => {
     formData.append("password", password);
     formData.append("name", name);
     formData.append("studentId", studentId);
+    formData.append("department", department);
     formData.append("phone", phone);
     formData.append("email", email);
     formData.append("photo", photo); // 파일 추가
@@ -117,6 +126,7 @@ const Signup = () => {
       console.log("key : " + key + " value : " + value);
     });
 
+  
     //axios 파일 전송
     axios
       .post("/user/create", formData, {
@@ -126,9 +136,13 @@ const Signup = () => {
       })
       .then((res) => {
         console.log(res.data);
-        alert("회원가입 성공 하셨습니다!");
-        //페이지 이동
-        navigate('/Main');
+        if(res.data==true){
+          alert("회원가입 성공 하셨습니다!");
+          //페이지 이동
+          navigate('/Main');
+        }else{
+          alert("회원가입 실패 하셨습니다!" + "\n" + "아이디와 비밀번호를 확인해주세요!");
+        }
       })
       .catch((err) => {
         console.log("err message : " + err);
@@ -186,6 +200,12 @@ const Signup = () => {
         }));
       }
 
+      //아이디 중복 확인
+      if(isdoubleChk.id===false){
+        alert("아이디 중복확인을 해주세요.")
+        return;
+      }
+
     //두 번째 슬라이드
     }else if(isSlideIndex==1){
 
@@ -205,7 +225,7 @@ const Signup = () => {
       }
 
       //빈 칸 확인
-      if(nullCheck.studentId==""||nullCheck.studentId==null){
+      if(nullCheck.studentId==""){
         setWarning((isWarning) => ({
           ...isWarning,
           studentId: false,
@@ -218,10 +238,31 @@ const Signup = () => {
           studentId: true,
         }));
       }
+
+      //빈 칸 확인
+      if(nullCheck.department==""){
+        setWarning((isWarning) => ({
+          ...isWarning,
+          department: false,
+        }));
+        return;
+      }else{
+        setWarning((isWarning) => ({
+          ...isWarning,
+          studentId: true,
+        }));
+      }
+
+      //학번 중복 확인
+      if(isdoubleChk.studentid===false){
+        alert("학번 중복확인을 해주세요.")
+        return;
+      }
+
     //세 번째 슬라이드
     }else if(isSlideIndex==2){
       
-      if(nullCheck.phone==""||nullCheck.phone==null){
+      if(nullCheck.phone==""){
         setWarning((isWarning) => ({
           ...isWarning,
           phone: false,
@@ -284,9 +325,93 @@ const Signup = () => {
     })
   }
 
+  //아이디 변경시 중복체크 다시 해야함
+  const changeId = (e:any) => {
+    setdoubleChk({
+      ...isdoubleChk,
+      id: false,
+    });
+  };
+
+  //아이디 중복 체크
+  const doubleChk_id = () => {
+    const id = nullCheck.id;
+    console.log(id);
+
+    if(id==="test"){
+      alert("현재 사용중인 아이디입니다.");
+      setdoubleChk({
+        ...isdoubleChk,
+        id: false,
+      });
+    }else{
+      alert("사용가능한 아이디입니다.");
+      setdoubleChk({
+        ...isdoubleChk,
+        id: true,
+      });
+    }
+
+    // axios
+    //   .post("/user/create", id)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if(res.data==true){
+    //       alert("사용가능한 아이디입니다.");
+    //     }else{
+    //       alert("현재 사용중인 아이디입니다.");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("err message : " + err);
+    //   });
+  };
+
+    //학번 변경시 중복체크 다시 해야함
+    const changeStudentId = (e:any) => {
+      setdoubleChk({
+        ...isdoubleChk,
+        studentid: false,
+      });
+    };
+
+  //학번 중복 체크
+  const doubleChk_studentid = () => {
+    const studentid = nullCheck.studentId;
+    console.log(studentid);
+
+    if(studentid==="232323"){
+      alert("현재 사용중인 학번입니다.");
+      setdoubleChk({
+        ...isdoubleChk,
+        studentid: false,
+      });
+    }else{
+      alert("사용가능한 학번입니다.");
+      setdoubleChk({
+        ...isdoubleChk,
+        studentid: true,
+      });
+    }
+
+    // axios
+    //   .post("/user/create", studentid)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if(res.data==true){
+    //       alert("사용가능한 학번입니다.");
+    //     }else{
+    //       alert("현재 사용중인 학번입니다.");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log("err message : " + err);
+    //   });
+  };
+
   return (
     <div className="phone">
-      <h1>SIGN UP</h1>
+      <h1 className='title'>SIGN UP</h1>
       {/* Step Progress Bar */}
       <div className="barcontainer">
         <ul className="progressbar">
@@ -296,12 +421,13 @@ const Signup = () => {
           <li className={active4}></li>
         </ul>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form_container'>
       <div className='slide_wrap'>
         <div className='slide_box'>
           <div className='slide_list clearfix' ref={slideList}>
               <div className="form1 slide_content">
-                <input type="text" name="id" className="input_text first" placeholder="아이디" onChange={nullchk} ref={id_ref} required />
+                <input type="text" name="id" className="input_text first double_check" placeholder="아이디" onChange={(e) => {changeId(e); nullchk(e)}} ref={id_ref} required />
+                <input type='button' name='id_check' className='double_check_btn' value="중복 확인" onClick={doubleChk_id} />
                 <p className='warning' style={{ display: isWarning.id ? 'none' : 'block'}}>아이디를 입력해주세요.</p>
                 <br />
                 <input type="password" name="password" className="input_text" placeholder="비밀번호" onChange={(e) => {password(e); nullchk(e);}} ref={password_ref} required />
@@ -310,31 +436,47 @@ const Signup = () => {
                 <input type="password" name="password_check" className="input_text" placeholder="비밀번호 확인" onChange={(e) => {password(e); nullchk(e);}} ref={password_check_ref} required />
                 <p className='warning' style={{ display: isWarning.password_check ? 'none' : 'block'}}>비밀번호가 일치하지 않습니다.</p>
                 <br />
-                <input type="button" className='next' onClick={handleNext} value="다음" />
+                <input type="button" className='signup_btn next' onClick={handleNext} value="다음" />
               </div>
               <div className="form2 slide_content">
                 <input type="text" name="name" className="input_text first" placeholder="이름" onChange={nullchk} ref={name_ref} required />
                 <p className='warning' style={{ display: isWarning.name ? 'none' : 'block'}}>이름을 입력해주세요.</p>
                 <br />
-                <input type="number" name="studentId" className="input_text" placeholder="학번" onChange={nullchk} ref={studentId_ref} required />
+                <input type="text" name="studentId" className="input_text double_check" placeholder="학번" onChange={(e) => {changeStudentId(e); nullchk(e)}} ref={studentId_ref} required />
                 <p className='warning' style={{ display: isWarning.studentId ? 'none' : 'block'}}>학번을 입력해주세요.</p>
+                <input type='button' name='studentId_check' className='double_check_btn' value="중복 확인" onClick={doubleChk_studentid} />
                 <br />
-                <input type="button" className='pre' onClick={handlePre} value="이전" />
-                <input type="button" className='next' onClick={handleNext} value="다음" />
+                <select name="department" className='input_select' onChange={nullchk} required>
+                  <option className='select-first' value="">학과선택</option>
+                  <option value="ICT융합보안">ICT융합보안</option>
+                  <option value="공간건축디자인">공간건축디자인</option>
+                  <option value="호텔조리">호텔조리</option>
+                  <option value="호텔제과제빵">호텔제과제빵</option>
+                  <option value="호텔식음료서비스">호텔식음료서비스</option>
+                  <option value="게임">게임</option>
+                  <option value="웹툰애니메이션">웹툰애니메이션</option>
+                  <option value="뷰티아트">뷰티아트</option>
+                  <option value="반려동물">반려동물</option>
+                  <option value="동물보건ㆍ재활치료">동물보건ㆍ재활치료</option>
+                </select>
+                <p className='warning' style={{ display: isWarning.department ? 'none' : 'block'}}>학과를 골라주세요.</p>
+                <br />
+                <input type="button" className='signup_btn pre' onClick={handlePre} value="이전" />
+                <input type="button" className='signup_btn next' onClick={handleNext} value="다음" />
               </div>
               <div className="form3 slide_content">
-                <input type="number" name="phone" className="input_text first" placeholder="전화번호" onChange={nullchk} ref={phone_ref} required />
+                <input type="text" name="phone" className="input_text first" placeholder="전화번호" onChange={nullchk} ref={phone_ref} required />
                 <p className='warning' style={{ display: isWarning.phone ? 'none' : 'block'}}>전화번호를 입력해주세요.</p>
                 <br />
                 <input type="text" name="email" className="input_text" placeholder="이메일" onChange={nullchk} ref={email_ref} required />
                 <p className='warning' style={{ display: isWarning.email ? 'none' : 'block'}}>이메일을 입력해주세요.</p>
                 <br />
-                <input type="button" className='pre' onClick={handlePre} value="이전" />
-                <input type="button" className='next'  onClick={handleNext} value="다음" />
+                <input type="button" className='signup_btn pre' onClick={handlePre} value="이전" />
+                <input type="button" className='signup_btn next'  onClick={handleNext} value="다음" />
               </div>
               <div className="form4 slide_content">
                 <h2>재학생 인증 사진</h2>
-                <img className='hems_img' src="/img/hems.png" alt="hems" />
+                <img className='hems_img' src="/Icon/hems.png" alt="hems" />
                 <br />
                 예시 사진
                 <br />
@@ -344,7 +486,7 @@ const Signup = () => {
                   <div className="btn-upload">사진 추가</div>
                 </label>
                 <br />
-                <input type="button" className='pre' onClick={handlePre} value="이전" />
+                <input type="button" className='signup_btn pre' onClick={handlePre} value="이전" />
                 <input className="submit_btn" type="submit" value="회원가입" />
               </div>
             

@@ -54,8 +54,6 @@ function OneBoard() {
     });
     }
 
-
-
   return (
     <div className="OneBoard">
           {boardData? (
