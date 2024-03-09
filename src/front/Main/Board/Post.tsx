@@ -77,16 +77,16 @@ function Post() {
         </div>
 
         <div className="post-bar-two">
-          <select name="category" className='post-category'>
-              <option value="hoseo">호서게시판</option>
-              <option value="qna">QnA게시판</option>
-              <option value="food">맛집게시판</option>
-              <option value="department">학과게시판</option>
-          </select>
-          익명등록<input type="checkbox" name="anonymous" checked={isAnonymous} onChange={anonymousCheck} className="post-check" />
+            <select name="category" className='post-category'>
+                <option value="hoseo">호서게시판</option>
+                <option value="qna">QnA게시판</option>
+                <option value="food">맛집게시판</option>
+                <option value="department">학과게시판</option>
+            </select>
+            <p className="post-p">익명등록</p><input type="checkbox" name="anonymous" checked={isAnonymous} onChange={anonymousCheck} className="post-check" />
         </div>
 
-        <input type='text' name="title" className='post-title' placeholder="제목" required/>
+        <input type='text' name="title" className='post-title' placeholder="&nbsp;&nbsp;제목" required/>
         <textarea name="content" className='post-content' placeholder={postMassage} required/>
 
         <div className="filebox">

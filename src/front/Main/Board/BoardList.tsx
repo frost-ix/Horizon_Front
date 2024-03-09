@@ -36,8 +36,14 @@ function BoardList() {
   },[selectedCategory]);
   
   const cateclick = (cate:string) => {
-    navigate(`/board?Category=${cate}`)
-    setSelectedCategory(cate)
+    if(userImpormation.userId && userImpormation.userName)
+    {
+      navigate(`/board?Category=${cate}`)
+      setSelectedCategory(cate)
+    }else{
+      alert("로그인 후 이용하실 수 있습니다.")
+      navigate('/login')
+    }
   }
 
   const oneboard = (boardId:string)=> {

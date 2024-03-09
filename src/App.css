@@ -3,10 +3,8 @@
   height: 100vh;
 
   display: flex; 
-  /* justify-content: center; */
   align-items: center;
   flex-direction:column;
-  background-color: rgb(250,251,252);
 }
 
 /* 프렌텐다드 경고문 */
@@ -23,9 +21,12 @@
   font-weight: 500;
   font-style: normal;
 }
+/* 본고딕 노토산스 */
+@import url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/stylesheets/NotoSansKR-Hestia.css);
 
 *{
-  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: 'Noto Sans Korean', sans-serif;
+  /* font-family: 'Pretendard-Regular', sans-serif; */
   /* font-weight: bold; */
 
   /* 스크롤바 없애기 */

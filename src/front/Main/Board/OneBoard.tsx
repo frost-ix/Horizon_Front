@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import ClipboardJS from 'clipboard';
 import BoardItem from "../../../Interface/BoardInterface";
@@ -11,7 +11,8 @@ import Likes from '../../Information/Likes';
 import './OneBoard.css';
 
 function OneBoard() {
-    const[boardData, setBoardData] = useState<BoardItem | null>()
+    const navigate = useNavigate();
+    const[boardData, setBoardData] = useState<BoardItem | null>();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const boardId:string = queryParams.get('boardId') || 'null';
@@ -37,14 +38,19 @@ function OneBoard() {
     }
 
     const LikesEvent = async () => {
-      const response:any = await Likes(boardId, "좋아요누른사람이름")
-      if(response)
-      {
-        alert("임시 좋아요알림")
-        getBoard()
-      }else{
-        alert("임시 좋아요실패알림")
+      try{
+        const response:any = await Likes(boardId, "좋아요누른사람이름")
+        if(response)
+        {
+          alert("임시 좋아요알림")
+          getBoard()
+        }else{
+          alert("임시 좋아요실패알림")
+        }
+      }catch(error){
+        console.log("likeEvent"+error)
       }
+      
     }
 
     const shareEvent = () => {
@@ -53,11 +59,22 @@ function OneBoard() {
       alert("URL이 클립보드에 복사되었습니다.")
     });
     }
+    
+    const backEvent = () => {
+      navigate(-1);
+    }
 
   return (
     <div className="OneBoard">
           {boardData? (
         <div className='oneboard-all'>
+          <div className='oneboard-navbar'>
+            <img src="./Icon/Back.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={backEvent} />
+            {/* <img src="./Icon/HorizonLogo.png" alt="" className='oneboard-navbar-logoIcon'/> */}
+            <div className='oneboard-navbar-logoIcon'>HORIZON</div>
+            <img src="./Icon/Jumjumjum.png" alt="" className='oneboard-navbar-settingIcon'/>
+          </div>
+
           <div className='oneboard-header'>
             <img src="./Icon/User.png" className="oneBoard-userIcon" alt="" />
             <div className='oneboard-data-div'>
@@ -76,8 +93,8 @@ function OneBoard() {
                 <span className="board-like"><img src="/Icon/Like.png" className="board-like-icon" alt="" /> {boardData.likes}</span>               
           </div>
 
-          {boardData.boardImageMetadata? (
-          <img className='oneboard-image' src={boardData.boardImageMetadata}/>
+          {boardData.imageUrl? (
+          <img className='oneboard-image' src={boardData.imageUrl}/>
           ):(<></>)}
 
           <div className='oneboard-bar'>

@@ -1,7 +1,12 @@
 @media screen and (max-width: 800px) {
     .Myaccount{
         width: 100vw;
-        height: auto;
+        min-height: 92vh;
+        background-color: rgb(250,250,250);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .Myaccount-logoBar{
@@ -23,9 +28,44 @@
     }
 
     .Myaccount-myData{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1em;
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 디브박스들 위에 헤더 */
+    .Myaccount-div-header{
         width: 100%;
-        height: 100px;
-        border:1px solid rgb()
+        height: 45px;
+        font-size: 25px;
+        box-sizing: border-box;
+        padding-left: 5%;
+        background-color: #66c1dc;
+        color: white;
+        border-radius: 0.7em 0.7em 0 0;
+        display: flex;
+        align-items: center;
+    }
+    .Myaccount-myData-data{
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 5%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        font-size: 17px;
+        background-color: rgb(255,255,255);
+    }
+    .Myaccount-myData-data-bottom{
+        border-radius: 0 0 0.7em 0.7em;
+    }
+
+    .Myaccount-myData-line{
+        width: 90%;
+        border-bottom: 0.7px solid rgb(0,0,0,0.2);
     }
 
 }

@@ -10,7 +10,7 @@ interface BoardItem {
   likes: number;
   hits: number;
   commentNum:number;
-  boardImageMetadata: string|null;
+  imageUrl: string|null;
 }
 
 export default BoardItem;
