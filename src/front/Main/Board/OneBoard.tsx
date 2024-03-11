@@ -7,8 +7,8 @@ import Comments from './Comments';
 import Loading from '../../Information/Loading';
 import report from '../../Information/Report';
 import Likes from '../../Information/Likes';
-
-import './OneBoard.css';
+import accessTokenAxiosConfig from '../../Information/accessTokenAxios';
+import './css/OneBoard.css';
 
 function OneBoard() {
     const navigate = useNavigate();
@@ -19,10 +19,12 @@ function OneBoard() {
 
     const getBoard = async () => {
       try {
-        const response: AxiosResponse<{success: boolean, board: BoardItem}> = await axios.get(`http://jungsonghun.iptime.org:7223/board/oneboard/${boardId}`);
-        if(response.data.success)
+        const response: AxiosResponse<{tokenVerify: boolean, board: BoardItem}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/oneboard/${boardId}`);
+        if(response.data.tokenVerify)
         {
           setBoardData(response.data.board);
+        }else{
+          navigate('/login');
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -39,7 +41,7 @@ function OneBoard() {
 
     const LikesEvent = async () => {
       try{
-        const response:any = await Likes(boardId, "좋아요누른사람이름")
+        const response:any = await Likes(boardId)
         if(response)
         {
           alert("임시 좋아요알림")
@@ -71,8 +73,9 @@ function OneBoard() {
           <div className='oneboard-navbar'>
             <img src="./Icon/Back.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={backEvent} />
             {/* <img src="./Icon/HorizonLogo.png" alt="" className='oneboard-navbar-logoIcon'/> */}
-            <div className='oneboard-navbar-logoIcon'>HORIZON</div>
-            <img src="./Icon/Jumjumjum.png" alt="" className='oneboard-navbar-settingIcon'/>
+            <div className='oneboard-navbar-logoIcon'>게시물</div>
+            {/* <img src="./Icon/Jumjumjum.png" alt="" className='oneboard-navbar-settingIcon'/> */}
+            <div className='oneboard-navbar-settingIcon'></div>
           </div>
 
           <div className='oneboard-header'>
@@ -90,7 +93,7 @@ function OneBoard() {
           
           <div className="board-data-div-second">
                 <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {boardData.commentNum}</span>
-                <span className="board-like"><img src="/Icon/Like.png" className="board-like-icon" alt="" /> {boardData.likes}</span>               
+                <span className="board-like"><img src="/Icon/LikeRed.png" className="board-like-icon" alt="" /> {boardData.likes}</span>               
           </div>
 
           {boardData.imageUrl? (

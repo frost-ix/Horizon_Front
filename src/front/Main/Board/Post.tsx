@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import './Post.css';
+import './css/Post.css';
 import axios, { AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
+import accessTokenAxiosConfig from "../../Information/accessTokenAxios";
 
 function Post() {
   const navigate = useNavigate();
@@ -51,17 +52,18 @@ function Post() {
     formData.append("content", content);
     formData.append("isAnonymous",isAnonymous)
     formData.append("boardImageMetaData", boardImageMetaData);
-    formData.append("accessToken", sessionStorage.getItem("accessToken"));
 
     try {
-      const response: AxiosResponse<any> = await axios.post('http://jungsonghun.iptime.org:7223/board/post', formData, {
+      const response: AxiosResponse<{tokenVerify:boolean}> = await accessTokenAxiosConfig.post('http://jungsonghun.iptime.org:7223/board/post', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      if(response.data.success)
+      if(response.data.tokenVerify)
       {
         alert("게시물 작성 완료")
         navigate('/');
+      }else{
+        navigate('/login');
       }
         
     } catch (error) {

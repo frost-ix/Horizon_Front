@@ -7,6 +7,7 @@ import './css/signup.css';
 const Signup = () => {
   const navigate = useNavigate();
   
+  //패스워드 비교
   const [isPassword, setPassword] = useState({
     password: "",
     password_check: "",
@@ -24,6 +25,7 @@ const Signup = () => {
     photo: null,
   });
 
+  //경고
   const [isWarning, setWarning] = useState({
     id: true,
     password: true,
@@ -35,10 +37,21 @@ const Signup = () => {
     email: true,
   });
 
-  const [isdoubleChk, setdoubleChk] = useState({
+  //정규식 체크
+  const [isCheck, setCheck] = useState({
     id: false,
     studentid: false,
+    phone: false,
   });
+
+  //전화번호 정규화
+  const [ismakePhone, setmakePhone] = useState('');
+
+  //학번 정규화
+  const [ismakeStudentid, setmakeStudentid] = useState('');
+
+  //Modal
+  const [isShow, setShow] = useState(false);
 
   //focusing
   const id_ref = useRef<HTMLInputElement | null>(null);
@@ -201,7 +214,7 @@ const Signup = () => {
       }
 
       //아이디 중복 확인
-      if(isdoubleChk.id===false){
+      if(isCheck.id===false){
         alert("아이디 중복확인을 해주세요.")
         return;
       }
@@ -254,7 +267,7 @@ const Signup = () => {
       }
 
       //학번 중복 확인
-      if(isdoubleChk.studentid===false){
+      if(isCheck.studentid===false){
         alert("학번 중복확인을 해주세요.")
         return;
       }
@@ -288,6 +301,12 @@ const Signup = () => {
           ...isWarning,
           email: true,
         }));
+      }
+
+      //전화번호 정규식 확인
+      if(isCheck.phone===false){
+        alert("전화번호를 다시 입력해주세요.");
+        return;
       }
 
     }
@@ -327,8 +346,8 @@ const Signup = () => {
 
   //아이디 변경시 중복체크 다시 해야함
   const changeId = (e:any) => {
-    setdoubleChk({
-      ...isdoubleChk,
+    setCheck({
+      ...isCheck,
       id: false,
     });
   };
@@ -340,14 +359,14 @@ const Signup = () => {
 
     if(id==="test"){
       alert("현재 사용중인 아이디입니다.");
-      setdoubleChk({
-        ...isdoubleChk,
+      setCheck({
+        ...isCheck,
         id: false,
       });
     }else{
       alert("사용가능한 아이디입니다.");
-      setdoubleChk({
-        ...isdoubleChk,
+      setCheck({
+        ...isCheck,
         id: true,
       });
     }
@@ -368,11 +387,15 @@ const Signup = () => {
   };
 
     //학번 변경시 중복체크 다시 해야함
-    const changeStudentId = (e:any) => {
-      setdoubleChk({
-        ...isdoubleChk,
+    const changeStudentId = (e:string) => {
+      setCheck({
+        ...isCheck,
         studentid: false,
       });
+
+      return (
+        e.replace(/[^0-9]/g, '')
+      )
     };
 
   //학번 중복 체크
@@ -382,14 +405,14 @@ const Signup = () => {
 
     if(studentid==="232323"){
       alert("현재 사용중인 학번입니다.");
-      setdoubleChk({
-        ...isdoubleChk,
+      setCheck({
+        ...isCheck,
         studentid: false,
       });
     }else{
       alert("사용가능한 학번입니다.");
-      setdoubleChk({
-        ...isdoubleChk,
+      setCheck({
+        ...isCheck,
         studentid: true,
       });
     }
@@ -407,6 +430,52 @@ const Signup = () => {
     //   .catch((err) => {
     //     console.log("err message : " + err);
     //   });
+  };
+
+  //전화번호 정규화
+  const phoneNumber = (e:string) => {
+
+    const regphone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    
+    var number:string = e;
+    
+    if(regphone.test(number)){
+      setCheck({
+        ...isCheck,
+        phone: true,
+      });
+    }else{
+      setCheck({
+        ...isCheck,
+        phone: false,
+      });
+    }
+
+    return (
+      e
+        /** 
+                   * 숫자를 제외한 값 모두 제외 
+                   * 0[0-1][0-9]로 제한하는 것도 가능
+                   */
+        .replace(/[^0-9]/g, '')
+        /**
+         *  0자리 부터 3자리까지 첫번째 '-' 전에 위치
+         *  첫번째 '-'에서 0 자리부터 4자리까지 후에 '-' 위치
+         *  마지막 '-'에서 4자리  숫자
+         */
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
+        /**
+         * '-'기호는 한번에서 두번만 적용
+         */
+        .replace(/(-{1,2})$/g, '')
+    )
+
+  };
+
+  //헴스 이미지 클릭
+  const zoomImg = () => {
+    setShow(true);
+
   };
 
   return (
@@ -442,7 +511,7 @@ const Signup = () => {
                 <input type="text" name="name" className="input_text first" placeholder="이름" onChange={nullchk} ref={name_ref} required />
                 <p className='warning' style={{ display: isWarning.name ? 'none' : 'block'}}>이름을 입력해주세요.</p>
                 <br />
-                <input type="text" name="studentId" className="input_text double_check" placeholder="학번" onChange={(e) => {changeStudentId(e); nullchk(e)}} ref={studentId_ref} required />
+                <input type="text" name="studentId" className="input_text double_check" placeholder="학번" onChange={(e) => {setmakeStudentid(changeStudentId(e.currentTarget.value)); nullchk(e)}} ref={studentId_ref} value={ismakeStudentid} required />
                 <p className='warning' style={{ display: isWarning.studentId ? 'none' : 'block'}}>학번을 입력해주세요.</p>
                 <input type='button' name='studentId_check' className='double_check_btn' value="중복 확인" onClick={doubleChk_studentid} />
                 <br />
@@ -465,7 +534,7 @@ const Signup = () => {
                 <input type="button" className='signup_btn next' onClick={handleNext} value="다음" />
               </div>
               <div className="form3 slide_content">
-                <input type="text" name="phone" className="input_text first" placeholder="전화번호" onChange={nullchk} ref={phone_ref} required />
+                <input type="text" name="phone" className="input_text first" placeholder="전화번호" onChange={(e) => { setmakePhone(phoneNumber(e.currentTarget.value)); nullchk(e);}} ref={phone_ref} maxLength={13} value={ismakePhone} required />
                 <p className='warning' style={{ display: isWarning.phone ? 'none' : 'block'}}>전화번호를 입력해주세요.</p>
                 <br />
                 <input type="text" name="email" className="input_text" placeholder="이메일" onChange={nullchk} ref={email_ref} required />
@@ -476,7 +545,7 @@ const Signup = () => {
               </div>
               <div className="form4 slide_content">
                 <h2>재학생 인증 사진</h2>
-                <img className='hems_img' src="/Icon/hems.png" alt="hems" />
+                <img className='hems_img' src="/Icon/hems.png" alt="hems" onClick={zoomImg} />
                 <br />
                 예시 사진
                 <br />
@@ -494,6 +563,14 @@ const Signup = () => {
         </div>
       </div>
       </form>
+
+      {/* Modal */}
+      {isShow == true ? 
+        <div className='modalSign'>
+          <img className='modalImg' src={`/Icon/hems.png`} alt="" onClick={() => setShow(false)} />
+        </div> 
+        : null 
+      }
     </div>
   );
 }

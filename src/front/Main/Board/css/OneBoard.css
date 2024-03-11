@@ -4,6 +4,8 @@
     width: 100vw;
     height: auto;
 
+    padding-bottom: 5vh;
+
 }
 
 .oneboard-all{
@@ -25,7 +27,7 @@
     border-bottom: 1px solid rgba(77, 77, 77, 0.2);
 }
 .oneboard-navbar-backIcon{
-    width: auto;
+    width: 25px;
     height: 25px;
 }
 .oneboard-navbar-logoIcon{
@@ -35,7 +37,7 @@
     margin-left: auto;
 }
 .oneboard-navbar-settingIcon{
-    width: auto;
+    width: 25px;
     height: 25px;
 }
 
@@ -45,13 +47,13 @@
     justify-content:center;
     flex-direction:row;
 
-    margin-top: 5px;
+    margin-top: 35px;
     width: 100%;
     height: 50px;
 
+    padding-bottom: 29px;
     /* border-bottom: 1px solid rgb(0,0,0,0.2); */
     border-bottom: 7px solid rgba(119, 119, 119, 0.1);
-    margin-bottom: 13px;
 }
 
 .oneboard-bar-button{

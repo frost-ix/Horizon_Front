@@ -94,16 +94,17 @@
 @media screen and (max-width: 800px) {
     .Header{
         width: 100vw;
-        height: 7vh;
+        height: 6vh;
     
         position: fixed;
         bottom: 0;
-        z-index: 99999;
+        z-index: 999;
         /* left: 0; */
     
         display: flex; 
         flex-direction:row;
-        margin-top: 5px;
+        align-items: center;
+        /* margin-top: 5px; */
     
         background-color: rgb(255, 255, 255);
         border-top: 0.8px solid rgba(0, 0, 0); 
@@ -119,13 +120,9 @@
         flex-direction:row;
     }
     
-    .displayLineIcon{
-        display: none;
-    }
-    
     .Header-icon{
-        height: 6vh;
-        width: 6vh;
+        height: 5vh;
+        width: 5vh;
         /* background-color: rgb(205, 205, 205); */
         border-radius: 15px;
     
@@ -138,6 +135,9 @@
     }
     
     .displayBar{
+        display: none;
+    }
+    .displayLineIcon{
         display: none;
     }
     .displayBar.visible {

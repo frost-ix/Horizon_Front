@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from 'axios';
-import './Comments.css';
+import './css/Comments.css';
 import CommentsItem from "../../../Interface/CommentsInterface";
 import report from "../../Information/Report";
 import CommentPostItem from "../../../Interface/CommentPostInterface";
+import { useNavigate } from "react-router-dom";
+import accessTokenAxiosConfig from "../../Information/accessTokenAxios";
 
 function Comments({ boardId }: { boardId: any }) {
+  const navigate = useNavigate();
   const [comments, setComments] = useState<CommentsItem[] | null>();
   const [isChecked, setIsChecked] = useState<boolean>(true);
 
@@ -16,10 +19,12 @@ function Comments({ boardId }: { boardId: any }) {
 
   const getComments = async () => {
     try {
-      const response: AxiosResponse<{success: boolean, comments: CommentsItem[]}> = await axios.get(`http://jungsonghun.iptime.org:7223/board/comments/${boardId}`);
-      if(response.data.success)
+      const response: AxiosResponse<{tokenVerify: boolean, comments: CommentsItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/comments/${boardId}`);
+      if(response.data.tokenVerify)
       {
         setComments(response.data.comments);
+      }else{
+        navigate('/login');
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -44,15 +49,21 @@ function Comments({ boardId }: { boardId: any }) {
       }
       
       try {
-        const response: AxiosResponse<{success: boolean, comments: CommentsItem[]}>
-        = await axios.post(`http://jungsonghun.iptime.org:7223/board/comments/post`,commentData);
-
-        if(response.data.success)
+        if(sessionStorage.getItem("accessToken"))
         {
-          getComments()
+          const response: AxiosResponse<{success: boolean, comments: CommentsItem[]}>
+          = await axios.post(`http://jungsonghun.iptime.org:7223/board/comments/post`,commentData);
+  
+          if(response.data.success)
+          {
+            getComments()
+          }else{
+            alert("댓글등록 실패")
+          }
         }else{
-          alert("댓글등록 실패")
+          navigate('/login')
         }
+        
       } catch (error) {
         alert("댓글등록 실패")
         // console.error('Error fetching data:', error);

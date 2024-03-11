@@ -1,5 +1,6 @@
 import ReportItem from "../../Interface/ReportInterface";
 import axios, { AxiosResponse } from 'axios';
+import accessTokenAxiosConfig from "./accessTokenAxios";
 
 const report = async (reportId:String, reporter:String) => {
     const reportText:String|null = window.prompt("신고 내용을 입력해주세요.");
@@ -9,14 +10,13 @@ const report = async (reportId:String, reporter:String) => {
     }
 
     const reportItem:ReportItem={
-      accessToken : sessionStorage.getItem("accessToken") || "storageError",
       reportId:reportId,
       reportText:reportText
     }
 
     try {
-      const response: AxiosResponse<{success: boolean}> = await axios.post(`http://jungsonghun.iptime.org:7223/report`,reportItem);
-      if(response.data.success)
+      const response: AxiosResponse<{tokenVerify: boolean}> = await accessTokenAxiosConfig.post(`http://jungsonghun.iptime.org:7223/report`,reportItem);
+      if(response.data.tokenVerify)
       {
         alert("신고가 완료되었습니다.")
       }

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./css/Login.css";
 import { useNavigate } from "react-router-dom";
-import { LoginSessionDispatch } from "../../../Redux/Login/ReduxLoginSessionDispatch";
 
 // fontawesome 
 import "https://kit.fontawesome.com/344577fb7a.js";
@@ -44,10 +43,9 @@ export default function Login() {
     const userPw: string = element.currentTarget.userPW.value;
     // console.log("userID : " + userID + "\n" + "userPW : " + userPW);
     
-      axios
-      .post(`http://jungsonghun.iptime.org:7223/user`, {
+      axios.post(`http://jungsonghun.iptime.org:7223/user`, {
         userId:userId,
-        userPw:userPw
+        userPwd:userPw
       })
       .then((res) => {
         if(res.data.success)
@@ -55,7 +53,6 @@ export default function Login() {
           alert("로그인 성공 하셨습니다!" + "\n" + "환영합니다!" );
           localStorage.setItem("refreshToken",res.data.refreshToken)
           sessionStorage.setItem("accessToken",res.data.accessToken)
-          LoginSessionDispatch("정송훈","wjdthdgns1")
           navigate('/')
         }else{
           alert("로그인실패")

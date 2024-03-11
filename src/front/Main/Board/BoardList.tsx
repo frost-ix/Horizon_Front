@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
-import { useSelector } from 'react-redux';
-import { RootState } from "../../../Redux/store";
-import './BoardList.css';
+import './css/BoardList.css';
 import BoardListItem from "../../../Interface/BoardListItem";
 import Loading from "../../Information/Loading";
+import accessTokenAxiosConfig from "../../Information/accessTokenAxios";
 
 
 function BoardList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const Category = queryParams.get('Category');
-  const userImpormation = useSelector((state:RootState) => state.LoginSession);
 
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<BoardListItem[] | null>(null);
@@ -20,10 +18,12 @@ function BoardList() {
 
   const getBoardList = async () => {
     try {
-      const response: AxiosResponse<{success: boolean, boards: BoardListItem[]}> = await axios.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}`);
-      if(response.data.success)
+      const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}`);
+      if(response.data.tokenVerify)
       {
         setBoardList(response.data.boards);
+      }else{
+        navigate('/login');
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -32,11 +32,10 @@ function BoardList() {
 
   useEffect(()=> {
     getBoardList();
-    // console.log(Category)
   },[selectedCategory]);
   
   const cateclick = (cate:string) => {
-    if(userImpormation.userId && userImpormation.userName)
+    if(sessionStorage.getItem("accessToken"))
     {
       navigate(`/board?Category=${cate}`)
       setSelectedCategory(cate)
@@ -47,7 +46,7 @@ function BoardList() {
   }
 
   const oneboard = (boardId:string)=> {
-    if(userImpormation.userId && userImpormation.userName)
+    if(sessionStorage.getItem("accessToken"))
     {
       navigate(`/oneboard?boardId=${boardId}`);
     }else{
@@ -83,7 +82,7 @@ function BoardList() {
             </div>
             <div className="board-tr-right">
                 <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {item.commentNum}</span>
-                <span className="board-like"><img src="/Icon/Like.png" className="board-like-icon" alt="" /> {item.likes}</span>               
+                <span className="board-like"><img src="/Icon/LikeRed.png" className="board-like-icon" alt="" /> {item.likes}</span>               
             </div>
           </div>
         ))}

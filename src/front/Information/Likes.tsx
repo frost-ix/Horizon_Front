@@ -1,16 +1,16 @@
 import axios, { AxiosResponse } from 'axios';
 import LikesItem from '../../Interface/LikesInterface';
+import accessTokenAxiosConfig from './accessTokenAxios';
 
-const Likes = async (LikesId:String, userId:String) => {
+const Likes = async (LikesId:String) => {
 
     const LikesItem:LikesItem = {
-        LikesId : LikesId,
-        accessToken : sessionStorage.getItem("accessToken") || "storageError"
+        LikesId : LikesId
     }
 
     try {
-      const response: AxiosResponse<{success: boolean}> = await axios.post(`http://jungsonghun.iptime.org:7223/Likes`,LikesItem);
-      if(response.data.success)
+      const response: AxiosResponse<{tokenVerify: boolean}> = await accessTokenAxiosConfig.post(`http://jungsonghun.iptime.org:7223/Likes`,LikesItem);
+      if(response.data.tokenVerify)
       {
         return true;
       }else{

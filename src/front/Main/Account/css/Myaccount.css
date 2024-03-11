@@ -9,63 +9,46 @@
         align-items: center;
     }
 
-    .Myaccount-logoBar{
-        width: 94%;
+    .Myaccount-haeder{
+        width: 100%;
+        height: auto;
+        font-size: 20px;
+        font-weight: bold;
+        box-sizing: border-box;
+        padding: 4%;
+        background-color: rgba(77, 77, 77, 0.2);
+    }
+
+    .Myaccoun-myData{
+        width: 100%;
         height: auto;
         display: flex;
-        align-items: center;
-        padding: 3%;
-        padding-top: 1%;
-        padding-bottom: 1%;
-    }
-    .Myaccount-logoBar-logoImg{
-        width: 40px;
-        height: 40px;
-    }
-    .Myaccount-logoBar-p{
-        font-size: 23px;
-        font-weight: bold;
-    }
-
-    .Myaccount-myData{
-        width: 90%;
-        display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border-radius: 1em;
-        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
     }
 
-    /* 디브박스들 위에 헤더 */
-    .Myaccount-div-header{
+    .Myaccoun-myData-div{
         width: 100%;
-        height: 45px;
-        font-size: 25px;
+        height: auto;
+        border-bottom: 0.1px solid rgb(0,0,0,0.1);
         box-sizing: border-box;
-        padding-left: 5%;
-        background-color: #66c1dc;
-        color: white;
-        border-radius: 0.7em 0.7em 0 0;
-        display: flex;
-        align-items: center;
-    }
-    .Myaccount-myData-data{
-        width: 100%;
-        box-sizing: border-box;
-        padding-left: 5%;
+        padding: 4%;
         padding-top: 3%;
         padding-bottom: 3%;
-        font-size: 17px;
-        background-color: rgb(255,255,255);
-    }
-    .Myaccount-myData-data-bottom{
-        border-radius: 0 0 0.7em 0.7em;
-    }
 
-    .Myaccount-myData-line{
-        width: 90%;
-        border-bottom: 0.7px solid rgb(0,0,0,0.2);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .Myaccoun-myData-div-header{
+        font-weight: bold;
+    }
+    .Myaccoun-myData-div-data{
+        margin-left: auto;
+        margin-right: 10px;
+    }
+    .Myaccoun-myData-div-icon{
+        height: 15px;
+        width: auto;
     }
 
 }

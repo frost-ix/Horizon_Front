@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './Body.css';
-import { LoginSessionDispatch } from '../../Redux/Login/ReduxLoginSessionDispatch'
 
 import Main from '../Main/Main';
 import Post from '../Main/Board/Post';
@@ -13,16 +12,16 @@ import Signup from '../Main/Account/Signup';
 import Login from '../Main/Account/Login';
 import Myaccount from '../Main/Account/Myaccount';
 
+import refreshTokenAxiosConfig from '../Information/refreshTokenAxios';
+
 function Body() {
   const navigate = useNavigate();
   const autoLogin = async () => {
     try{
-      const respones: AxiosResponse<any> = await axios
-      .post(`http://jungsonghun.iptime.org:7223/user`,{"refreshToken" : localStorage.getItem("refreshToken")})
-      if(respones.data.success)
+      const respones: AxiosResponse<{tokenVerify:boolean, accessToken:string}> = await refreshTokenAxiosConfig.post(`http://jungsonghun.iptime.org:7223/user`)
+      if(respones.data.tokenVerify)
       {
         sessionStorage.setItem("accessToken",respones.data.accessToken)
-        LoginSessionDispatch("정송훈","wjdthdgns1")
       }else{
         navigate('/login')
       }

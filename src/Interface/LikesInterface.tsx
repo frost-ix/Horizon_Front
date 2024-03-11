@@ -1,6 +1,5 @@
 interface LikesItem {
-    LikesId:String,
-    accessToken:String
+    LikesId:String
  }
  
  export default LikesItem;
