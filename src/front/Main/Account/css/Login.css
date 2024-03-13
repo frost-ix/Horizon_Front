@@ -268,12 +268,12 @@ body{
     border-radius: 5px 5px 0 0;
     border: 1px solid rgba(185, 185, 185, 0.7);
   
-    background-image : url('/public/Icon/user_before.svg');
+    /* background-image : url('/public/Icon/user_before.svg'); */
     margin-bottom: 0;
 
-    &:focus{
+    /* &:focus{
       background-image : url('/public/Icon/user_after.svg');
-    }
+    } */
   }
   
   #userPW{
@@ -282,10 +282,10 @@ body{
     border: 1px solid rgba(185, 185, 185, 0.7);
     border-top: none;
 
-    background-image : url('/public/Icon/pwd_before.svg');
+    /* background-image : url('/public/Icon/pwd_before.svg'); */
 
     &:focus{
-      background-image: url('/public/Icon/pwd_after.svg');
+      /* background-image: url('/public/Icon/pwd_after.svg'); */
     }
   }
 

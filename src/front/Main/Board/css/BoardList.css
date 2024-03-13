@@ -24,11 +24,25 @@
         transition: background-color 0.3s ease; 
     }
     .board-bar-list.select{
-        /* border-bottom:2px solid #66c0dc;
-        color: #66c0dc; */
         border-bottom:2px solid #1897be;
         color: #1897be;
     }
+
+    .board-bar-list-myversion{
+        width: 50%;
+        height: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s ease; 
+    }
+    .board-bar-list-myversion.select{
+        border-bottom:2px solid #1897be;
+        color: #1897be;
+    }
+
+
     .barl{
         display: flex;
         justify-content: center;

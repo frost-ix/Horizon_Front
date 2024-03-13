@@ -7,6 +7,7 @@ import Main from '../Main/Main';
 import Post from '../Main/Board/Post';
 import OneBoard from '../Main/Board/OneBoard';
 import BoardList from '../Main/Board/BoardList';
+import MyBoardnLikeList from '../Main/Board/MyBoardnLikeList';
 
 import Signup from '../Main/Account/Signup';
 import Login from '../Main/Account/Login';
@@ -47,6 +48,7 @@ function Body() {
                 <Route path='/board' element={<BoardList/>}/>
                 <Route path='/oneboard' element={<OneBoard/>}/>
                 <Route path='/post' element={<Post/>}/>
+                <Route path='/MyBoardnLikeList' element={<MyBoardnLikeList/>}/>
                 
                 <Route path='/myaccount' element={<Myaccount/>}/>
                 {/* <Route path='/myaccount' element={<Login/>}/> */}

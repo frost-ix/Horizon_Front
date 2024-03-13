@@ -9,9 +9,6 @@ import MyAccountItem from '../../../Interface/MyAccountInterface';
 
 function Myaccount() {
   const navigate  = useNavigate()
-  const [myBoardList, setMyBoardList] = useState<BoardListItem[] | null>(null);
-  const [myBookList, setMyBookList] = useState<BoardListItem[] | null>(null);
-  const [myLikeBoardList, setMyLikeBoardList] = useState<BoardListItem[] | null>(null);
   const [myAccount, setMyAccount] = useState<MyAccountItem | null>(null);
 
   const myDataAxios = async () => {
@@ -19,9 +16,6 @@ function Myaccount() {
         const response: AxiosResponse<{tokenVerify: boolean, myData:MyDataItem }> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/dddd`);
         if(response.data.tokenVerify)
         {
-          setMyBoardList(response.data.myData.myBoardList)
-          setMyBookList(response.data.myData.myBookList)
-          setMyLikeBoardList(response.data.myData.myLikeBoardList)
           setMyAccount({
             userName:response.data.myData.userName,
             userEmail:response.data.myData.userEmail,
@@ -72,12 +66,12 @@ function Myaccount() {
 
       <div className='Myaccoun-myData'>
         <div className='Myaccount-haeder'>계정 관리</div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
+        <div className='Myaccoun-myData-div'>
           <div className='Myaccoun-myData-div-header'>이름(실명)</div>
           <div className='Myaccoun-myData-div-data'>{myAccount? myAccount.userName : "error"}</div>
           <div className='Myaccoun-myData-div-icon'></div>
         </div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
+        <div className='Myaccoun-myData-div'>
           <div className='Myaccoun-myData-div-header'>학과</div>
           <div className='Myaccoun-myData-div-data'>{myAccount? myAccount.userDepartment : "error"}</div>
           <div className='Myaccoun-myData-div-icon'></div>
@@ -108,18 +102,18 @@ function Myaccount() {
         <div className='Myaccount-haeder'>
           게시물 관리
         </div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
+        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/MyBoardnLikeList',{state:{option:"myboard"}})}}>
           <div className='Myaccoun-myData-div-header'>내 게시물</div>
+          <div className='Myaccoun-myData-div-data'></div>
+          <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
+        </div>
+        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/MyBoardnLikeList',{state:{option:"mylike"}})}}>
+          <div className='Myaccoun-myData-div-header'>좋아요 누른 게시물</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
         <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
           <div className='Myaccoun-myData-div-header'>내 책방</div>
-          <div className='Myaccoun-myData-div-data'></div>
-          <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
-        </div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
-          <div className='Myaccoun-myData-div-header'>좋아요 누른 게시물</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
