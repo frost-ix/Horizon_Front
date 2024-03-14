@@ -2,10 +2,8 @@
 @media screen and (max-width: 800px) {
 .OneBoard{
     width: 100vw;
-    height: auto;
-
+    min-height: 88vh;
     padding-bottom: 5vh;
-
 }
 
 .oneboard-all{
@@ -13,22 +11,26 @@
     align-items: center;
     justify-content:center;
     flex-direction:column;
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .oneboard-navbar{
-    width: 100%;
+    width: 100vw;
     height: auto;
     box-sizing: border-box;
     padding-left: 3%;
     padding-right: 3%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     display: flex;
+    align-items: center;
     border-bottom: 1px solid rgba(77, 77, 77, 0.2);
 }
 .oneboard-navbar-backIcon{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 }
 .oneboard-navbar-logoIcon{
     width: auto;
@@ -55,6 +57,12 @@
     /* border-bottom: 1px solid rgb(0,0,0,0.2); */
     border-bottom: 7px solid rgba(119, 119, 119, 0.1);
 }
+/* 
+.oneboard-padding{
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 13px;
+} */
 
 .oneboard-bar-button{
     height: 70%;
@@ -85,7 +93,8 @@
     width: 96%;
     height: auto;
     padding-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
+    margin-bottom: 18px;
     padding-left: 4%;
     display: flex;
     align-items: center;

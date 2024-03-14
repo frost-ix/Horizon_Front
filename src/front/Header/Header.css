@@ -131,7 +131,8 @@
     }
 
     .Header-icon.visible{
-        background-color: #66c1dc50;
+        /* background-color: #66c1dc50; */
+        background-color: #d0e8ff;
     }
     
     .displayBar{

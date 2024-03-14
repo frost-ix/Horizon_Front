@@ -3,6 +3,31 @@
   "name": "Horizon",
   "icons": [
     {
+      "src": "./PwaIcon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "./PwaIcon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./PwaIcon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./PwaIcon/apple-touch-icon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./PwaIcon/apple-touch-icon-32x32.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
       "src": "./PwaIcon/apple-touch-icon-57x57.png",
       "sizes": "57x57",
       "type": "image/png"
@@ -42,11 +67,17 @@
       "src": "./PwaIcon/apple-touch-icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png"
+    },
+    {
+      "src": "./PwaIcon/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
     }
   ],
    "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "version":"beta"
 }
 

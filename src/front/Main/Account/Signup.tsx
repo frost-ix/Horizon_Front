@@ -152,7 +152,7 @@ const Signup = () => {
         if(res.data==true){
           alert("회원가입 성공 하셨습니다!");
           //페이지 이동
-          navigate('/Main');
+          navigate('/login');
         }else{
           alert("회원가입 실패 하셨습니다!" + "\n" + "아이디와 비밀번호를 확인해주세요!");
         }

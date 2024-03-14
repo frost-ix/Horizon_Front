@@ -38,18 +38,7 @@ function Myaccount() {
       alert("로그인 후 이용하실 수 있습니다.")
       navigate('/login')
     }
-      
   },[])
-
-  const oneboard = (boardId:string)=> {
-    if(sessionStorage.getItem("accessToken"))
-    {
-      navigate(`/oneboard?boardId=${boardId}`);
-    }else{
-      alert("로그인 후 이용하실 수 있습니다.")
-      navigate('/login')
-    }
-  }
   
   const LogoutSubmit = () => {
     sessionStorage.removeItem("accessToken");
@@ -86,12 +75,12 @@ function Myaccount() {
           <div className='Myaccoun-myData-div-data'>{myAccount? myAccount.userEmail : "error"}</div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
+        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/findpw')}}>
           <div className='Myaccoun-myData-div-header'>비밀번호</div>
           <div className='Myaccoun-myData-div-data'>************</div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
-        <div className='Myaccoun-myData-div' onClick={LogoutSubmit}>
+        <div className='Myaccoun-myData-div last' onClick={LogoutSubmit}>
           <div className='Myaccoun-myData-div-header'>로그아웃</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
@@ -112,7 +101,7 @@ function Myaccount() {
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
+        <div className='Myaccoun-myData-div last' onClick={ChangeSubmit}>
           <div className='Myaccoun-myData-div-header'>내 책방</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
@@ -138,7 +127,7 @@ function Myaccount() {
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
-        <div className='Myaccoun-myData-div' onClick={ChangeSubmit}>
+        <div className='Myaccoun-myData-div last' onClick={ChangeSubmit}>
           <div className='Myaccoun-myData-div-header'>회원탈퇴</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />

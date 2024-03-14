@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import './css/BoardList.css';
@@ -13,15 +13,47 @@ function BoardList() {
   const Category = queryParams.get('Category');
 
   const navigate = useNavigate();
-  const [boardList, setBoardList] = useState<BoardListItem[] | null>(null);
+  const [boardList, setBoardList] = useState<BoardListItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string|null>(Category);
+  const [page, setPage] = useState<number>(0);
+  const [isLoding, setIsLoding] = useState<boolean>(false);
 
   const getBoardList = async () => {
     try {
-      const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}`);
+      const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
       if(response.data.tokenVerify)
       {
         setBoardList(response.data.boards);
+        setPage(page+1);
+      }else{
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const getBoardListS = async () => {
+    try {
+      const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
+      if(response.data.tokenVerify)
+      {
+        setTimeout(() => {
+          const Data = response.data.boards.map((item) => ({
+            _id: item._id,
+            commentNum: item.commentNum,
+            writer:item.writer,
+            title:item.title,
+            createAt:item.createAt,
+            likes:item.likes,
+            hits:item.hits,
+            content:item.content
+          }));
+          setBoardList((prevData) => [...prevData, ...Data]);
+          setPage(page+1);
+          setIsLoding(false);
+        }, 1500);
+        
       }else{
         navigate('/login');
       }
@@ -35,26 +67,29 @@ function BoardList() {
   },[selectedCategory]);
   
   const cateclick = (cate:string) => {
-    if(sessionStorage.getItem("accessToken"))
-    {
-      navigate(`/board?Category=${cate}`)
-      setSelectedCategory(cate)
-    }else{
-      alert("로그인 후 이용하실 수 있습니다.")
-      navigate('/login')
-    }
+    navigate(`/board?Category=${cate}`);
+    setSelectedCategory(cate);
+    setPage(0);
   }
 
   const oneboard = (boardId:string)=> {
-    if(sessionStorage.getItem("accessToken"))
-    {
-      navigate(`/oneboard?boardId=${boardId}`);
-    }else{
-      alert("로그인 후 이용하실 수 있습니다.")
-      navigate('/login')
-    }
-    
+    navigate(`/oneboard?boardId=${boardId}`);
   }
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        if (scrollTop + clientHeight >= scrollHeight - 5) {
+          window.removeEventListener('scroll', handleScroll);
+          setIsLoding(true);
+          getBoardListS();
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, [boardList]);
 
   return (
     <div className="BoardList">
@@ -67,13 +102,11 @@ function BoardList() {
       {boardList? (
         <div className='boardList-box'>
         <div className="board-table">
-        {boardList.map((item) => (
-          <div key={item._id} className='board-tr' onClick={()=>{oneboard(item._id)}}>
+        {boardList.map((item, index) => (
+          <div key={index} className='board-tr' onClick={()=>{oneboard(item._id)}}>
             <div className="board-tr-left">
               <div className='board-title'><img src="./Icon/User.png" className="board-userIcon" alt="" />{item.title}</div>
-
               <div className='board-content'>{item.content}</div>
-
               <div className='board-data'>
                 {item.writer}
                 <div className="board-line">|</div> <span className="board-hit">조회수 {item.hits}</span>
@@ -86,6 +119,8 @@ function BoardList() {
             </div>
           </div>
         ))}
+        {/* <img src="/Icon/Loading.gif" className="BoardList-loding-icon" alt="" /> */}
+        {isLoding?<div className="loading-container"><div className="loading"></div></div>:<></>}
         </div>
         </div>
       ):(

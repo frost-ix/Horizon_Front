@@ -77,20 +77,21 @@ function Comments({ boardId }: { boardId: any }) {
   return (
     <div className="Comments">
       {comments? (
-        comments.map((item) => (
-          <div className="comment-tr">
+        comments.map((item,index) => (
+          <div className="comment-tr" key={index} >
               <div className="comment-tr-writer"><img src="./Icon/User.png" className="comment-userIcon" alt="" />
                 {item.writer}
                 <button className="comment-report" onClick={()=>{reportEvent(item.commentNum)}}>
                 <img src="/Icon/Report.png" className="oneboard-bar-icon" alt="" />신고</button>
               </div>
+              
               <div className="comment-tr-content">{item.content}</div>
               
             <div className="comment-tr-bottom">
                 <div className="comment-tr-createAt">{item.createAt.toString().substring(0, 10)}</div>
                 {/* <div className="comment-like"><img src="/Icon/Like.png" className="comment-like-icon" alt="" /> {item.likes.toString()}</div> */}
             </div>
-
+            <div className="border80center"><div className="border80"></div></div>
           </div>
         ))
       ):

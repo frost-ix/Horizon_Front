@@ -71,30 +71,30 @@ function OneBoard() {
           {boardData? (
         <div className='oneboard-all'>
           <div className='oneboard-navbar'>
-            <img src="./Icon/Back.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={backEvent} />
+            <img src="./Icon/LeftArrow.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={backEvent} />
             {/* <img src="./Icon/HorizonLogo.png" alt="" className='oneboard-navbar-logoIcon'/> */}
             <div className='oneboard-navbar-logoIcon'>게시물</div>
             {/* <img src="./Icon/Jumjumjum.png" alt="" className='oneboard-navbar-settingIcon'/> */}
             <div className='oneboard-navbar-settingIcon'></div>
           </div>
 
-          <div className='oneboard-header'>
-            <img src="./Icon/User.png" className="oneBoard-userIcon" alt="" />
-            <div className='oneboard-data-div'>
-              <div className='oneboard-writer'>{boardData.writer}</div>
-              <div className='oneboard-data'>{boardData.createAt.toString().substring(0, 10)}</div>
+            <div className='oneboard-header'>
+              <img src="./Icon/User.png" className="oneBoard-userIcon" alt="" />
+              <div className='oneboard-data-div'>
+                <div className='oneboard-writer'>{boardData.writer}</div>
+                <div className='oneboard-data'>{boardData.createAt.toString().substring(0, 10)}</div>
+              </div>
             </div>
-          </div>
 
-          <div className='oneboard-content'>
-            <div className='oneboard-title'>{boardData.title}</div>
-            {boardData.content}
-          </div>
-          
-          <div className="board-data-div-second">
-                <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {boardData.commentNum}</span>
-                <span className="board-like"><img src="/Icon/LikeRed.png" className="board-like-icon" alt="" /> {boardData.likes}</span>               
-          </div>
+            <div className='oneboard-content'>
+              <div className='oneboard-title'>{boardData.title}</div>
+              {boardData.content}
+            </div>
+            
+            <div className="board-data-div-second">
+                  <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {boardData.commentNum}</span>
+                  <span className="board-like"><img src="/Icon/LikeRed.png" className="board-like-icon" alt="" /> {boardData.likes}</span>               
+            </div>
 
           {boardData.imageUrl? (
           <img className='oneboard-image' src={boardData.imageUrl}/>

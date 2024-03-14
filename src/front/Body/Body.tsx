@@ -12,6 +12,9 @@ import MyBoardnLikeList from '../Main/Board/MyBoardnLikeList';
 import Signup from '../Main/Account/Signup';
 import Login from '../Main/Account/Login';
 import Myaccount from '../Main/Account/Myaccount';
+import FindPw from '../Main/Account/FindPw';
+
+import Book from '../Main/Book/Book';
 
 import refreshTokenAxiosConfig from '../Information/refreshTokenAxios';
 
@@ -43,21 +46,24 @@ function Body() {
 
   return (
     <div className="Body">
-            <Routes>
-                <Route path='/' element={<Main/>}/>
-                <Route path='/board' element={<BoardList/>}/>
-                <Route path='/oneboard' element={<OneBoard/>}/>
-                <Route path='/post' element={<Post/>}/>
-                <Route path='/MyBoardnLikeList' element={<MyBoardnLikeList/>}/>
-                
-                <Route path='/myaccount' element={<Myaccount/>}/>
-                {/* <Route path='/myaccount' element={<Login/>}/> */}
-                <Route path='/signup' element={<Signup/>}/>
-                <Route path='/login' element={<Login/>}/>
+      <Routes>
+        {/* 게시판 */}
+        <Route path='/' element={<Main/>}/>
+        <Route path='/board' element={<BoardList/>}/>
+        <Route path='/oneboard' element={<OneBoard/>}/>
+        <Route path='/post' element={<Post/>}/>
+        <Route path='/MyBoardnLikeList' element={<MyBoardnLikeList/>}/>
+        {/* 계정 */}
+        <Route path='/myaccount' element={<Myaccount/>}/>
+        <Route path='/findpw' element={<FindPw/>}/>
+        <Route path='/signup' element={<Signup/>}/>
+        <Route path='/login' element={<Login/>}/>
+        {/* 책방 */}
+        <Route path='/Book' element={<Book/>}/>
+        {/* 없는 url 예외처리 */}
+        <Route path={"*"} element={<Main/>} />
 
-                <Route path='/account' element={<Main/>}/>
-                <Route path='/book' element={<Main/>}/>
-            </Routes>
+      </Routes>
     </div>
   );
 }

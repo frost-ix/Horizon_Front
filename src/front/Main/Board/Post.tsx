@@ -71,6 +71,14 @@ function Post() {
     }
   }
 
+  useEffect(()=> {
+    if(!sessionStorage.getItem("accessToken"))
+    {
+      alert("로그인 후 이용하실 수 있습니다.")
+      navigate('/login')
+    }
+  },[]);
+  
   return (
     <div className="Post">
       <form onSubmit={posting} className='post-form'>
