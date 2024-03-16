@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect} from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import './css/BoardList.css';
 import BoardListItem from "../../../Interface/BoardListItem";
 import Loading from "../../Information/Loading";
@@ -10,12 +10,13 @@ import accessTokenAxiosConfig from "../../Information/accessTokenAxios";
 function BoardList() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const Category = queryParams.get('Category');
+  const Category = queryParams.get('Category')||"hoseo";
 
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<BoardListItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string|null>(Category);
-  const [page, setPage] = useState<number>(0);
+  const sessionPage:number = Number(sessionStorage.getItem("boardPage")) || 0;
+  const [page, setPage] = useState<number>(sessionPage);
   const [isLoding, setIsLoding] = useState<boolean>(false);
   const [searchName,setSearchName] = useState<String|null>();
 
@@ -54,7 +55,6 @@ function BoardList() {
           setPage(page+1);
           setIsLoding(false);
         }, 300);
-        
       }else{
         navigate('/login');
       }
@@ -74,7 +74,9 @@ function BoardList() {
   }
 
   const oneboard = (boardId:string)=> {
-    navigate(`/oneboard?boardId=${boardId}`);
+    navigate(`/oneboard?BoardId=${boardId}`);
+    const toStr = String(page-1)
+    sessionStorage.setItem("boardPage", toStr)
   }
 
     useEffect(() => {
@@ -94,15 +96,22 @@ function BoardList() {
 
     const search = (e:any) => {
       e.preventDefault();
-      
+      const value = searchName?searchName.replace(/\s+/g, '') : "";
+      if(value === "")
+      {
+        alert("검색어를 입력해주세요.");
+      }else{
+        sessionStorage.setItem("searchBoardPage","0")
+        navigate(`/searchBoard?Category=${selectedCategory}&Search=${searchName}`);
+      }
     }
 
   return (
     <div className="BoardList">
       <div className="Book-header">
-          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" /><div className="Book-header-name-data"></div></div>
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" onClick={()=>navigate('/')}/></div>
           <form onSubmit={search} className="Book-header-form">
-            <input type="text" placeholder="검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" />
+            <input type="text" placeholder="검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" required/>
             <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>
           </form>
       </div>

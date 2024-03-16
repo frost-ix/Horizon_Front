@@ -1,0 +1,16 @@
+.SearchBoard-header{
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+
+    display:flex;
+    align-items: center;
+}
+.SearchBoard-header-backIcon{
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+}

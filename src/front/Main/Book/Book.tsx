@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate,Outlet } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import './css/Book.css';
-import { serialize } from "v8";
 
 
 function Book() {
@@ -20,17 +19,18 @@ function Book() {
 
   const search = (e:any) => {
     e.preventDefault();
-    
+    console.log("제작중")
   }
 
   const DepartmentEvent = (department:string) => {
     console.log(department)
+    console.log("제작중")
   }
 
   return (
     <div className="Book">
         <div className="Book-header">
-          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" /></div>
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" onClick={()=>navigate('/')}/></div>
           <form onSubmit={search} className="Book-header-form">
             <input type="text" placeholder="책 이름 검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" />
             <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>

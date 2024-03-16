@@ -91,12 +91,12 @@ function Myaccount() {
         <div className='Myaccount-haeder'>
           게시물 관리
         </div>
-        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/MyBoardnLikeList',{state:{option:"myboard"}})}}>
+        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/myBoardnLikeList',{state:{option:"myboard"}})}}>
           <div className='Myaccoun-myData-div-header'>내 게시물</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />
         </div>
-        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/MyBoardnLikeList',{state:{option:"mylike"}})}}>
+        <div className='Myaccoun-myData-div' onClick={()=>{navigate('/myBoardnLikeList',{state:{option:"mylike"}})}}>
           <div className='Myaccoun-myData-div-header'>좋아요 누른 게시물</div>
           <div className='Myaccoun-myData-div-data'></div>
           <img src="/Icon/RightArrow.png" className='Myaccoun-myData-div-icon' alt="" />

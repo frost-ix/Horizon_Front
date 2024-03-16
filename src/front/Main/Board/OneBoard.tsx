@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import ClipboardJS from 'clipboard';
 import BoardItem from "../../../Interface/BoardInterface";
 import Comments from './Comments';
@@ -15,7 +15,7 @@ function OneBoard() {
     const[boardData, setBoardData] = useState<BoardItem | null>();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const boardId:string = queryParams.get('boardId') || 'null';
+    const boardId:string = queryParams.get('BoardId') || 'null';
 
     const getBoard = async () => {
       try {
