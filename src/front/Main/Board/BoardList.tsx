@@ -17,6 +17,7 @@ function BoardList() {
   const [selectedCategory, setSelectedCategory] = useState<string|null>(Category);
   const [page, setPage] = useState<number>(0);
   const [isLoding, setIsLoding] = useState<boolean>(false);
+  const [searchName,setSearchName] = useState<String|null>();
 
   const getBoardList = async () => {
     try {
@@ -52,7 +53,7 @@ function BoardList() {
           setBoardList((prevData) => [...prevData, ...Data]);
           setPage(page+1);
           setIsLoding(false);
-        }, 1500);
+        }, 300);
         
       }else{
         navigate('/login');
@@ -91,8 +92,20 @@ function BoardList() {
       };
     }, [boardList]);
 
+    const search = (e:any) => {
+      e.preventDefault();
+      
+    }
+
   return (
     <div className="BoardList">
+      <div className="Book-header">
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" /><div className="Book-header-name-data"></div></div>
+          <form onSubmit={search} className="Book-header-form">
+            <input type="text" placeholder="검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" />
+            <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>
+          </form>
+      </div>
       <div className="board-bar">
         <div className={`board-bar-list ${selectedCategory === 'hoseo' ? 'select' : ''}`} onClick={() => cateclick('hoseo')}>호서게시판</div><div className="barl">|</div>
         <div className={`board-bar-list ${selectedCategory === 'qna' ? 'select' : ''}`} onClick={() => cateclick('qna')}>Q & A</div><div className="barl">|</div>

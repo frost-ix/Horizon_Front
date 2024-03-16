@@ -263,7 +263,7 @@
 
         .loading {
             border: 2px solid transparent;
-            border-color: transparent #7f7f7f transparent #7f7f7f;
+            border-color: transparent #aaa9a9 transparent #aaa9a9;
             -moz-animation: rotate-loading 1.5s linear 0s infinite normal;
             -moz-transform-origin: 50% 50%;
             -o-animation: rotate-loading 1.5s linear 0s infinite normal;

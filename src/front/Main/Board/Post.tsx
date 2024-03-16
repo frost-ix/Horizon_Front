@@ -81,6 +81,9 @@ function Post() {
   
   return (
     <div className="Post">
+      <div className="Book-header">
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" /></div>
+      </div>
       <form onSubmit={posting} className='post-form'>
         <div className="post-bar">
           <p className="post-p">게시글 작성</p> <input type='submit' className='post-submit' value="등록"/>
