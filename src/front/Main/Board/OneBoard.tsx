@@ -16,6 +16,7 @@ function OneBoard() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const boardId:string = queryParams.get('BoardId') || 'null';
+    const [isSettingVisible, setIsSettingVisible] = useState(false);
 
     const getBoard = async () => {
       try {
@@ -66,16 +67,45 @@ function OneBoard() {
       navigate(-1);
     }
 
+    const removeBoard = async () => {
+      let result = window.confirm("이 게시물을 삭제하시겠습니까?");
+      if(result){
+        try {
+          await accessTokenAxiosConfig.delete(`http://jungsonghun.iptime.org:7223/remove`,{data:{boardId:boardId}})
+          .then(
+            (res:any) => {
+              if(res.data.tokenVerify)
+              {
+                alert("게시물을 삭제하였습니다.");
+                navigate(-1);
+              }else{
+                alert("게시물 삭제에 실패하였습니다.");
+              }
+            }
+          )
+          .catch((err:any)=>{console.log(err)})
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+
   return (
     <div className="OneBoard">
-          {boardData? (
+      {boardData? (
         <div className='oneboard-all'>
           <div className='oneboard-navbar'>
             <img src="./Icon/LeftArrow.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={backEvent} />
-            {/* <img src="./Icon/HorizonLogo.png" alt="" className='oneboard-navbar-logoIcon'/> */}
             <div className='oneboard-navbar-logoIcon'>게시물</div>
-            {/* <img src="./Icon/Jumjumjum.png" alt="" className='oneboard-navbar-settingIcon'/> */}
-            <div className='oneboard-navbar-settingIcon'></div>
+            {boardData.isMe ? (
+              <img src="/Icon/Jumjumjum.png" className='oneboard-navbar-settingIcon'  onClick={()=>setIsSettingVisible(!isSettingVisible)}alt="" />
+            ):(
+              <div className='oneboard-navbar-settingIcon'></div>
+            )}
+            <div className={`oneboard-navbar-setting ${isSettingVisible ? 'visible' : ''}`}>
+              <div className='oneboard-navbar-setting-button onsbb' onClick={()=>console.log("수정")}><div className='oneboard-navbar-setting-button-text'>수정하기</div></div>
+              <div className='oneboard-navbar-setting-button' onClick={removeBoard}><div className='oneboard-navbar-setting-button-text'>삭제하기</div></div>
+            </div>
           </div>
 
             <div className='oneboard-header'>

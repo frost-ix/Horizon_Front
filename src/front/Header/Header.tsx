@@ -17,21 +17,29 @@ function Header() {
     const AccountClick = () => {
         navigate('/myaccount')
         // alert("기능 준비 중")
+        sessionStorage.setItem("boardPage","0");
+        sessionStorage.setItem("searchBoardPage","0");
         setAcc(true);setBook(false);setHome(false);setPost(false);
     };
 
     const PostClick = () => {
         navigate('/post')
+        sessionStorage.setItem("boardPage","0");
+        sessionStorage.setItem("searchBoardPage","0");
         setAcc(false);setBook(false);setHome(false);setPost(true)
     };
 
     const MainClick = () => {
         navigate('/board?Category=hoseo')
+        sessionStorage.setItem("boardPage","0");
+        sessionStorage.setItem("searchBoardPage","0");
         setAcc(false);setBook(false);setHome(true);setPost(false)
     };
 
     const BookClick = () => {
         navigate('/book')
+        sessionStorage.setItem("boardPage","0");
+        sessionStorage.setItem("searchBoardPage","0");
         setAcc(false);setBook(true);setHome(false);setPost(false)
     };
     

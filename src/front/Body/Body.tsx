@@ -16,6 +16,7 @@ import Myaccount from '../Main/Account/Myaccount';
 import FindPw from '../Main/Account/FindPw';
 
 import Book from '../Main/Book/Book';
+import BookList from '../Main/Book/BookList';
 
 import refreshTokenAxiosConfig from '../Information/refreshTokenAxios';
 
@@ -55,14 +56,14 @@ function Body() {
         <Route path='/post' element={<Post/>}/>
         <Route path='/myBoardnLikeList' element={<MyBoardnLikeList/>}/>
         <Route path='/searchBoard' element={<SearchBoard/>}/>
-
         {/* 계정 */}
         <Route path='/myaccount' element={<Myaccount/>}/>
         <Route path='/findpw' element={<FindPw/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
         {/* 책방 */}
-        <Route path='/Book' element={<Book/>}/>
+        <Route path='/book' element={<Book/>}/>
+        <Route path='/bookList' element={<BookList/>}/>
         {/* 없는 url 예외처리 */}
         <Route path={"*"} element={<Main/>} />
 

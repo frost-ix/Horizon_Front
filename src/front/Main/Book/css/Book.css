@@ -50,12 +50,16 @@
     .Book-header-search:focus {
         outline:none;
       }
-    
-    .Book-header-searchIcon{
+
+    .Book-header-search-button{
         position: absolute;
+        right: 3%;
+        border: 0;
+        background-color: transparent;
+    }
+    .Book-header-searchIcon{
         height: 38px;
         width: auto;
-        right: 4%;
     }
 
     .Book-selectDepartment{

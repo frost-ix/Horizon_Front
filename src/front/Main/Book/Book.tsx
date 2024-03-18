@@ -23,17 +23,16 @@ function Book() {
   }
 
   const DepartmentEvent = (department:string) => {
-    console.log(department)
-    console.log("제작중")
+    navigate(`/bookList?department=${department}`);
   }
 
   return (
     <div className="Book">
         <div className="Book-header">
-          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" onClick={()=>navigate('/')}/></div>
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt=""/></div>
           <form onSubmit={search} className="Book-header-form">
             <input type="text" placeholder="책 이름 검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" />
-            <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>
+            <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/></button>
           </form>
         </div>
 

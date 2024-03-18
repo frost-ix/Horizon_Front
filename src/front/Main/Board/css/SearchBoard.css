@@ -14,3 +14,8 @@
     height: 20px;
     margin-right: 20px;
 }
+.SearchBoard-noBoard{
+    width: 100%;
+    height: auto;
+    text-align: center;
+}

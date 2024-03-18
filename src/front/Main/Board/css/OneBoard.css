@@ -20,27 +20,62 @@
     width: 100vw;
     height: auto;
     box-sizing: border-box;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding: 3%;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(77, 77, 77, 0.2);
+
+    position: relative;
 }
 .oneboard-navbar-backIcon{
-    width: 20px;
-    height: 20px;
+    width: 7.5%;
+    height: auto;
 }
 .oneboard-navbar-logoIcon{
-    width: auto;
+    width: 85%;
     height: 25px;
-    margin-right: auto;
-    margin-left: auto;
+    text-align: center;
 }
 .oneboard-navbar-settingIcon{
-    width: 25px;
-    height: 25px;
+    width: 7.5%;
+    height: auto;
+}
+
+.oneboard-navbar-setting {
+    width: 130px;
+    height: auto;
+    position: absolute;
+    top: 90%;
+    right: 2%;
+    background-color: rgb(255,255,255);
+    box-sizing: border-box;
+    border-radius: 5px;
+    border:0.1px solid rgb(0,0,0,0.3);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.oneboard-navbar-setting.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+.oneboard-navbar-setting-button{
+    width: 100%;
+    height: 60px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+.onsbb{
+    border-bottom: 0.1px solid rgb(0,0,0,0.3);
+}
+
+.oneboard-navbar-setting-button-text{
+    text-align: center;
+    width: 100%;
+    height: auto;
 }
 
 .oneboard-bar{
@@ -57,12 +92,6 @@
     /* border-bottom: 1px solid rgb(0,0,0,0.2); */
     border-bottom: 7px solid rgba(119, 119, 119, 0.1);
 }
-/* 
-.oneboard-padding{
-    box-sizing: border-box;
-    padding-left: 13px;
-    padding-right: 13px;
-} */
 
 .oneboard-bar-button{
     height: 70%;

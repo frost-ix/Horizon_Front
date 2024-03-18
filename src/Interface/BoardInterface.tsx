@@ -11,6 +11,7 @@ interface BoardItem {
   hits: number;
   commentNum:number;
   imageUrl: string|null;
+  isMe:boolean;
 }
 
 export default BoardItem;

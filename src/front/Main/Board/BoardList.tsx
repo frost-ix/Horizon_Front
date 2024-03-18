@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useCallback} from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import './css/BoardList.css';
@@ -18,9 +18,23 @@ function BoardList() {
   const sessionPage:number = Number(sessionStorage.getItem("boardPage")) || 0;
   const [page, setPage] = useState<number>(sessionPage);
   const [isLoding, setIsLoding] = useState<boolean>(false);
-  const [searchName,setSearchName] = useState<String|null>();
 
-  const getBoardList = async () => {
+  // const getBoardList = async () => {
+  //   try {
+  //     const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
+  //     if(response.data.tokenVerify)
+  //     {
+  //       setBoardList(response.data.boards);
+  //       setPage(page+1);
+  //     }else{
+  //       navigate('/login');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+
+  const getBoardList = useCallback(async()=>{
     try {
       const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
       if(response.data.tokenVerify)
@@ -33,86 +47,97 @@ function BoardList() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
+  },[selectedCategory,page])
 
-  const getBoardListS = async () => {
-    try {
-      const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
-      if(response.data.tokenVerify)
-      {
-        setTimeout(() => {
-          const Data = response.data.boards.map((item) => ({
-            _id: item._id,
-            commentNum: item.commentNum,
-            writer:item.writer,
-            title:item.title,
-            createAt:item.createAt,
-            likes:item.likes,
-            hits:item.hits,
-            content:item.content
-          }));
-          setBoardList((prevData) => [...prevData, ...Data]);
-          setPage(page+1);
-          setIsLoding(false);
-        }, 300);
-      }else{
-        navigate('/login');
+
+
+    const getBoardListPaging = useCallback(async()=>{
+      try {
+        const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
+        if(response.data.tokenVerify)
+        {
+          setTimeout(() => {
+            const Data = response.data.boards.map((item) => ({
+              _id: item._id,
+              commentNum: item.commentNum,
+              writer:item.writer,
+              title:item.title,
+              createAt:item.createAt,
+              likes:item.likes,
+              hits:item.hits,
+              content:item.content
+            }));
+            setBoardList((prevData) => [...prevData, ...Data]);
+            setPage(page+1);
+            setIsLoding(false);
+          }, 300);
+        }else{
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
+    },[selectedCategory,page])
+
 
   useEffect(()=> {
     getBoardList();
   },[selectedCategory]);
   
-  const cateclick = (cate:string) => {
+  // const cateclick = (cate:string) => {
+  //   navigate(`/board?Category=${cate}`);
+  //   setSelectedCategory(cate);
+  //   setPage(0);
+  // }
+
+  const cateclick = useCallback((cate:string)=>{
     navigate(`/board?Category=${cate}`);
     setSelectedCategory(cate);
     setPage(0);
-  }
+  },[])
 
-  const oneboard = (boardId:string)=> {
-    navigate(`/oneboard?BoardId=${boardId}`);
-    const toStr = String(page-1)
-    sessionStorage.setItem("boardPage", toStr)
-  }
+  const oneboard = useCallback((boardId:string)=>{
+      const toStr = String(page-1)
+      sessionStorage.setItem("boardPage", toStr)
+      navigate(`/oneboard?BoardId=${boardId}`);
+  },[page])
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        if (scrollTop + clientHeight >= scrollHeight - 5) {
-          window.removeEventListener('scroll', handleScroll);
-          setIsLoding(true);
-          getBoardListS();
-        }
-      };
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, [boardList]);
+    // useEffect(() => {
+    //   const handleScroll = () => {
+    //     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    //     if (scrollTop + clientHeight >= scrollHeight - 5) {
+    //       window.removeEventListener('scroll', handleScroll);
+    //       setIsLoding(true);
+    //       getBoardListPaging();
+    //       console.log("감지")
+    //     }
+    //   };
+    //   window.addEventListener('scroll', handleScroll);
+    //   return () => {
+    //     window.removeEventListener('scroll', handleScroll);
+    //   };
+    // }, [boardList]);
 
-    const search = (e:any) => {
+
+    const search = useCallback((e:any) => {
       e.preventDefault();
-      const value = searchName?searchName.replace(/\s+/g, '') : "";
-      if(value === "")
-      {
+      const value = e.target.searchName.value ? e.target.searchName.value.replace(/\s+/g, "") : "";
+      if (value === "") {
         alert("검색어를 입력해주세요.");
-      }else{
-        sessionStorage.setItem("searchBoardPage","0")
-        navigate(`/searchBoard?Category=${selectedCategory}&Search=${searchName}`);
+      } else {
+        sessionStorage.setItem("searchBoardPage", "0");
+        navigate(`/searchBoard?Category=${selectedCategory}&Search=${e.target.searchName.value}`);
       }
-    }
+    }, [selectedCategory]);
+
 
   return (
     <div className="BoardList">
       <div className="Book-header">
-          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" onClick={()=>navigate('/')}/></div>
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt=""/></div>
           <form onSubmit={search} className="Book-header-form">
-            <input type="text" placeholder="검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" required/>
-            <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>
+            <input type="text" placeholder="게시물 검색" name="searchName" className="Book-header-search" required/>   
+            <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon"/></button>
           </form>
       </div>
       <div className="board-bar">
@@ -121,7 +146,11 @@ function BoardList() {
         <div className={`board-bar-list ${selectedCategory === 'food' ? 'select' : ''}`} onClick={() => cateclick('food')}>맛집</div><div className="barl">|</div>
         <div className={`board-bar-list ${selectedCategory === 'department' ? 'select' : ''}`} onClick={() => cateclick('department')}>학과별</div>
       </div>
-      {boardList? (
+      {/* <form onSubmit={search} className="Book-header-form">
+        <input type="text" placeholder="게시물 검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" required/>
+        <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>
+      </form> */}
+      {boardList.length > 0 ? (
         <div className='boardList-box'>
         <div className="board-table">
         {boardList.map((item, index) => (
@@ -142,7 +171,7 @@ function BoardList() {
           </div>
         ))}
         {/* <img src="/Icon/Loading.gif" className="BoardList-loding-icon" alt="" /> */}
-        {isLoding?<div className="loading-container"><div className="loading"></div></div>:<></>}
+        {isLoding?<div className="loading-container"><div className="loading"></div></div>:<div className="BottomArrowDiv" onClick={()=>{setIsLoding(true);getBoardListPaging();}}><img src="/Icon/BottomArrow.png" alt="" className="BottomArrow"/></div>}
         </div>
         </div>
       ):(

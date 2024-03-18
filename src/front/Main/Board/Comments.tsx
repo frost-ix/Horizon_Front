@@ -96,7 +96,7 @@ function Comments({ boardId }: { boardId: any }) {
         ))
       ):
       (
-        <>댓글없음</>
+       <div className="Comments-noComment">댓글이 존재하지 않습니다.</div>
       )}
       <div className="form-comment-div">
         <form onSubmit={Commenting} className="form-comment">

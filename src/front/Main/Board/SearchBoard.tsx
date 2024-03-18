@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useCallback , useMemo} from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import './css/BoardList.css';
@@ -12,35 +12,49 @@ function SearchBoard(this: any) {
     const location = useLocation();
     const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
-    const sessionPage = Number(sessionStorage.getItem("searchBoardPage")) || 0;
-    const category = queryParams.get('Category') || "error";
-    const [search,setSearch] = useState<String|null>(queryParams.get('Search'))
+    const sessionPage = Number(sessionStorage.getItem("searchBoardPage")) || 0; //세션에 저장되어있는 페이지
+    const category = queryParams.get('Category') || "error"; //url로 받은 카테고리
+    const [search,setSearch] = useState<String|null>(queryParams.get('Search')) //url로받은  검색어
     const [page, setPage] = useState<number>(sessionPage);
     const [isLoding, setIsLoding] = useState<boolean>(false);
     const [boardList, setBoardList] = useState<BoardListItem[]>([]);
-    const [searchName,setSearchName] = useState<String|null>(search);
-    // const placeValue = category+" 카테고리 "+search+"검색 결과";
-    const placeValue = (()=>{
-        if(category === "hoseo"){
-            return "호서게시판 "+search+" 검색결과"
-        }else if(category === "qna"){
-            return "QnA게시판 "+search+" 검색결과"
-        }else if(category === "qna"){
-            return "맛집게시판 "+search+" 검색결과"
-        }else if(category === "qna"){
-            return "학과게시판 "+search+" 검색결과"
-        }else{
-            return "error"
-        }
-    })();
+    const placeValue = useMemo(() => {
+      if (category === "hoseo") {
+          return "호서게시판 " + search + " 검색결과";
+      } else if (category === "qna") {
+          return "QnA게시판 " + search + " 검색결과";
+      } else if (category === "food") {
+          return "맛집게시판 " + search + " 검색결과";
+      } else if (category === "department") {
+          return "학과게시판 " + search + " 검색결과";
+      } else {
+          return "error";
+      }
+  }, [category, search]);
 
-    const oneboard = (boardId:string)=> {
-        navigate(`/oneboard?BoardId=${boardId}`);
-        const toStr = String(page-1)
-        sessionStorage.setItem("searchBoardPage", toStr)
-    }
+    const oneboard = useCallback((boardId:string)=>{
+      navigate(`/oneboard?BoardId=${boardId}`);
+      const toStr = String(page-1)
+      sessionStorage.setItem("searchBoardPage", toStr)
+    },[page])
 
-    const getBoardList = async () => {
+
+    // const getBoardList = async () => {
+    //     try {
+    //       const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/searchBoard/${category}/${page}/${search}`);
+    //       if(response.data.tokenVerify)
+    //       {
+    //         setBoardList(response.data.boards);
+    //         setPage(page+1);
+    //       }else{
+    //         navigate('/login');
+    //       }
+    //     } catch (error) {
+    //       console.error('Error fetching data:', error);
+    //     }
+    //   };
+
+      const getBoardList = useCallback(async()=>{
         try {
           const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/searchBoard/${category}/${page}/${search}`);
           if(response.data.tokenVerify)
@@ -53,9 +67,10 @@ function SearchBoard(this: any) {
         } catch (error) {
           console.error('Error fetching data:', error);
         }
-      };
-    
-      const getBoardListS = async () => {
+      },[category, page, search])
+
+
+      const getBoardListPaging = useCallback(async()=>{
         try {
           const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/searchBoard/${category}/${page}/${search}`);
           if(response.data.tokenVerify)
@@ -81,64 +96,64 @@ function SearchBoard(this: any) {
         } catch (error) {
           console.error('Error fetching data:', error);
         }
-      };
+      },[category, page, search])
+
     
-        useEffect(() => {
-          const handleScroll = () => {
-            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-            if (scrollTop + clientHeight >= scrollHeight - 5) {
-              window.removeEventListener('scroll', handleScroll);
-              setIsLoding(true);
-              getBoardListS();
-            }
-          };
-          window.addEventListener('scroll', handleScroll);
-          return () => {
-            window.removeEventListener('scroll', handleScroll);
-          };
-        }, [boardList]);
+        // useEffect(() => {
+        //   const handleScroll = () => {
+        //     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        //     if (scrollTop + clientHeight >= scrollHeight - 5) {
+        //       window.removeEventListener('scroll', handleScroll);
+        //       setIsLoding(true);
+        //       getBoardListPaging();
+        //     }
+        //   };
+        //   window.addEventListener('scroll', handleScroll);
+        //   return () => {
+        //     window.removeEventListener('scroll', handleScroll);
+        //   };
+        // }, [boardList]);
 
         useEffect(()=> {
             getBoardList();
           },[]);
 
-          const searchEvent = async (e:any) => {
+          const searchEvent = useCallback(async (e:any) => {
             e.preventDefault();
-            const value = searchName?searchName.replace(/\s+/g, '') : "";
-            if(value === "")
-            {
+            const value = e.target.searchName.value ? e.target.searchName.value.replace(/\s+/g, '') : "";
+            if (value === "") {
               alert("검색어를 입력해주세요.");
-            }else{
+            } else {
               try {
-                sessionStorage.setItem("searchBoardPage","0");
-                setSearch(searchName);
+                sessionStorage.setItem("searchBoardPage", "0");
+                setSearch(e.target.searchName.value);
                 setPage(0);
-                navigate(`/searchBoard?Category=${category}&Search=${searchName}`);
-                const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/searchBoard/${category}/0/${searchName}`);
-                if(response.data.tokenVerify)
-                {
+                navigate(`/searchBoard?Category=${category}&Search=${e.target.searchName.value}`);
+                const response: AxiosResponse<{ tokenVerify: boolean, boards: BoardListItem[] }> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/searchBoard/${category}/0/${e.target.searchName.value}`);
+                if (response.data.tokenVerify) {
                   setBoardList(response.data.boards);
                   setPage(1);
-                }else{
+                } else {
                   navigate('/login');
                 }
               } catch (error) {
                 console.error('Error fetching data:', error);
               }
             }
-          }
+          }, []);
+
+
 
   return (
     <div className="SearchBoard">
-      {page}
         <div className="Book-header">
-          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt="" onClick={()=>navigate('/')} /></div>
+          <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt=""/></div>
           <form onSubmit={searchEvent} className="Book-header-form">
-            <input type="text" placeholder={placeValue} onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" required/>
-            <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={searchEvent}/>
+            <input type="text" placeholder={placeValue} name="searchName" className="Book-header-search" required/>   
+            <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon"/></button>
           </form>
         </div>
-      {boardList? (
+      {boardList.length > 0 ? (
         <div className='boardList-box'>
         <div className="board-table">
         {boardList.map((item, index) => (
@@ -159,11 +174,11 @@ function SearchBoard(this: any) {
           </div>
         ))}
         {/* <img src="/Icon/Loading.gif" className="BoardList-loding-icon" alt="" /> */}
-        {isLoding?<div className="loading-container"><div className="loading"></div></div>:<></>}
+        {isLoding?<div className="loading-container"><div className="loading"></div></div>:<div className="BottomArrowDiv" onClick={()=>{setIsLoding(true);getBoardListPaging();}}><img src="/Icon/BottomArrow.png" alt="" className="BottomArrow"/></div>}
         </div>
         </div>
       ):(
-        <Loading/>
+        <div className="SearchBoard-noBoard">게시물이 존재하지 않습니다.</div>
       )}
     </div>
   );
