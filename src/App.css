@@ -42,12 +42,11 @@
 
 *{
   font-family: 'Noto Sans Korean', sans-serif;
-  /* font-family: 'Pretendard-Regular', sans-serif; */
-  /* font-weight: bold; */
 
   /* 스크롤바 없애기 */
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overscroll-behavior-x: none;
 }
 
 /* 스크롤바 없애기 */
@@ -62,15 +61,16 @@ input {
 
 /* 공용 컴포넌트 css */
 .BottomArrow{
-  width: auto;
-  height: 5vh;
+  width: 20px;
+  height: auto;
   text-align: center;
 }
 
 .BottomArrowDiv{
   width: 100vw;
-  height: auto;
+  height: 6vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+/* 공용 컴포넌트 css */

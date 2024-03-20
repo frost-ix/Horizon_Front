@@ -70,7 +70,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-bottom: 1px solid rgb(0,0,0,0.3);
    }
 
    .board-data-div{
@@ -250,6 +249,7 @@
         .loading-container{
             position: relative;
             border-radius: 100%;
+            
         }
         .loading {
             height: 30px;

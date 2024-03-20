@@ -99,14 +99,13 @@ function Post() {
             <p className="post-p">익명등록</p><input type="checkbox" name="anonymous" checked={isAnonymous} onChange={anonymousCheck} className="post-check" />
         </div>
 
-        <input type='text' name="title" className='post-title' placeholder="&nbsp;&nbsp;제목" required/>
-        <textarea name="content" className='post-content' placeholder={postMassage} required/>
+        <input type='text' name="title" className='post-title' placeholder="&nbsp;&nbsp;제목" maxLength={30} required/>
+        <textarea name="content" className='post-content' placeholder={postMassage}  maxLength={1000} required/>
 
         <div className="filebox">
           <label htmlFor="ex_file"><img src="/Icon/Photo.png" alt="" className="post-photoIcon" />{imgName}</label>
           <input type="file" id="ex_file" name="boardImageMetaData" onChange={changeImg}/>
         </div>
-
       </form>
     </div>
   );

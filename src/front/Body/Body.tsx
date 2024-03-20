@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './Body.css';
 
 import Main from '../Main/Main';
@@ -9,6 +9,7 @@ import OneBoard from '../Main/Board/OneBoard';
 import BoardList from '../Main/Board/BoardList';
 import MyBoardnLikeList from '../Main/Board/MyBoardnLikeList';
 import SearchBoard from '../Main/Board/SearchBoard';
+import UpdateBoard from '../Main/Board/UpdateBoard';
 
 import Signup from '../Main/Account/Signup';
 import Login from '../Main/Account/Login';
@@ -20,8 +21,11 @@ import BookList from '../Main/Book/BookList';
 
 import refreshTokenAxiosConfig from '../Information/refreshTokenAxios';
 
+import { AnimatePresence } from "framer-motion";
+
 function Body() {
   const navigate = useNavigate();
+  const location = useLocation();
   const autoLogin = async () => {
     try{
       const respones: AxiosResponse<{tokenVerify:boolean, accessToken:string}> = await refreshTokenAxiosConfig.post(`http://jungsonghun.iptime.org:7223/user`)
@@ -48,7 +52,8 @@ function Body() {
 
   return (
     <div className="Body">
-      <Routes>
+      <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
         {/* 게시판 */}
         <Route path='/' element={<Main/>}/>
         <Route path='/board' element={<BoardList/>}/>
@@ -56,6 +61,7 @@ function Body() {
         <Route path='/post' element={<Post/>}/>
         <Route path='/myBoardnLikeList' element={<MyBoardnLikeList/>}/>
         <Route path='/searchBoard' element={<SearchBoard/>}/>
+        <Route path='/updateBoard' element={<UpdateBoard/>}/>
         {/* 계정 */}
         <Route path='/myaccount' element={<Myaccount/>}/>
         <Route path='/findpw' element={<FindPw/>}/>
@@ -66,8 +72,8 @@ function Body() {
         <Route path='/bookList' element={<BookList/>}/>
         {/* 없는 url 예외처리 */}
         <Route path={"*"} element={<Main/>} />
-
       </Routes>
+      </AnimatePresence>
     </div>
   );
 }

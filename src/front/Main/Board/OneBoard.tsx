@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import ClipboardJS from 'clipboard';
@@ -12,13 +12,13 @@ import './css/OneBoard.css';
 
 function OneBoard() {
     const navigate = useNavigate();
-    const[boardData, setBoardData] = useState<BoardItem | null>();
+    const [boardData, setBoardData] = useState<BoardItem | null>();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const boardId:string = queryParams.get('BoardId') || 'null';
+    const boardId:string = queryParams.get('boardId') || 'null';
     const [isSettingVisible, setIsSettingVisible] = useState(false);
 
-    const getBoard = async () => {
+    const getBoard = useCallback(async () => {
       try {
         const response: AxiosResponse<{tokenVerify: boolean, board: BoardItem}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/oneboard/${boardId}`);
         if(response.data.tokenVerify)
@@ -30,17 +30,17 @@ function OneBoard() {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    };
-
+    },[boardId]);
+    
     useEffect(()=>{
       getBoard()
     },[])
 
-    const reportEvent = () => {
-      report(boardId, "신고자이름")
-    }
+    const reportEvent = useCallback(() => {
+      report(boardId)
+    },[boardId]) 
 
-    const LikesEvent = async () => {
+    const LikesEvent = useCallback(async () => {
       try{
         const response:any = await Likes(boardId)
         if(response)
@@ -53,21 +53,18 @@ function OneBoard() {
       }catch(error){
         console.log("likeEvent"+error)
       }
-      
-    }
+    },[boardId])
+    
 
-    const shareEvent = () => {
+    const shareEvent = useCallback(() => {
       const clipboard = new ClipboardJS('.oneboard-bar-button');
       clipboard.on('success', function(e) {
-      alert("URL이 클립보드에 복사되었습니다.")
-    });
-    }
+      alert("URL이 클립보드에 복사되었습니다.");
+      clipboard.destroy(); 
+    })},[])
     
-    const backEvent = () => {
-      navigate(-1);
-    }
-
-    const removeBoard = async () => {
+  
+    const removeBoardEvent = useCallback(async () => {
       let result = window.confirm("이 게시물을 삭제하시겠습니까?");
       if(result){
         try {
@@ -88,14 +85,21 @@ function OneBoard() {
           console.error('Error fetching data:', error);
         }
       }
-    };
+    },[boardId])
+
+    const updataeBoardEvent = useCallback(async () => {
+      let result = window.confirm("게시물을 수정 하시겠습니까?");
+      if(result){
+        navigate(`/updateBoard?${boardId}`)
+      }
+    },[boardId])
 
   return (
     <div className="OneBoard">
       {boardData? (
         <div className='oneboard-all'>
           <div className='oneboard-navbar'>
-            <img src="./Icon/LeftArrow.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={backEvent} />
+            <img src="./Icon/LeftArrow.png" className='oneboard-navbar-backIcon' alt="뒤로가기" onClick={()=>{navigate(-1)}} />
             <div className='oneboard-navbar-logoIcon'>게시물</div>
             {boardData.isMe ? (
               <img src="/Icon/Jumjumjum.png" className='oneboard-navbar-settingIcon'  onClick={()=>setIsSettingVisible(!isSettingVisible)}alt="" />
@@ -103,8 +107,8 @@ function OneBoard() {
               <div className='oneboard-navbar-settingIcon'></div>
             )}
             <div className={`oneboard-navbar-setting ${isSettingVisible ? 'visible' : ''}`}>
-              <div className='oneboard-navbar-setting-button onsbb' onClick={()=>console.log("수정")}><div className='oneboard-navbar-setting-button-text'>수정하기</div></div>
-              <div className='oneboard-navbar-setting-button' onClick={removeBoard}><div className='oneboard-navbar-setting-button-text'>삭제하기</div></div>
+              <div className='oneboard-navbar-setting-button onsbb' onClick={updataeBoardEvent}><div className='oneboard-navbar-setting-button-text'>수정하기</div></div>
+              <div className='oneboard-navbar-setting-button' onClick={removeBoardEvent}><div className='oneboard-navbar-setting-button-text'>삭제하기</div></div>
             </div>
           </div>
 

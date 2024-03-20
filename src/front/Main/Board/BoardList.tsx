@@ -14,25 +14,11 @@ function BoardList() {
 
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState<BoardListItem[]>([]);
+  const [hotBoardList, setHotBoardList] = useState<BoardListItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string|null>(Category);
   const sessionPage:number = Number(sessionStorage.getItem("boardPage")) || 0;
   const [page, setPage] = useState<number>(sessionPage);
   const [isLoding, setIsLoding] = useState<boolean>(false);
-
-  // const getBoardList = async () => {
-  //   try {
-  //     const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/list/${selectedCategory}/${page}`);
-  //     if(response.data.tokenVerify)
-  //     {
-  //       setBoardList(response.data.boards);
-  //       setPage(page+1);
-  //     }else{
-  //       navigate('/login');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
 
   const getBoardList = useCallback(async()=>{
     try {
@@ -48,6 +34,20 @@ function BoardList() {
       console.error('Error fetching data:', error);
     }
   },[selectedCategory,page])
+
+  const getHotBoardList = useCallback(async()=>{
+    try {
+      const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/hotlist/${selectedCategory}`);
+      if(response.data.tokenVerify)
+      {
+        setHotBoardList(response.data.boards);
+      }else{
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  },[selectedCategory])
 
 
 
@@ -70,7 +70,7 @@ function BoardList() {
             setBoardList((prevData) => [...prevData, ...Data]);
             setPage(page+1);
             setIsLoding(false);
-          }, 300);
+          }, 1000);
         }else{
           navigate('/login');
         }
@@ -82,14 +82,9 @@ function BoardList() {
 
   useEffect(()=> {
     getBoardList();
+    getHotBoardList();
   },[selectedCategory]);
   
-  // const cateclick = (cate:string) => {
-  //   navigate(`/board?Category=${cate}`);
-  //   setSelectedCategory(cate);
-  //   setPage(0);
-  // }
-
   const cateclick = useCallback((cate:string)=>{
     navigate(`/board?Category=${cate}`);
     setSelectedCategory(cate);
@@ -99,7 +94,7 @@ function BoardList() {
   const oneboard = useCallback((boardId:string)=>{
       const toStr = String(page-1)
       sessionStorage.setItem("boardPage", toStr)
-      navigate(`/oneboard?BoardId=${boardId}`);
+      navigate(`/oneboard?boardId=${boardId}`);
   },[page])
 
     // useEffect(() => {
@@ -135,8 +130,9 @@ function BoardList() {
     <div className="BoardList">
       <div className="Book-header">
           <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt=""/></div>
+          {/* <div className="Book-header-name"><img src="/PwaIcon/Logo.png" className="Book-header-logo" alt=""/></div> */}
           <form onSubmit={search} className="Book-header-form">
-            <input type="text" placeholder="게시물 검색" name="searchName" className="Book-header-search" required/>   
+            <input type="text" placeholder="게시물 검색" maxLength={30} name="searchName" className="Book-header-search" required/>   
             <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon"/></button>
           </form>
       </div>
@@ -150,6 +146,29 @@ function BoardList() {
         <input type="text" placeholder="게시물 검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" required/>
         <img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/>
       </form> */}
+      {hotBoardList.length > 0 ? (
+        <div className='boardList-box'>
+        <div className="board-table">
+      {hotBoardList.map((item, index) => (
+          <div key={index} className='board-tr' onClick={()=>{oneboard(item._id)}}>
+            <div className="board-tr-left">
+              <div className='board-title'><img src="./Icon/User.png" className="board-userIcon" alt="" />🔥{item.title}</div>
+              <div className='board-content'>{item.content}</div>
+              <div className='board-data'>
+                {item.writer}
+                <div className="board-line">|</div> <span className="board-hit">조회수 {item.hits}</span>
+                <div className="board-line">|</div><>{item.createAt.toString().substring(5, 10)}</>
+              </div>
+            </div>
+            <div className="board-tr-right">
+                <span className="board-comment"><img src="/Icon/Comment.png" className="board-comment-icon" alt="" /> {item.commentNum}</span>
+                <span className="board-like"><img src="/Icon/LikeRed.png" className="board-like-icon" alt="" /> {item.likes}</span>               
+            </div>
+          </div>
+        ))}
+        </div>
+        </div>
+      ):(<></>)}
       {boardList.length > 0 ? (
         <div className='boardList-box'>
         <div className="board-table">

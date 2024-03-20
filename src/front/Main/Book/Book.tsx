@@ -1,38 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import './css/Book.css';
 
 
 function Book() {
   const navigate = useNavigate();
-  const [searchName,setSearchName] = useState<String|null>();
 
   useEffect(()=>{
-    if(sessionStorage.getItem("accessToken"))
+    if(!sessionStorage.getItem("accessToken"))
     {
-    //   myDataAxios();
-    }else{
       alert("로그인 후 이용하실 수 있습니다.")
       navigate('/login')
     }
   },[])
 
-  const search = (e:any) => {
+  const searchEvent = useCallback((e:any) => {
     e.preventDefault();
-    console.log("제작중")
-  }
+    console.log(e.target.searchName.value)
+  },[])
+  
 
-  const DepartmentEvent = (department:string) => {
+  const DepartmentEvent = useCallback((department:string) => {
     navigate(`/bookList?department=${department}`);
-  }
+  },[])
+  
 
   return (
     <div className="Book">
         <div className="Book-header">
           <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt=""/></div>
-          <form onSubmit={search} className="Book-header-form">
-            <input type="text" placeholder="책 이름 검색" onChange={(e)=>setSearchName(e.target.value)}className="Book-header-search" />
-            <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon" onClick={search}/></button>
+          <form onSubmit={searchEvent} className="Book-header-form">
+            <input type="text" placeholder="책이름 검색" maxLength={30} name="searchName" className="Book-header-search" required/>   
+            <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon"/></button>
           </form>
         </div>
 

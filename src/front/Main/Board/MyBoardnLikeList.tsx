@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate,useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import './css/BoardList.css';
@@ -14,7 +14,7 @@ function MyBoardnLikeList() {
   const option = location.state? (location.state.option? location.state.option : "error") : "error";
   const [selectedCategory, setSelectedCategory] = useState<string|null>(option);
 
-  const cateclick = (cate:string) => {
+  const cateclick = useCallback((cate:string) => {
     if(sessionStorage.getItem("accessToken"))
     {
       setSelectedCategory(cate)
@@ -22,9 +22,10 @@ function MyBoardnLikeList() {
       alert("로그인 후 이용하실 수 있습니다.")
       navigate('/login')
     }
-  }
+  },[])
+  
 
-  const getMyBoardList = async () => {
+  const getMyBoardList = useCallback(async () => {
     try {
       const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/myboard`);
       if(response.data.tokenVerify)
@@ -36,9 +37,10 @@ function MyBoardnLikeList() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
+  },[])
+   
 
-  const getMyLikeBoardList = async () => {
+  const getMyLikeBoardList = useCallback( async () => {
     try {
       const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/board/mylikeboard`);
       if(response.data.tokenVerify)
@@ -50,7 +52,8 @@ function MyBoardnLikeList() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
+  },[])
+
 
   useEffect(()=> {
     if(selectedCategory === "myboard"){
@@ -60,10 +63,9 @@ function MyBoardnLikeList() {
     }else{
       navigate('/')
     }
-
   },[selectedCategory]);
 
-  const oneboard = (boardId:string)=> {
+  const oneboard = useCallback((boardId:string)=> {
     if(sessionStorage.getItem("accessToken"))
     {
       navigate(`/oneboard?boardId=${boardId}`);
@@ -71,7 +73,7 @@ function MyBoardnLikeList() {
       alert("로그인 후 이용하실 수 있습니다.")
       navigate('/login')
     }
-  }
+  },[])
 
   return (
     <div className="BoardList">

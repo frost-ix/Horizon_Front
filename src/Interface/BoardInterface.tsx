@@ -1,10 +1,9 @@
-
 interface BoardItem {
   _id: string;
   writer: string;
-  title: String;
-  category: String;
-  content: String;
+  title: string;
+  category: string;
+  content: string;
   createAt: Date;
   // updateAt: Date;
   likes: number;

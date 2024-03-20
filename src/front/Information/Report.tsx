@@ -2,7 +2,7 @@ import ReportItem from "../../Interface/ReportInterface";
 import axios, { AxiosResponse } from 'axios';
 import accessTokenAxiosConfig from "./accessTokenAxios";
 
-const report = async (reportId:String, reporter:String) => {
+const report = async (reportId:String) => {
     const reportText:String|null = window.prompt("신고 내용을 입력해주세요.");
 
     if (reportText === null) {

@@ -33,26 +33,10 @@ function SearchBoard(this: any) {
   }, [category, search]);
 
     const oneboard = useCallback((boardId:string)=>{
-      navigate(`/oneboard?BoardId=${boardId}`);
+      navigate(`/oneboard?boardId=${boardId}`);
       const toStr = String(page-1)
       sessionStorage.setItem("searchBoardPage", toStr)
     },[page])
-
-
-    // const getBoardList = async () => {
-    //     try {
-    //       const response: AxiosResponse<{tokenVerify: boolean, boards: BoardListItem[]}> = await accessTokenAxiosConfig.get(`http://jungsonghun.iptime.org:7223/searchBoard/${category}/${page}/${search}`);
-    //       if(response.data.tokenVerify)
-    //       {
-    //         setBoardList(response.data.boards);
-    //         setPage(page+1);
-    //       }else{
-    //         navigate('/login');
-    //       }
-    //     } catch (error) {
-    //       console.error('Error fetching data:', error);
-    //     }
-    //   };
 
       const getBoardList = useCallback(async()=>{
         try {
@@ -142,14 +126,12 @@ function SearchBoard(this: any) {
             }
           }, []);
 
-
-
   return (
     <div className="SearchBoard">
         <div className="Book-header">
           <div className="Book-header-name"><img src="/PwaIcon/HoseoLogoLong.png" className="Book-header-logo" alt=""/></div>
           <form onSubmit={searchEvent} className="Book-header-form">
-            <input type="text" placeholder={placeValue} name="searchName" className="Book-header-search" required/>   
+            <input type="text" placeholder={placeValue} maxLength={30} name="searchName" className="Book-header-search" required/>   
             <button type="submit" className="Book-header-search-button"><img src="/Icon/Search.png" alt="" className="Book-header-searchIcon"/></button>
           </form>
         </div>
