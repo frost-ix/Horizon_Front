@@ -152,7 +152,7 @@ function BoardList() {
       {hotBoardList.map((item, index) => (
           <div key={index} className='board-tr' onClick={()=>{oneboard(item._id)}}>
             <div className="board-tr-left">
-              <div className='board-title'><img src="./Icon/User.png" className="board-userIcon" alt="" />🔥{item.title}</div>
+              <div className='board-title'>{/*<img src="./Icon/User.png" className="board-userIcon" alt="" />*/}🔥{item.title}</div>
               <div className='board-content'>{item.content}</div>
               <div className='board-data'>
                 {item.writer}
@@ -175,7 +175,7 @@ function BoardList() {
         {boardList.map((item, index) => (
           <div key={index} className='board-tr' onClick={()=>{oneboard(item._id)}}>
             <div className="board-tr-left">
-              <div className='board-title'><img src="./Icon/User.png" className="board-userIcon" alt="" />{item.title}</div>
+              <div className='board-title'>{/*<img src="./Icon/User.png" className="board-userIcon" alt="" />*/}{item.title}</div>
               <div className='board-content'>{item.content}</div>
               <div className='board-data'>
                 {item.writer}

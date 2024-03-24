@@ -143,6 +143,7 @@
     font-size: 13px;
     display: flex;
     flex-direction: row;
+    color: rgb(0,0,0,0.6);
    }
 
    .board-line{

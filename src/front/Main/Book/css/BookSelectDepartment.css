@@ -1,0 +1,35 @@
+@media screen and (max-width: 800px) {
+    .Book-selectDepartment{
+        width: 100%;
+        height: auto;
+    }
+
+    .Book-selectDepartment-div{
+        width: 100%;
+        height: auto;
+        /* box-sizing: border-box;
+        padding: 5%; */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .Book-selectDepartment-div-department{
+        width: 50%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 5%;
+        text-align: center;
+        text-decoration: none;
+        color:inherit;
+    }
+
+    .Book-selectDepartment-div-departmentIcon{
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+    }
+    .Book-selectDepartment-div-department-name{
+        font-size: 15px;
+        font-weight: 400;
+    }
+}

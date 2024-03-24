@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import LikesItem from '../../Interface/LikesInterface';
 import accessTokenAxiosConfig from './accessTokenAxios';
 
-const Likes = async (LikesId:String) => {
+const Likes = async (LikesId:string) => {
 
     const LikesItem:LikesItem = {
         LikesId : LikesId

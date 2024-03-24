@@ -21,11 +21,10 @@ import BookList from '../Main/Book/BookList';
 
 import refreshTokenAxiosConfig from '../Information/refreshTokenAxios';
 
-import { AnimatePresence } from "framer-motion";
 
 function Body() {
   const navigate = useNavigate();
-  const location = useLocation();
+
   const autoLogin = async () => {
     try{
       const respones: AxiosResponse<{tokenVerify:boolean, accessToken:string}> = await refreshTokenAxiosConfig.post(`http://jungsonghun.iptime.org:7223/user`)
@@ -52,8 +51,7 @@ function Body() {
 
   return (
     <div className="Body">
-      <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
+      <Routes>
         {/* 게시판 */}
         <Route path='/' element={<Main/>}/>
         <Route path='/board' element={<BoardList/>}/>
@@ -68,12 +66,10 @@ function Body() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
         {/* 책방 */}
-        <Route path='/book' element={<Book/>}/>
-        <Route path='/bookList' element={<BookList/>}/>
+        <Route path='/book/*' element={<Book/>}/>
         {/* 없는 url 예외처리 */}
         <Route path={"*"} element={<Main/>} />
       </Routes>
-      </AnimatePresence>
     </div>
   );
 }

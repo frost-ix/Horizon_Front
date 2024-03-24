@@ -4,9 +4,6 @@ import axios from "axios";
 import "./css/Login.css";
 import { useNavigate } from "react-router-dom";
 
-// fontawesome 
-import "https://kit.fontawesome.com/344577fb7a.js";
-
 export default function Login() {
   const navigate = useNavigate()
   /***

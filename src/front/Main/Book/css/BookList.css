@@ -1,4 +1,128 @@
 .BookList{
-    width: 100vw;
-    height: 94vh;
+    width: 100%;
+    height: auto;
+
+}
+
+.BookList-header{
+    width: 100%;
+    height: auto;
+
+    box-sizing: border-box;
+    padding: 2%;
+    padding-top: 0;
+    font-size: 18px;
+    font-weight: bold;
+
+    border-bottom: 2px solid rgba(119, 119, 119, 0.1);
+    display: flex;
+    flex-direction: row;
+}
+.BookList-header-sort{
+    margin-left: auto;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.BookList-mapDiv{
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    display: flex;
+    flex-direction: row;
+}
+
+.BookList-mapDiv-left{
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    padding-right: 3%;
+}
+.BookList-mapdiv-title{
+    width: 100%;
+    height: auto;
+    font-size: 17px;
+}
+.BookList-mapDiv-title-span{
+    color:#3aa0ffe5;
+}
+.BookList-mapdiv-data{
+    width: 100%;
+    height: auto;
+    font-size: 12px;
+    color:rgb(134, 134, 134);
+}
+.BookList-mapdiv-data-span{
+    margin-left: 7px;
+}
+
+.BookList-mapDiv-img{
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 1em;
+    margin-left: auto;
+}
+
+.BookList-mapDiv-line{
+    width: 95%;
+    border-bottom:  2px solid rgba(119, 119, 119, 0.1);
+}
+
+
+.BookList-mapDiv-v2-flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    width: 100%;
+    height: auto;
+}
+.BookList-mapDiv-v2{
+    width: 33%;
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+.BookList-mapDiv-img-v2{
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 1em;
+}
+.BookList-mapdiv-data-v2{
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.BookList-mapdiv-title-v2{
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}
+.BookList-mapdiv-price-v2{
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+}
+.BookList-mapdiv-date-v2{
+    width: 100%;
+    font-size: 10px;
+    color: rgb(0,0,0,0.5);
 }

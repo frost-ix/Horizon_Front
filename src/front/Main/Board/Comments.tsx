@@ -26,8 +26,6 @@ function Comments({ boardId }: { boardId: any }) {
       console.error('Error fetching data:', error);
     }
   },[boardId])
-    
-
 
   useEffect(()=>{
     getComments()
@@ -36,9 +34,9 @@ function Comments({ boardId }: { boardId: any }) {
     const Commenting = useCallback(async(e:any)=>{
       e.preventDefault()
       const form:any = e.target;
-      const content:String = form.elements.content.value
+      const content:string = form.elements.content.value
       const isAnonymous:boolean = isChecked
-      const accessToken:String =  sessionStorage.getItem("accessToken") || "storageError"
+      const accessToken:string =  sessionStorage.getItem("accessToken") || "storageError"
       const commentData:CommentPostItem = {
         content : content,
         isAnonymous : isAnonymous,
@@ -79,13 +77,28 @@ function Comments({ boardId }: { boardId: any }) {
       }
     },[]);
 
+    const deleteEvent = useCallback(async(commentId:any)=>{
+      try {
+        const response: AxiosResponse<{tokenVerify: boolean, comments: CommentsItem[]}> = await accessTokenAxiosConfig.delete(`http://jungsonghun.iptime.org:7223/comment/comments/${commentId}`);
+        if(response.data.tokenVerify)
+        {
+          setComments(response.data.comments);
+          alert("댓글을 삭제하였습니다.")
+        }else{
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },[]);
+
   return (
     <div className="Comments">
       {comments? (
         comments.map((item,index) => (
           <div className="comment-tr" key={index} >
               <div className="comment-tr-writer"><img src="./Icon/User.png" className="comment-userIcon" alt="" />
-                {item.writer}
+                {item.isMe?"내 댓글":item.writer}
                 <button className="comment-likes" onClick={()=>{likeEvent(item.commentNum)}}>
                 <img src="/Icon/LikeRed.png" className="oneboard-bar-icon" alt="" />추천  {item.likes.toString()}</button>
                 <button className="comment-report" onClick={()=>{reportEvent(item.commentNum)}}>
@@ -96,7 +109,7 @@ function Comments({ boardId }: { boardId: any }) {
               
             <div className="comment-tr-bottom">
                 <div className="comment-tr-createAt">{item.createAt.toString().substring(0, 10)}</div>
-                {/* <div className="comment-like"><img src="/Icon/Like.png" className="comment-like-icon" alt="" /> {item.likes.toString()}</div> */}
+                {item.isMe?(<div className="comment-delete" onClick={()=>deleteEvent(item.commentNum)}>삭제</div>):(<></>)}
             </div>
             <div className="border80center"><div className="border80"></div></div>
           </div>

@@ -1,10 +1,11 @@
 interface CommentsItem {
-     commentNum :Number
-     writer :String
-     content  :String
+     commentNum :number
+     writer :string
+     content  :string
      createAt  :Date
-     likes  :Number
-     isFixed  :Boolean
+     likes  :number
+     isFixed  :boolean
+     isMe:boolean
   }
   
   export default CommentsItem;
